@@ -64,6 +64,15 @@ public class TestCsv
         Assert.IsTrue(Csv.ReadLineAsFloat(TestWriteLine(input)).Zip(input, (x, y) => Mathf.Approximately(x, y)).All(x => x));
     }
 
-
+    [Test]
+    [TestCase("AB\nBC\nCD\nDE\n", "AB", "BC", "CD", "DE")]
+    [TestCase("AB,a\nBC,b\nCD,c\nDE,d\n", "AB,a", "BC,b", "CD,c", "DE,d")]
+    public void TestGetAllLines(string source, params string[] answer)
+    {
+        var result = Csv.GetAllLines(source).ToArray();
+        Assert.IsTrue(result.Length == answer.Length);
+        for(int i = 0; i < result.Length; ++i)
+            Assert.AreEqual(result[i], answer[i]);
+    }
     
 }

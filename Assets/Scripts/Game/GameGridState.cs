@@ -15,7 +15,7 @@ namespace SortGame
             this.grid = new GameTileState[rowCount, columnCount];
             for(int i = 0; i < rowCount; ++i)
                 for(int j = 0; j < columnCount; ++j) 
-                    this.grid[i, j] = new();
+                    this.grid[i, j] = new(-1);
         }
         public GameGridState(GameGridState from) : this(from.rowCount, from.columnCount)
         {
@@ -63,23 +63,23 @@ namespace SortGame
         {
             for(int i = 0; i < rowCount; ++i)
                 for(int j = 0; j < columnCount; ++j) 
-                    grid[i, j] = new();
+                    grid[i, j] = new(-1);
         }
         public void LoadRandom(int minInclusive = 0, int maxExclusive = 100)
         {
             for(int i = 0; i < rowCount; ++i)
-                for(int j = 0; j < columnCount; ++j) 
-                    this.grid[i, j].number = Random.Range(minInclusive, maxExclusive);
+                for(int j = 0; j < columnCount; ++j)
+                    Set(new(i, j), Random.Range(minInclusive, maxExclusive));
         }
         public void LoadRow(int rowId, int[] rowValues)
         {
             for(int j = 0; j < columnCount; ++j)
-                grid[rowId, j].number = rowValues[j];
+                Set(new(rowId, j), rowValues[j]);
         }
         public void LoadColumn(int columnId, int[] columnValues)
         {
             for(int i = 0; i < rowCount; ++i)
-                grid[i, columnId].number = columnValues[i];
+                Set(new(i, columnId), columnValues[i]);
         }
         public struct SwapOp
         {
@@ -114,11 +114,22 @@ namespace SortGame
 
             for(int i = bottom - offset; i >= 0 && !grid[i, column].IsEmpty(); --i)
             {
-                (Vector2Int a, Vector2Int b) = (new(i + offset, column), new(i, column));
+                (Vector2Int a, Vector2Int b) = (new(i, column), new(i + offset, column));
                 Swap(a, b);
                 swaps.Add(new(){a = a, b = b});
             }
             return swaps;
+        }
+
+        public bool ContentEqual(GameGridState other)
+        {
+            if(rowCount != other.rowCount || columnCount != other.columnCount) return false;
+            
+            for(int i = 0; i < rowCount; ++i)
+                for(int j = 0; j < columnCount; ++j)
+                    if(Get(new(i, j)) != other.Get(new(i, j))) 
+                        return false;
+            return true;
         }
     }
 }
