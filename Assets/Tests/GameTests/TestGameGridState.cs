@@ -4,9 +4,14 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using SortGame;
-using System.Text;
+
 public class TestGameGridState
 {
+    [SetUp]
+    public void InitializeRandomState()
+    {
+        Random.InitState(555_666_777);
+    }
     // A Test behaves as an ordinary method
     [Test]
     [Pairwise]
@@ -26,10 +31,7 @@ public class TestGameGridState
         int[,] matrix = new int[rowCount, columnCount];
         for(int i = 0; i < rowCount; ++i)
             for(int j = 0; j < columnCount; ++j)
-            {
-                int rand = Random.Range(0, 100);
-                matrix[i, j] = rand;
-            }
+                matrix[i, j] = Random.Range(0, 100);
         return matrix;
     }
     [Test]
@@ -46,6 +48,23 @@ public class TestGameGridState
         for(int i = 0; i < rowCount; ++i)
             for(int j = 0; j < columnCount; ++j)
                 Assert.AreEqual(answer[i, j], state.Get(new(i, j)));
+    }
+    public void TestContentEqual(
+        [Values(2, 3)] int rowCount, 
+        [Values(3, 4)] int columnCount)
+    {
+        GameGridState a = new(rowCount, columnCount), b = new(rowCount, columnCount);
+        int[,] answer = CreateRandomMatrix(rowCount, columnCount);
+        for(int i = 0; i < rowCount; ++i)
+            for(int j = 0; j < columnCount; ++j)
+            {
+                a.Set(new(i, j), answer[i, j]);
+                b.Set(new(i, j), answer[i, j]);
+            }
+        Assert.IsTrue(a.ContentEqual(b));
+        a.Set(new(0, 0), -1);
+        b.Clear();
+        Assert.IsFalse(a.ContentEqual(b));
     }
 
     [Test]
@@ -104,62 +123,4 @@ public class TestGameGridState
         Assert.AreEqual(aVal, state.Get(b));
         Assert.AreEqual(bVal, state.Get(a));
     }
-
-    [Test]
-    public void TestPullDownCase1()
-    {
-        GameGridState state = GameGridState.Deserialize(
-            "-1, -1, -1, -1, -1\n" +
-            "-1, -1,  5, -1,  5\n" +
-            "-1, -1,  4, -1,  5\n" +
-            "-1, -1, -1, -1, -1\n" +
-            "-1, -1, -1, -1, -1\n".StripWhiteSpaces());
-        var swaps = state.PullDown(2);
-        Assert.AreEqual(swaps.Count, 2);
-        Assert.IsTrue(swaps[0].a == new Vector2Int(2, 2));
-        Assert.IsTrue(swaps[0].b == new Vector2Int(4, 2));
-        Assert.IsTrue(swaps[1].a == new Vector2Int(1, 2));
-        Assert.IsTrue(swaps[1].b == new Vector2Int(3, 2));
-        Assert.IsTrue(
-            state.ContentEqual(
-                GameGridState.Deserialize(
-                    "-1, -1, -1, -1, -1\n" +
-                    "-1, -1, -1, -1,  5\n" +
-                    "-1, -1, -1, -1,  5\n" +
-                    "-1, -1,  5, -1, -1\n" +
-                    "-1, -1,  4, -1, -1\n".StripWhiteSpaces())));
-    }
-    [Test]
-    public void TestPullDownCase2()
-    {
-        GameGridState state = new(5, 5);
-        var swaps = state.PullDown(1);
-        Assert.AreEqual(swaps.Count, 0);
-        Assert.IsTrue(state.ContentEqual(new(5, 5)));
-    }
-    [Test]
-    public void TestPullDownCase3()
-    {
-        GameGridState state = GameGridState.Deserialize(
-            "-1,  6, -1, -1, -1\n" +
-            "-1,  5, -1, -1, -1\n" +
-            "-1, -1, -1, -1, -1\n" +
-            "-1, -1, -1, -1, -1\n" +
-            "-1,  1, -1, -1, -1\n".StripWhiteSpaces());
-        var swaps = state.PullDown(1);
-        Assert.AreEqual(swaps.Count, 2);
-        Assert.IsTrue(swaps[0].a == new Vector2Int(1, 1));
-        Assert.IsTrue(swaps[0].b == new Vector2Int(3, 1));
-        Assert.IsTrue(swaps[1].a == new Vector2Int(0, 1));
-        Assert.IsTrue(swaps[1].b == new Vector2Int(2, 1));
-        Assert.IsTrue(
-            state.ContentEqual(
-                GameGridState.Deserialize(
-                    "-1, -1, -1, -1, -1\n" +
-                    "-1, -1, -1, -1, -1\n" +
-                    "-1,  6, -1, -1, -1\n" +
-                    "-1,  5, -1, -1, -1\n" +
-                    "-1,  1, -1, -1, -1\n".StripWhiteSpaces())));
-    }
-
 }

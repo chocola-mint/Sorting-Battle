@@ -58,6 +58,7 @@ namespace SortGame
         }
 
         public int Get(Vector2Int coord) => grid[coord.x, coord.y].number;
+        public bool IsEmpty(Vector2Int coord) => grid[coord.x, coord.y].IsEmpty();
         public void Set(Vector2Int coord, int value) => grid[coord.x, coord.y].number = value;
         public void Clear()
         {

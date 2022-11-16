@@ -67,6 +67,8 @@ public class TestCsv
     [Test]
     [TestCase("AB\nBC\nCD\nDE\n", "AB", "BC", "CD", "DE")]
     [TestCase("AB,a\nBC,b\nCD,c\nDE,d\n", "AB,a", "BC,b", "CD,c", "DE,d")]
+    [TestCase("")]
+    [TestCase("\n")]
     public void TestGetAllLines(string source, params string[] answer)
     {
         var result = Csv.GetAllLines(source).ToArray();

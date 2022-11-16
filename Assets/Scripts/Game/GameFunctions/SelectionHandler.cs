@@ -48,6 +48,7 @@ namespace SortGame.GameFunctions
         private bool CanAddToSelection(Vector2Int target)
         {
             if(currentSelection.Contains(target)
+            || gameGridState.IsEmpty(target)
             || !LastSelectionIsAdjacentTo(target)
             || !SelectionIsSortedWithRespectTo(target))
             {
@@ -74,10 +75,12 @@ namespace SortGame.GameFunctions
             Debug.Log("=== Begin selection ===");
             currentSelection.Clear();
         }
-        public void EndSelection()
+        public List<Vector2Int> EndSelection()
         {
             Debug.Log("=== End selection ===");
+            List<Vector2Int> selection = new(currentSelection);
             currentSelection.Clear();
+            return selection;
         }
     }
 
