@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 293388531314259307}
   - component: {fileID: 8489702094765334055}
   - component: {fileID: 7519346641491654017}
+  - component: {fileID: 5494930505710514087}
+  - component: {fileID: 1177217750753570076}
   m_Layer: 5
   m_Name: Game Board
   m_TagString: Untagged
@@ -129,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06a6c08775b25649805d0bf3cc15ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberBlockPrefab: {fileID: 7463100942755303708, guid: db18daa73829264429c43585a5f1e7d6, type: 3}
 --- !u!223 &8489702094765334055
 Canvas:
   m_ObjectHideFlags: 0
@@ -168,6 +169,30 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5494930505710514087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097067247853268494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deaf6455e12576c46885621b72ae59fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1177217750753570076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097067247853268494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475db09064796424db1c3832a03a1ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3097067248379439769
 GameObject:
   m_ObjectHideFlags: 0

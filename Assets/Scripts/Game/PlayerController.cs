@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 namespace SortGame
 {
 
-    [RequireComponent(typeof(GameBoard))]
     public class PlayerController : MonoBehaviour
     {
         private GameBoard gameBoard;
+        private GameGridSelector selector;
         [System.Serializable]
         private struct Inputs
         {
@@ -19,6 +19,7 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
+            selector = GetComponent<GameGridSelector>();
             gameBoard = GetComponent<GameBoard>();
         }
         private void OnEnable() 
@@ -31,9 +32,9 @@ namespace SortGame
         }
         private void OnPointerDrag(InputAction.CallbackContext ctx)
         {
-            if(ctx.started) gameBoard.BeginSelection();
-            else if(ctx.canceled) gameBoard.EndSelection();
-            gameBoard.Select(ctx.ReadValue<Vector2>());
+            if(ctx.started) selector.BeginSelection();
+            else if(ctx.canceled) selector.EndSelection();
+            selector.Select(ctx.ReadValue<Vector2>());
         }
 
         // Update is called once per frame
