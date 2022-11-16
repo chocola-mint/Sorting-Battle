@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 namespace SortGame
 {
+    /// <summary>
+    /// Extension methods containing common Input System boilerplates.
+    /// </summary>
     public static class InputSystemExtensions
     {
         public static void EnableAndConnect(
