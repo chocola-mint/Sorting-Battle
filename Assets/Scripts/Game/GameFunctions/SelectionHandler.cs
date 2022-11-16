@@ -57,18 +57,15 @@ namespace SortGame.GameFunctions
             return SelectionOnSameRowAs(target)
             || SelectionOnSameColumnAs(target);
         }
-        private bool TryAddToSelection(Vector2Int target)
+        public bool Select(Vector2Int tileCoord)
         {
-            bool canAdd = CanAddToSelection(target);
-            if(canAdd) currentSelection.Add(target);
-            return canAdd;
-        }
-        public void Select(Vector2Int tileCoord)
-        {
-            if(TryAddToSelection(tileCoord))
+            bool canAdd = CanAddToSelection(tileCoord);
+            if(canAdd) 
             {
+                currentSelection.Add(tileCoord);
                 Debug.Log($"Added {gameGridState.Get(tileCoord)}");
             }
+            return canAdd;
         }
         public void BeginSelection()
         {
