@@ -49,6 +49,8 @@ public class TestGameGridState
             for(int j = 0; j < columnCount; ++j)
                 Assert.AreEqual(answer[i, j], state.Get(new(i, j)));
     }
+    [Test]
+    [Pairwise]
     public void TestContentEqual(
         [Values(2, 3)] int rowCount, 
         [Values(3, 4)] int columnCount)
@@ -65,6 +67,7 @@ public class TestGameGridState
         a.Set(new(0, 0), -1);
         b.Clear();
         Assert.IsFalse(a.ContentEqual(b));
+        Assert.IsFalse(a.ContentEqual(new(columnCount, rowCount)));
     }
 
     [Test]
