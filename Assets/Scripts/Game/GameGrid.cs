@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace SortGame
 {
@@ -49,7 +52,7 @@ namespace SortGame
             else 
             {
                 foreach(var gameTile in GetAllTiles())
-                    Instantiate(numberBlockPrefab, gameTile.transform)
+                    (PrefabUtility.InstantiatePrefab(numberBlockPrefab, gameTile.transform) as GameObject)
                     .GetComponent<NumberBlock>().SetNumber(Random.Range(0, 100));
             }
             #else
@@ -62,25 +65,8 @@ namespace SortGame
         }
         public void ClearTiles()
         {
-            #if UNITY_EDITOR
-            if(UnityEditor.EditorApplication.isPlaying)
-            {
-                // Runtime GameGridState exists here.
-                foreach(var gameTile in allTiles.Value)
-                    gameTile.transform.DestroyAllChildren();
-                state.Clear();
-            }
-            else
-            {
-                foreach(var gameTile in GetAllTiles())
-                    gameTile.transform.DestroyAllChildren();
-            }
-            #else
-            // Runtime GameGridState exists here.
-            foreach(var gameTile in allTiles.Value)
-                gameTile.transform.DestroyAllChildren();
-            state.Clear();
-            #endif
+            foreach(var numberBlock in GetComponentsInChildren<NumberBlock>())
+                GameObject.DestroyImmediate(numberBlock.gameObject);
         }
         private void Awake() 
         {

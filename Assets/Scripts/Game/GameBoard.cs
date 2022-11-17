@@ -16,11 +16,13 @@ namespace SortGame
         private GameGrid gameGrid;
         public void LoadRandomNumbers()
         {
+            if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
             gameGrid.LoadRandomNumbers();
         }
         public void ClearTiles()
         {
+            if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
         }
         private void Awake() 

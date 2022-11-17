@@ -7,6 +7,14 @@ using SortGame.GameFunctions;
 
 namespace SortGame
 {
+    public interface ReceiveEvent_OnSelect
+    {
+        void OnSelect();
+    }
+    public interface ReceiveEvent_OnDeselect
+    {
+        void OnDeselect();
+    }
     [RequireComponent(typeof(GraphicRaycaster))]
     public class GameGridSelector : MonoBehaviour
     {
@@ -27,14 +35,16 @@ namespace SortGame
                 var numberBlock = raycastResult.gameObject.GetComponentInParent<NumberBlock>();
                 if(numberBlock)
                 {
-                    selectionHandler.Select(numberBlock.gameTile.gridCoord);
+                    Select(numberBlock.gameTile.gridCoord);
                     break;
                 }
             }
         }
         public void Select(Vector2Int tileCoord)
         {
-            selectionHandler.Select(tileCoord);
+            if(selectionHandler.Select(tileCoord))
+                foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<ReceiveEvent_OnSelect>())
+                    receiver.OnSelect();
         }
         public void BeginSelection()
         {
@@ -42,7 +52,10 @@ namespace SortGame
         }
         public void EndSelection()
         {
-            selectionHandler.EndSelection();
+            var selection = selectionHandler.EndSelection();
+            foreach(var tileCoord in selection)
+                foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<ReceiveEvent_OnDeselect>())
+                    receiver.OnDeselect();
         }
         private void Awake() 
         {

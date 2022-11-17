@@ -40,14 +40,14 @@ public class GameGridEditor : Editor {
         }
         for(int i = 0; i < gameGrid.rowCount; ++i)
         {
-            var rowGO = Instantiate(rowPrefab);
+            var rowGO = PrefabUtility.InstantiatePrefab(rowPrefab) as GameObject;
             rowGO.name = $"Row {i}";
             rowGO.transform.SetParent(root.transform);
             var childGroup = rowGO.GetComponent<HorizontalOrVerticalLayoutGroup>();
             childGroup.spacing = spacing;
             for(int j = 0; j < gameGrid.columnCount; ++j)
             {
-                var tileGO = Instantiate(tilePrefab);
+                var tileGO = PrefabUtility.InstantiatePrefab(tilePrefab) as GameObject;
                 tileGO.transform.SetParent(rowGO.transform);
                 tileGO.name = $"Tile {i},{j}";
                 var tile = tileGO.transform as RectTransform;

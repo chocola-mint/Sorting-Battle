@@ -16,6 +16,14 @@ namespace SortGame
                 y = transform.GetSiblingIndex()
             };
         }
+        public void Select()
+        {
+
+        }
+        public void Deselect()
+        {
+            
+        }
         // Start is called before the first frame update
         void Start()
         {
