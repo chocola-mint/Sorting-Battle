@@ -4791,6 +4791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputs:
     select: {fileID: 6174452647223527053, guid: 630d204c02dccf941ac00aec3f28d5d1, type: 3}
+    swap: {fileID: -3684673212948471544, guid: 630d204c02dccf941ac00aec3f28d5d1, type: 3}
 --- !u!224 &1917518596 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5608728590332685949, guid: ff136dcd981c6d74f8af492f470e979d, type: 3}

@@ -23,15 +23,15 @@ namespace SortGame.GameFunctions
         private static readonly Vector2Int Null = new(-10, -10);
         private Vector2Int cursor = Null;
         public bool swappingActive => cursor != Null;
-        public bool StartSwapping(Vector2Int select)
+        public bool StartSwapping(Vector2Int target)
         {
-            if(gameGridState.IsEmpty(select)) return false;
+            if(gameGridState.IsEmpty(target)) return false;
             Debug.Log("=== Begin swapping ===");
-            cursor = select;
+            cursor = target;
             return true;
         }
         private bool AdjacentToCursor(Vector2Int target)
-            => LinAlg.L1Norm(cursor, target) <= 1;
+            => LinAlg.L1Norm(cursor, target) == 1;
         public Commands SwapTo(Vector2Int target)
         {
             Debug.Assert(cursor != Null);

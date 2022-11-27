@@ -19,6 +19,19 @@ namespace SortGame
         /// </summary>
         public static float L1Norm(Vector2 lhs, Vector2 rhs) 
             => Mathf.Abs(lhs.x - rhs.x) + Mathf.Abs(lhs.y - rhs.y);
-
+        /// <summary>
+        /// Project given point to the plane "Z = z"
+        /// </summary>
+        public static Vector3 MapToZPlane(this Vector3 point, float z)
+        {
+            return new(point.x, point.y, z);
+        }
+        /// <summary>
+        /// Project given point to the plane "Z = z"
+        /// </summary>
+        public static Vector3 MapToZPlane(this Vector2 point, float z)
+        {
+            return new(point.x, point.y, z);
+        }
     }
 }

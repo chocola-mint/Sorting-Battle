@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 7463100942755303709}
   - component: {fileID: 7463100942755303707}
   - component: {fileID: 5793981640498429526}
+  - component: {fileID: 1948072388642380822}
   m_Layer: 5
   m_Name: Number Block
   m_TagString: Untagged
@@ -98,6 +99,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberDisplay: {fileID: 7463100943623109502}
+--- !u!114 &1948072388642380822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7463100942755303708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdb549a6ae0de8489f67090827e4385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullSource: {x: 0, y: 0, z: 0}
+  pullRadius: 0.25
+  factor: 2
+  followTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &7463100943623109504
 GameObject:
   m_ObjectHideFlags: 0

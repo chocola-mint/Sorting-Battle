@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Linq;
+
+namespace SortGame
+{
+    [RequireComponent(typeof(GraphicRaycaster))]
+    public abstract class GameGridOperatorBase : MonoBehaviour
+    {
+        protected GraphicRaycaster raycaster;
+        protected GameGrid gameGrid;
+        private List<RaycastResult> raycastResults = new();
+        private GameGridOperatorBase[] otherOperators;
+        protected void Awake() 
+        {
+            raycaster = GetComponent<GraphicRaycaster>();    
+            gameGrid = GetComponentInChildren<GameGrid>();
+            otherOperators = GetComponents<GameGridOperatorBase>().Where(x => x != this).ToArray();
+        }
+        protected void CancelOtherOperatorsAndActivateThis()
+        {
+            foreach(var op in otherOperators) op.enabled = false;
+            this.enabled = true;
+        }
+
+        protected IEnumerable<RaycastResult> Raycast(Vector2 screenPosition)
+        {
+            raycastResults.Clear();
+            raycaster.Raycast(
+                new PointerEventData(EventSystem.current){ 
+                    position = screenPosition,
+                }, 
+                raycastResults);
+            return raycastResults.AsEnumerable();
+        }
+
+        protected IEnumerable<T> Raycast<T>(Vector2 screenPosition) where T : MonoBehaviour
+        {
+            raycastResults.Clear();
+            raycaster.Raycast(
+                new PointerEventData(EventSystem.current){ 
+                    position = screenPosition,
+                }, 
+                raycastResults);
+            foreach(var raycastResult in raycastResults)
+                if(TryGetComponentInParent<T>(raycastResult.gameObject, out T component))
+                    yield return component;
+        }
+        private static bool TryGetComponentInParent<T>(GameObject GO, out T component) where T : MonoBehaviour
+        {
+            component = GO.GetComponentInParent<T>();
+            if(component) return true;
+            else return false;
+        }
+        
+    }
+}

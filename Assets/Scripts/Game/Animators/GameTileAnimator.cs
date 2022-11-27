@@ -5,7 +5,7 @@ using UnityEngine;
 namespace SortGame
 {
     [RequireComponent(typeof(Animator))]
-    public class GameTileAnimator : MonoBehaviour, ReceiveEvent_OnSelect, ReceiveEvent_OnDeselect
+    public class GameTileAnimator : MonoBehaviour, IOnSelectReceiver, IOnDeselectReceiver
     {
         private Animator animator;
         private static class Params

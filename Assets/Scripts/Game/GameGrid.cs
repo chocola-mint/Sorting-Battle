@@ -70,7 +70,7 @@ namespace SortGame
         }
         private void Awake() 
         {
-            allTiles = new(() => GetAllTiles().ToList());
+            allTiles = new(() => GetAllTiles().ToList(), false);
             state = new(numberOfRows, numberOfColumns);
             ClearTiles();
         }

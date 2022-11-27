@@ -10,7 +10,7 @@ namespace SortGame
         public Vector2Int gridCoord => coord;
         private void Awake() 
         {
-            board = new(GetComponentInParent<GameBoard>);
+            board = new(GetComponentInParent<GameBoard>, false);
             coord = new Vector2Int{
                 x = transform.parent.GetSiblingIndex(),
                 y = transform.GetSiblingIndex()
