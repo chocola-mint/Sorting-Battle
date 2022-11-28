@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SortGame.GameFunctions;
-
+using ChocoUtil.Coroutines;
 namespace SortGame
 {
     public interface IOnSwapReceiver
@@ -54,12 +54,22 @@ namespace SortGame
             if(commands.success)
             {
                 // Swap was successful. Animate to reflect the changes.
-                var fromTile = gameGrid.GetGameTile(commands.swap.a);
-                var toTile = gameGrid.GetGameTile(commands.swap.b);
-                var from = fromTile.GetComponentInChildren<NumberBlock>();
-                var to = toTile.GetComponentInChildren<NumberBlock>();
-                from.MoveTo(toTile);
-                to.MoveTo(fromTile);
+                StartCoroutine(CoSwap(commands));
+            }
+        }
+        IEnumerator CoSwap(SortGame.GameFunctions.SwapHandler.Commands commands)
+        {
+            var fromTile = gameGrid.GetGameTile(commands.swap.a);
+            var toTile = gameGrid.GetGameTile(commands.swap.b);
+            var from = fromTile.GetComponentInChildren<NumberBlock>();
+            var to = toTile.GetComponentInChildren<NumberBlock>();
+            yield return this.All(
+                from.MoveTo(toTile),
+                to.MoveTo(fromTile));
+            foreach(var drop in commands.drops)
+            {
+                gameGrid.GetGameTile(drop.a).GetComponentInChildren<NumberBlock>()
+                .MoveTo(gameGrid.GetGameTile(drop.b));
             }
         }
         public void EndSwapping()

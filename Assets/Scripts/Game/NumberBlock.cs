@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using SortGame.MonoTween;
 using SortGame.Modifiers;
+using ChocoUtil.Coroutines;
+using static ChocoUtil.Algorithms.Ease;
 namespace SortGame
 {
     [RequireComponent(typeof(PulledFollow))]
@@ -14,7 +15,6 @@ namespace SortGame
         private TMP_Text numberDisplay;
         public GameTile gameTile { get; private set; }
         private int number = 0;
-        private TMove tweenMoveTo;
         private PulledFollow pulledFollow;
         private Graphic[] graphics;
         public void SetNumber(int number) {
@@ -31,7 +31,6 @@ namespace SortGame
         private void Awake() 
         {
             gameTile = GetComponentInParent<GameTile>();
-            tweenMoveTo = gameObject.AddComponent<TMove>();
             pulledFollow = gameObject.GetComponent<PulledFollow>();
             StopFollowPointer();
             graphics = GetComponentsInChildren<Graphic>();
@@ -58,26 +57,30 @@ namespace SortGame
                 }
             }
         }
-        public void MoveTo(GameTile next)
+        public IEnumerator CoMoveTo(GameTile next)
         {
             foreach(var graphic in graphics)
                 graphic.raycastTarget = false;
-
             gameTile = next;
             transform.SetParent(next.transform);
             pulledFollow.enabled = false;
-            tweenMoveTo.FromExisting(new(){
-                from = transform.position,
-                to = next.transform.position,
-                duration = 0.25f,
-                curve = AnimationCurve.Linear(0, 0, 1, 1),
-                useUnscaledTime = false,
-                destroyOnDone = false,
-            }).Then(p => {
-                pulledFollow.pullSource = next.transform.position;
-                foreach(var graphic in graphics)
-                    graphic.raycastTarget = true;
-            }).Start();
+            yield return Tween.MoveWorld(
+                transform, 
+                from: transform.position,
+                to: next.transform.position,
+                duration: 0.25f,
+                ease: Linear,
+                useUnscaledTime: false
+            );
+            pulledFollow.pullSource = next.transform.position;
+            foreach(var graphic in graphics)
+                graphic.raycastTarget = true;
+        }
+        public Coroutine MoveTo(GameTile next)
+        {
+            // PromiseMoveTo(next).Start();
+            StopAllCoroutines();
+            return StartCoroutine(CoMoveTo(next));
         }
         public void FollowPointer(Vector2 pointerPosition)
         {
