@@ -14,11 +14,15 @@ namespace SortGame
     public class GameBoard : MonoBehaviour
     {
         private GameGrid gameGrid;
+        public GameBoardState state { get; private set; }
+        [SerializeField] private int seed = 1337;
         public void LoadRandomNumbers()
         {
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
+            Random.state = state.randomState; // Load this board's random state.
             gameGrid.LoadRandomNumbers();
+            state.randomState = Random.state; // Save afterwards.
         }
         public void ClearTiles()
         {
@@ -28,6 +32,14 @@ namespace SortGame
         private void Awake() 
         {   
             gameGrid = GetComponentInChildren<GameGrid>();
+            state = new(
+                new(){
+                    seed = seed, 
+                    rowCount = gameGrid.rowCount,
+                    columnCount = gameGrid.columnCount
+                }
+            );
+            
         }
         
         // Start is called before the first frame update

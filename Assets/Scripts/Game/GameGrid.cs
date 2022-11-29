@@ -71,13 +71,12 @@ namespace SortGame
         private void Awake() 
         {
             allTiles = new(() => GetAllTiles().ToList(), false);
-            state = new(numberOfRows, numberOfColumns);
             ClearTiles();
         }
         // Start is called before the first frame update
         void Start()
         {
-            
+            state = GetComponentInParent<GameBoard>().state.gameGridState;
         }
 
         // Update is called once per frame

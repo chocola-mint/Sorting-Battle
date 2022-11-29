@@ -16,7 +16,6 @@ namespace SortGame
     }
     public class GameGridSelector : GameGridOperatorBase
     {
-        public const int MinimumSortedLength = 3;
         private SelectionHandler selectionHandler;
         public void Select(Vector2 screenPosition)
         {
