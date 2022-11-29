@@ -48,7 +48,7 @@ namespace SortGame.GameFunctions
         private bool CanAddToSelection(Vector2Int target)
         {
             if(currentSelection.Contains(target)
-            || gameGridState.IsEmpty(target)
+            || !gameGridState.IsNumber(target)
             || !LastSelectionIsAdjacentTo(target)
             || !SelectionIsSortedWithRespectTo(target))
             {

@@ -59,6 +59,8 @@ namespace SortGame
 
         public int Get(Vector2Int coord) => grid[coord.x, coord.y].number;
         public bool IsEmpty(Vector2Int coord) => grid[coord.x, coord.y].IsEmpty();
+        public bool IsGarbage(Vector2Int coord) => grid[coord.x, coord.y].IsGarbage();
+        public bool IsNumber(Vector2Int coord) => grid[coord.x, coord.y].IsNumber();
         public void Set(Vector2Int coord, int value) => grid[coord.x, coord.y].number = value;
         public void Clear()
         {
@@ -121,7 +123,34 @@ namespace SortGame
             }
             return swaps;
         }
-
+        public List<SwapOp> PushUp(int column, int number)
+        {
+            List<SwapOp> swaps = new();
+            int top;
+            for(top = 0; top < rowCount && grid[top, column].IsEmpty(); ++top);
+            for(int i = top; i < rowCount; ++i)
+            {
+                (Vector2Int a, Vector2Int b) = (new(i, column), new(i - 1, column));
+                if(i != 0) Swap(a, b); // Don't actually swap when i is 0, because row -1 doesn't exist.
+                swaps.Add(new(){a = a, b = b});
+            }
+            Set(new(rowCount - 1, column), number);
+            return swaps;
+        }
+        public List<SwapOp> RemoveTile(Vector2Int coord)
+        {
+            Set(coord, GameTileState.Empty);
+            return PullDown(coord.y);
+        }
+        public List<SwapOp> RemoveTiles(Vector2Int[] coords)
+        {
+            List<SwapOp> swaps = new();
+            foreach(var coord in coords)
+                Set(coord, GameTileState.Empty);
+            foreach(var coord in coords)
+                swaps.AddRange(PullDown(coord.y));
+            return swaps;
+        }
         public bool ContentEqual(GameGridState other)
         {
             if(rowCount != other.rowCount || columnCount != other.columnCount) return false;

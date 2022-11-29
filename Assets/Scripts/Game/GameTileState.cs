@@ -8,9 +8,12 @@ namespace SortGame
     public struct GameTileState
     {
         public int number;
-        public GameTileState(int val = -1) {
+        public const int Empty = -1, Garbage = -2;
+        public GameTileState(int val = Empty) {
             number = val;
         }
-        public bool IsEmpty() => number < 0;
+        public bool IsEmpty() => number == Empty;
+        public bool IsGarbage() => number == Garbage;
+        public bool IsNumber() => number >= 0;
     }
 }
