@@ -36,7 +36,7 @@ namespace SortGame.GameFunctions
         {
             Debug.Assert(cursor != Null);
             Commands cmds = new();
-            cmds.success = AdjacentToCursor(target);
+            cmds.success = AdjacentToCursor(target) && gameGridState.IsNumber(target);
             if(cmds.success)
             {
                 cmds.swap = new(){a = cursor, b = target};
