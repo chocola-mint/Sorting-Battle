@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 7463100942755303707}
   - component: {fileID: 5793981640498429526}
   - component: {fileID: 1948072388642380822}
+  - component: {fileID: 6014391238493162217}
   m_Layer: 5
   m_Name: Number Block
   m_TagString: Untagged
@@ -115,6 +116,26 @@ MonoBehaviour:
   pullRadius: 0.25
   factor: 2
   followTarget: {x: 0, y: 0, z: 0}
+--- !u!95 &6014391238493162217
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7463100942755303708}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fc290f8b9f48b2e4dbf841436071e255, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7463100943623109504
 GameObject:
   m_ObjectHideFlags: 0

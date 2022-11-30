@@ -14,11 +14,13 @@ namespace SortGame
         protected GameGrid gameGrid;
         private List<RaycastResult> raycastResults = new();
         private GameGridOperatorBase[] otherOperators;
+        protected GameControllerState gameControllerState { get; private set; }
         protected void Awake() 
         {
             raycaster = GetComponent<GraphicRaycaster>();    
             gameGrid = GetComponentInChildren<GameGrid>();
             otherOperators = GetComponents<GameGridOperatorBase>().Where(x => x != this).ToArray();
+            gameControllerState = GetComponent<GameBoard>().state.gameControllerState;
         }
         protected void CancelOtherOperatorsAndActivateThis()
         {

@@ -10,6 +10,7 @@ namespace SortGame.GameFunctions
     {
         private readonly GameGridState gameGridState;
         private List<Vector2Int> currentSelection = new();
+        public int GetCurrentSelectionCount() => currentSelection.Count;
         public SelectionHandler(GameGridState gameGridState)
         {
             this.gameGridState = gameGridState;

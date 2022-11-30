@@ -9,14 +9,19 @@ using static ChocoUtil.Algorithms.Ease;
 namespace SortGame
 {
     [RequireComponent(typeof(PulledFollow))]
-    public class NumberBlock : MonoBehaviour
+    public class NumberBlock : MonoBehaviour, IOnRemoveReceiver
     {
         [SerializeField]
         private TMP_Text numberDisplay;
         public GameTile gameTile { get; private set; }
         private int number = 0;
         private PulledFollow pulledFollow;
+        private Animator animator;
         private Graphic[] graphics;
+        private static class AnimState
+        {
+            public static readonly int Vanish = Animator.StringToHash(nameof(Vanish));
+        }
         public void SetNumber(int number) {
             if(this.number != number) 
                 numberDisplay.text = number.ToString();
@@ -34,6 +39,7 @@ namespace SortGame
             pulledFollow = gameObject.GetComponent<PulledFollow>();
             StopFollowPointer();
             graphics = GetComponentsInChildren<Graphic>();
+            animator = GetComponent<Animator>();
             SetNumber(Random.Range(0, 100));
             AutoResize();
         }
@@ -103,6 +109,21 @@ namespace SortGame
         void Update()
         {
             
+        }
+
+        public void OnRemove()
+        {
+            // ! We CANNOT set parent to null here, because NumberBlock is an UI object.
+            // ! It won't render if it's not under a Canvas.
+            // ! It's okay because we will turn off its raycast targets.
+            // transform.SetParent(null);
+            StopAllCoroutines();
+            foreach(var graphic in graphics)
+                graphic.raycastTarget = false;
+            animator.Play(AnimState.Vanish);
+            StartCoroutine(animator.WaitUntilCurrentStateIsDone(() => {
+                Destroy(gameObject);
+            }));
         }
     }
 

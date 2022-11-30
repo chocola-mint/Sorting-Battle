@@ -14,9 +14,14 @@ namespace SortGame
     {
         void OnDeselect();
     }
+    public interface IOnRemoveReceiver
+    {
+        void OnRemove();
+    }
+    // TODO: Switch to using GameControllerState.
+    // TODO: Also, add GameGridRemover.
     public class GameGridSelector : GameGridOperatorBase
     {
-        private SelectionHandler selectionHandler;
         public void Select(Vector2 screenPosition)
         {
             if(!enabled) return;
@@ -29,21 +34,31 @@ namespace SortGame
         public void Select(Vector2Int tileCoord)
         {
             if(!enabled) return;
-            if(selectionHandler.Select(tileCoord))
+            if(gameControllerState.Select(tileCoord))
                 foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<IOnSelectReceiver>())
                     receiver.OnSelect();
         }
         public void BeginSelection()
         {
             CancelOtherOperatorsAndActivateThis();
-            selectionHandler.BeginSelection();
+            gameControllerState.BeginSelection();
         }
         public void EndSelection()
         {
-            var selection = selectionHandler.EndSelection();
+            var (selection, drops, shouldRemove) = gameControllerState.EndSelection();
             foreach(var tileCoord in selection)
+            {    
                 foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<IOnDeselectReceiver>())
                     receiver.OnDeselect();
+                if(shouldRemove)
+                    foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponentsInChildren<IOnRemoveReceiver>())
+                        receiver.OnRemove();
+            }
+            foreach(var drop in drops)
+            {
+                gameGrid.GetGameTile(drop.a).GetComponentInChildren<NumberBlock>()
+                .MoveTo(gameGrid.GetGameTile(drop.b));
+            }
         }
         private void OnDisable() 
         {
@@ -52,7 +67,6 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
-            selectionHandler = new(gameGrid.state);
             enabled = false;
         }
 

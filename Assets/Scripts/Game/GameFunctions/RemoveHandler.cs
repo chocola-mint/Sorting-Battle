@@ -11,6 +11,7 @@ namespace SortGame.GameFunctions
     {
         private readonly GameGridState gameGridState;
         private readonly SelectionHandler selectionHandler;
+        public int GetCurrentSelectionCount() => selectionHandler.GetCurrentSelectionCount();
         public RemoveHandler(GameGridState gameGridState, SelectionHandler selectionHandler)
         {
             this.selectionHandler = selectionHandler;
@@ -28,11 +29,15 @@ namespace SortGame.GameFunctions
         /// </summary>
         /// <returns>A tuple, containing the removed blocks 
         /// and the SwapOps that come from dropping the blocks above.</returns>
-        public (List<Vector2Int>, List<GameGridState.SwapOp>) EndSelection()
+        public (List<Vector2Int>, List<GameGridState.SwapOp>) EndSelection(int minimumLength = 0)
         {
             var selection = selectionHandler.EndSelection();
-            var swaps = gameGridState.RemoveTiles(selection.ToArray());
-            return (selection, swaps);
+            if(selection.Count >= minimumLength)
+            {
+                var swaps = gameGridState.RemoveTiles(selection.ToArray());
+                return (selection, swaps);
+            }
+            else return (selection, new());
         }
     }
 }

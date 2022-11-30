@@ -9,14 +9,13 @@ namespace SortGame
     {
         void OnSwap();
     }
+    // TODO: Switch to using GameControllerState.
     public class GameGridSwapper : GameGridOperatorBase
     {
-        private SwapHandler swapper;
         private NumberBlock currentNumberBlock;
         // Start is called before the first frame update
         void Start()
         {
-            swapper = new(gameGrid.state);
             enabled = false;
         }
         public void StartSwapping(Vector2 screenPosition)
@@ -35,7 +34,7 @@ namespace SortGame
         public bool StartSwapping(Vector2Int target)
         {
             CancelOtherOperatorsAndActivateThis();
-            return swapper.StartSwapping(target);
+            return gameControllerState.StartSwapping(target);
         }
         public void SwapTo(Vector2 screenPosition)
         {
@@ -50,7 +49,7 @@ namespace SortGame
         public void SwapTo(Vector2Int target)
         {
             if(!enabled || !currentNumberBlock) return;
-            var commands = swapper.SwapTo(target);
+            var commands = gameControllerState.SwapTo(target);
             if(commands.success)
             {
                 // Swap was successful. Animate to reflect the changes.
@@ -78,7 +77,7 @@ namespace SortGame
             {
                 currentNumberBlock.StopFollowPointer();
             }
-            swapper.EndSwapping();
+            gameControllerState.EndSwapping();
         }
         private void OnDisable() 
         {
