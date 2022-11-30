@@ -16,13 +16,6 @@ namespace SortGame
         public readonly GameGridState gameGridState;
         public Random.State randomState;
         public readonly GameControllerState gameControllerState;
-        /// <summary>
-        /// Whether the simulated game environment is paused or not.
-        /// While paused, write operations are locked (like swaps), but read operations
-        /// (like selects) are not.
-        /// See <see cref="Block"></see> and <see cref="Unblock"></see>.
-        /// </summary>
-        public bool writeLocked { get; private set; }
         public GameBoardState(Config config)
         {
             Random.InitState(config.seed);
