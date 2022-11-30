@@ -34,9 +34,8 @@ namespace SortGame.GameFunctions
             => LinAlg.L1Norm(cursor, target) == 1;
         public Commands SwapTo(Vector2Int target)
         {
-            Debug.Assert(cursor != Null);
             Commands cmds = new();
-            cmds.success = AdjacentToCursor(target) && gameGridState.IsNumber(target);
+            cmds.success = cursor != Null && AdjacentToCursor(target) && gameGridState.IsNumber(target);
             if(cmds.success)
             {
                 cmds.swap = new(){a = cursor, b = target};
