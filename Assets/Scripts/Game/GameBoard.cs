@@ -36,7 +36,13 @@ namespace SortGame
                 new(){
                     seed = seed, 
                     rowCount = gameGrid.rowCount,
-                    columnCount = gameGrid.columnCount
+                    columnCount = gameGrid.columnCount,
+                    // TODO: Expose these parameters...
+                    minimumSortedLength = 3,
+                    baseRemoveScore = 50,
+                    removeLengthBonus = 25,
+                    maxEffectiveCombo = 10,
+                    comboScoreStep = 2,
                 }
             );
             

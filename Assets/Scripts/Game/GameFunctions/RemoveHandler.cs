@@ -29,15 +29,15 @@ namespace SortGame.GameFunctions
         /// </summary>
         /// <returns>A tuple, containing the removed blocks 
         /// and the SwapOps that come from dropping the blocks above.</returns>
-        public (List<Vector2Int>, List<GameGridState.SwapOp>) EndSelection(int minimumLength = 0)
+        public (List<Vector2Int>, List<GameGridState.SwapOp>, bool shouldRemove) EndSelection(int minimumLength = 0)
         {
             var selection = selectionHandler.EndSelection();
             if(selection.Count >= minimumLength)
             {
                 var swaps = gameGridState.RemoveTiles(selection.ToArray());
-                return (selection, swaps);
+                return (selection, swaps, true);
             }
-            else return (selection, new());
+            else return (selection, new(), false);
         }
     }
 }

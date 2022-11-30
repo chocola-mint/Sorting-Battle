@@ -11,6 +11,7 @@ namespace SortGame
         public readonly int minimumSortedLength;
         private readonly RemoveHandler remover;
         private readonly SwapHandler swapper;
+        public event System.Action<int> onRemove;
         public GameControllerState(GameGridState gameGridState, int minimumSortedLength)
         {
             this.gameGridState = gameGridState;
@@ -40,9 +41,10 @@ namespace SortGame
         }
         public (List<Vector2Int>, List<GameGridState.SwapOp>, bool) EndSelection()
         {
-            bool shouldRemove = remover.GetCurrentSelectionCount() >= minimumSortedLength;
-            var (selection, drops) = remover.EndSelection(minimumSortedLength);
-            return (selection, drops, shouldRemove);
+            var (selection, swaps, shouldRemove) = remover.EndSelection(minimumSortedLength);
+            if(shouldRemove) onRemove?.Invoke(selection.Count);
+            else onRemove?.Invoke(0);
+            return (selection, swaps, shouldRemove);
         }
     }
 }
