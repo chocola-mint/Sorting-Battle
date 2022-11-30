@@ -65,8 +65,7 @@ namespace SortGame
         }
         public IEnumerator CoMoveTo(GameTile next)
         {
-            foreach(var graphic in graphics)
-                graphic.raycastTarget = false;
+            DisableRaycast();
             gameTile = next;
             transform.SetParent(next.transform);
             pulledFollow.enabled = false;
@@ -79,8 +78,7 @@ namespace SortGame
                 useUnscaledTime: false
             );
             pulledFollow.pullSource = next.transform.position;
-            foreach(var graphic in graphics)
-                graphic.raycastTarget = true;
+            EnableRaycast();
         }
         public Coroutine MoveTo(GameTile next)
         {
@@ -90,13 +88,25 @@ namespace SortGame
         }
         public void FollowPointer(Vector2 pointerPosition)
         {
+            // DisableRaycast();
             pulledFollow.enabled = true;
             pulledFollow.pullSource = gameTile.transform.position.MapToZPlane(transform.position.z);
             pulledFollow.followTarget = Camera.main.ScreenToWorldPoint(pointerPosition).MapToZPlane(transform.position.z);
         }
         public void StopFollowPointer()
         {
+            // EnableRaycast();
             pulledFollow.followTarget = pulledFollow.pullSource;
+        }
+        private void DisableRaycast()
+        {
+            foreach(var graphic in graphics)
+                graphic.raycastTarget = false;
+        }
+        private void EnableRaycast()
+        {
+            foreach(var graphic in graphics)
+                graphic.raycastTarget = true;
         }
         
         // Start is called before the first frame update
@@ -118,8 +128,7 @@ namespace SortGame
             // ! It's okay because we will turn off its raycast targets.
             // transform.SetParent(null);
             StopAllCoroutines();
-            foreach(var graphic in graphics)
-                graphic.raycastTarget = false;
+            DisableRaycast();
             animator.Play(AnimState.Vanish);
             StartCoroutine(animator.WaitUntilCurrentStateIsDone(() => {
                 Destroy(gameObject);
