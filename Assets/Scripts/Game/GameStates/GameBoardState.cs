@@ -9,6 +9,7 @@ namespace SortGame
     {
         public struct Config
         {
+            public bool useSeed;
             public int seed;
             public int rowCount, columnCount;
             public int minimumSortedLength;
@@ -23,7 +24,7 @@ namespace SortGame
         public readonly GameScoreState gameScoreState;
         public GameBoardState(Config config)
         {
-            Random.InitState(config.seed);
+            if(config.useSeed) Random.InitState(config.seed);
             randomState = Random.state;
             gameGridState = new(config.rowCount, config.columnCount);
             gameControllerState = new(gameGridState, config.minimumSortedLength);

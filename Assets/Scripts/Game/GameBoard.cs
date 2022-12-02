@@ -15,7 +15,10 @@ namespace SortGame
     {
         private GameGrid gameGrid;
         public GameBoardState state { get; private set; }
+        [Tooltip("Fixed seed to initialize the random state of the board. Useful for debugging or procedural generation.")]
         [SerializeField] private int seed = 1337;
+        [Tooltip("Enable to use the engine's random state at the time of execution, instead of a fixed seed.")]
+        [SerializeField] private bool randomSeed = false;
         public void LoadRandomNumbers(float rowPercentage = 1)
         {
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
@@ -34,6 +37,7 @@ namespace SortGame
             gameGrid = GetComponentInChildren<GameGrid>();
             state = new(
                 new(){
+                    useSeed = !randomSeed,
                     seed = seed, 
                     rowCount = gameGrid.rowCount,
                     columnCount = gameGrid.columnCount,
