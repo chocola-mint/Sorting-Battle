@@ -45,10 +45,6 @@ namespace SortGame
             {
                 // Runtime GameGridState exists here.
                 state.LoadRandom(rowPercentage: rowPercentage);
-                foreach(var gameTile in allTiles.Value)
-                    if(state.IsNumber(gameTile.gridCoord))
-                        Instantiate(numberBlockPrefab, gameTile.transform)
-                        .GetComponent<NumberBlock>().SetNumber(state.Get(gameTile.gridCoord));
             }
             else 
             {
@@ -65,7 +61,7 @@ namespace SortGame
                     .GetComponent<NumberBlock>().SetNumber(state.grid[gameTile.gridCoord.x, gameTile.gridCoord.y].number);
             #endif
         }
-        public void LoadNumberAt(Vector2Int tileCoord)
+        public void NewBlock(Vector2Int tileCoord)
         {
             Instantiate(numberBlockPrefab, GetGameTile(tileCoord).transform)
             .GetComponent<NumberBlock>().SetNumber(state.Get(tileCoord));
@@ -74,7 +70,6 @@ namespace SortGame
         {
             bool overflow = state.PushUp(column, Random.Range(0, 100));
             if(overflow) return false;
-            LoadNumberAt(new(rowCount - 1, column));
             return true;
         }
         public void ClearTiles()
@@ -87,6 +82,7 @@ namespace SortGame
             allTiles = new(() => GetAllTiles().ToList(), false);
             state = GetComponentInParent<GameBoard>().state.gameGridState;
             ClearTiles();
+            state.onNewBlock += NewBlock;
         }
 
         // Update is called once per frame

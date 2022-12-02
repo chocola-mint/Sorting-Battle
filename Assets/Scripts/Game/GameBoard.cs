@@ -56,16 +56,7 @@ namespace SortGame
         }
         bool PushNewRow()
         {
-            var (newBlocks, overflow) = state.PushNewRow(gameGrid.columnCount - 1);
-            // foreach(var swap in swaps)
-            // {
-            //     if(swap.b.x >= 0)
-            //         gameGrid.GetGameTile(swap.a).GetComponentInChildren<NumberBlock>()
-            //         .MoveTo(gameGrid.GetGameTile(swap.b));
-            // }
-            foreach(var newBlock in newBlocks)
-                gameGrid.LoadNumberAt(newBlock);
-            return overflow;
+            return state.PushNewRow(gameGrid.columnCount - 1);
         }
         IEnumerator TileGeneration()
         {

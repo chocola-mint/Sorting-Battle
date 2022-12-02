@@ -43,19 +43,16 @@ namespace SortGame
         // ! A GameBoardState can have multiple events that must be triggered manually.
         // ! The environment is supposed to invoke them appropriately according to the specification.
 
-        public (List<Vector2Int> newBlocks, bool overflow) 
-        PushNewRow(int numberOfColumns)
+        public bool PushNewRow(int numberOfColumns)
         {
             var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
             bool anyOverflow = false;
-            List<Vector2Int> newBlocks = new();
             foreach(var column in columns[0..Mathf.Min(numberOfColumns, columns.Length)])
             {
-                newBlocks.Add(new(gameGridState.rowCount - 1, column));
                 bool overflow = gameGridState.PushUp(column, Random.Range(0, 100));
                 anyOverflow |= overflow;
             }
-            return (newBlocks, anyOverflow);
+            return anyOverflow;
         }
         
     }

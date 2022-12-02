@@ -8,6 +8,7 @@ namespace SortGame
     {
         public readonly int rowCount, columnCount;
         public readonly GameTileState[,] grid;
+        public event System.Action<Vector2Int> onNewBlock;
         public GameGridState(int rowCount, int columnCount)
         {
             this.rowCount = rowCount;
@@ -63,6 +64,11 @@ namespace SortGame
         public bool IsNumber(Vector2Int coord) => grid[coord.x, coord.y].IsNumber();
         public bool IsOnGrid(Vector2Int coord) => coord.x < rowCount && coord.x >= 0 && coord.y < columnCount && coord.y >= 0;
         public void Set(Vector2Int coord, int value) => grid[coord.x, coord.y].number = value;
+        public void SetNew(Vector2Int coord, int value)
+        {
+            Set(coord, value);
+            onNewBlock?.Invoke(coord);
+        }
         public void Clear()
         {
             for(int i = 0; i < rowCount; ++i)
@@ -73,7 +79,7 @@ namespace SortGame
         {
             for(int i = Mathf.FloorToInt(rowCount * rowPercentage); i < rowCount; ++i)
                 for(int j = 0; j < columnCount; ++j)
-                    Set(new(i, j), Random.Range(minInclusive, maxExclusive));
+                    SetNew(new(i, j), Random.Range(minInclusive, maxExclusive));
         }
         public void RegisterBlockCallbacks(Vector2Int coord, System.Action<Vector2Int> onMove, System.Action onRemove)
         {
@@ -136,7 +142,7 @@ namespace SortGame
                 else overflow = true; // Mark overflows.
             }
             grid[rowCount - 1, column].Remove();
-            Set(new(rowCount - 1, column), number);
+            SetNew(new(rowCount - 1, column), number);
             return overflow;
         }
         public void RemoveTile(Vector2Int coord)
