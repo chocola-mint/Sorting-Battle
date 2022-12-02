@@ -63,8 +63,10 @@ namespace SortGame
         }
         public void NewBlock(Vector2Int tileCoord)
         {
-            Instantiate(numberBlockPrefab, GetGameTile(tileCoord).transform)
-            .GetComponent<NumberBlock>().SetNumber(state.Get(tileCoord));
+            var numberBlock = Instantiate(numberBlockPrefab, GetGameTile(tileCoord).transform)
+            .GetComponent<NumberBlock>();
+            numberBlock.SetNumber(state.Get(tileCoord));
+            if(state.IsTrash(tileCoord)) numberBlock.ToTrash(animate: false);
         }
         public bool PushUp(int column)
         {

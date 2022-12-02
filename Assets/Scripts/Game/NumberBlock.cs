@@ -21,8 +21,11 @@ namespace SortGame
         private Graphic[] graphics;
         private static class AnimState
         {
+            // Layer 0
             public static readonly int Vanish = Animator.StringToHash(nameof(Vanish));
             public static readonly int PushUp = Animator.StringToHash(nameof(PushUp));
+            // Layer 1
+            public static readonly int Trash = Animator.StringToHash(nameof(Trash));
         }
         public void SetRandomNumber() => SetNumber(Random.Range(0, 100));
         public void SetNumber(int number) {
@@ -31,10 +34,9 @@ namespace SortGame
             this.number = number;
         }
         public int GetNumber() => number;
-        public void ToTrash()
+        public void ToTrash(bool animate = false)
         {
-            // TODO: Smooth animation?
-            
+            animator.Play(AnimState.Trash, 1, animate ? 0 : 1);
         }
         private void Reset() 
         {
@@ -50,7 +52,7 @@ namespace SortGame
             animator = GetComponent<Animator>();
             SetRandomNumber();
             AutoResize();
-            animator.Play(AnimState.PushUp);
+            animator.Play(AnimState.PushUp, 0);
 
             
             gameGrid = GetComponentInParent<GameGrid>();
@@ -145,7 +147,7 @@ namespace SortGame
             // transform.SetParent(null);
             StopAllCoroutines();
             DisableRaycast();
-            animator.Play(AnimState.Vanish);
+            animator.Play(AnimState.Vanish, 0);
             StartCoroutine(animator.WaitUntilCurrentStateIsDone(() => {
                 Destroy(gameObject);
             }));
