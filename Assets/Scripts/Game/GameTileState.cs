@@ -7,7 +7,7 @@ namespace SortGame
     public class GameTileState
     {
         public int number;
-        public const int Empty = -1, Garbage = -2;
+        public const int Empty = -1, Trash = -2;
         public event System.Action<Vector2Int> onBlockMove;
         public event System.Action onBlockRemove, onTileSelect, onTileDeselect;
         public GameTileState(int val = Empty) {
@@ -39,7 +39,7 @@ namespace SortGame
             onTileDeselect?.Invoke();
         }
         public bool IsEmpty() => number == Empty;
-        public bool IsGarbage() => number == Garbage;
+        public bool IsTrash() => number == Trash;
         public bool IsNumber() => number >= 0;
     }
 }

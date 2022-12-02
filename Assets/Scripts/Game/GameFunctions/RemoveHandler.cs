@@ -45,7 +45,7 @@ namespace SortGame.GameFunctions
             HashSet<Vector2Int> garbageTiles = new();
             foreach(var coord in selection)
                 foreach(var adj in coord.AdjacentPoints())
-                    if(gameGridState.IsOnGrid(adj) && gameGridState.IsGarbage(adj))
+                    if(gameGridState.IsOnGrid(adj) && gameGridState.IsTrash(adj))
                         garbageTiles.Add(adj);
             foreach(var garbageTile in garbageTiles)
                 selection.Add(garbageTile);

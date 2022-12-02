@@ -60,7 +60,7 @@ namespace SortGame
 
         public int Get(Vector2Int coord) => grid[coord.x, coord.y].number;
         public bool IsEmpty(Vector2Int coord) => grid[coord.x, coord.y].IsEmpty();
-        public bool IsGarbage(Vector2Int coord) => grid[coord.x, coord.y].IsGarbage();
+        public bool IsTrash(Vector2Int coord) => grid[coord.x, coord.y].IsTrash();
         public bool IsNumber(Vector2Int coord) => grid[coord.x, coord.y].IsNumber();
         public bool IsOnGrid(Vector2Int coord) => coord.x < rowCount && coord.x >= 0 && coord.y < columnCount && coord.y >= 0;
         public void Set(Vector2Int coord, int value) => grid[coord.x, coord.y].number = value;
