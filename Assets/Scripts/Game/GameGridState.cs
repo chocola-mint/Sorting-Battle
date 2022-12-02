@@ -75,16 +75,6 @@ namespace SortGame
                 for(int j = 0; j < columnCount; ++j)
                     Set(new(i, j), Random.Range(minInclusive, maxExclusive));
         }
-        public void LoadRow(int rowId, int[] rowValues)
-        {
-            for(int j = 0; j < columnCount; ++j)
-                Set(new(rowId, j), rowValues[j]);
-        }
-        public void LoadColumn(int columnId, int[] columnValues)
-        {
-            for(int i = 0; i < rowCount; ++i)
-                Set(new(i, columnId), columnValues[i]);
-        }
         public void RegisterBlockCallbacks(Vector2Int coord, System.Action<Vector2Int> onMove, System.Action onRemove)
         {
             grid[coord.x, coord.y].onBlockMove += onMove;
