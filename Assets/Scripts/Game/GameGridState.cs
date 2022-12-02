@@ -115,8 +115,11 @@ namespace SortGame
             bool wasAEmpty = grid[a.x, a.y].IsEmpty();
             bool wasBEmpty = grid[b.x, b.y].IsEmpty();
             Swap(a, b);
-            PullDown(a.y);
-            PullDown(b.y);
+            if(wasAEmpty ^ wasBEmpty)
+            {
+                PullDown(a.y);
+                PullDown(b.y);
+            }
         }
         public void PullDown(int column)
         {
