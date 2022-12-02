@@ -14,10 +14,6 @@ namespace SortGame
     {
         void OnDeselect();
     }
-    public interface IOnRemoveReceiver
-    {
-        void OnRemove();
-    }
     // TODO: Switch to using GameControllerState.
     // TODO: Also, add GameGridRemover.
     public class GameGridSelector : GameGridOperatorBase

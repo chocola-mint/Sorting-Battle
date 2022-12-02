@@ -5,10 +5,6 @@ using SortGame.GameFunctions;
 using ChocoUtil.Coroutines;
 namespace SortGame
 {
-    public interface IOnSwapReceiver
-    {
-        void OnSwap();
-    }
     // TODO: Switch to using GameControllerState.
     public class GameGridSwapper : GameGridOperatorBase
     {

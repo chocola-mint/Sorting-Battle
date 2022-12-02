@@ -9,7 +9,7 @@ using static ChocoUtil.Algorithms.Ease;
 namespace SortGame
 {
     [RequireComponent(typeof(PulledFollow))]
-    public class NumberBlock : MonoBehaviour, IOnRemoveReceiver
+    public class NumberBlock : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text numberDisplay;
