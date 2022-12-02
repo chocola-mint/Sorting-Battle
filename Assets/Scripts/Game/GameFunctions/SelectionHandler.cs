@@ -44,7 +44,7 @@ namespace SortGame.GameFunctions
         private bool LastSelectionIsAdjacentTo(Vector2Int target)
         {
             return currentSelection.Count == 0 
-            || LinAlg.L1Norm(target, currentSelection[^1]) <= 1;
+            || LinAlg.L1Norm(target, currentSelection[^1]) == 1;
         }
         private bool CanAddToSelection(Vector2Int target)
         {
