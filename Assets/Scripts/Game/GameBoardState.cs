@@ -45,6 +45,7 @@ namespace SortGame
 
         public bool PushNewRow(int numberOfColumns)
         {
+            Random.state = randomState;
             var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
             bool anyOverflow = false;
             foreach(var column in columns[0..Mathf.Min(numberOfColumns, columns.Length)])
@@ -52,6 +53,7 @@ namespace SortGame
                 bool overflow = gameGridState.PushUp(column, Random.Range(0, 100));
                 anyOverflow |= overflow;
             }
+            randomState = Random.state;
             return anyOverflow;
         }
         
