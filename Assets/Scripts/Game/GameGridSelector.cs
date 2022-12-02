@@ -34,9 +34,10 @@ namespace SortGame
         public void Select(Vector2Int tileCoord)
         {
             if(!enabled) return;
-            if(gameControllerState.Select(tileCoord))
-                foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<IOnSelectReceiver>())
-                    receiver.OnSelect();
+            gameControllerState.Select(tileCoord);
+            // if(gameControllerState.Select(tileCoord))
+            //     foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<IOnSelectReceiver>())
+            //         receiver.OnSelect();
         }
         public void BeginSelection()
         {
@@ -45,20 +46,20 @@ namespace SortGame
         }
         public void EndSelection()
         {
-            var (selection, drops, shouldRemove) = gameControllerState.EndSelection();
-            foreach(var tileCoord in selection)
-            {    
-                foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<IOnDeselectReceiver>())
-                    receiver.OnDeselect();
-                if(shouldRemove)
-                    foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponentsInChildren<IOnRemoveReceiver>())
-                        receiver.OnRemove();
-            }
-            foreach(var drop in drops)
-            {
-                gameGrid.GetGameTile(drop.a).GetComponentInChildren<NumberBlock>()
-                .MoveTo(gameGrid.GetGameTile(drop.b));
-            }
+            gameControllerState.EndSelection();
+            // foreach(var tileCoord in selection)
+            // {    
+            //     foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponents<IOnDeselectReceiver>())
+            //         receiver.OnDeselect();
+            //     if(shouldRemove)
+            //         foreach(var receiver in gameGrid.GetGameTile(tileCoord).GetComponentsInChildren<IOnRemoveReceiver>())
+            //             receiver.OnRemove();
+            // }
+            // foreach(var drop in drops)
+            // {
+            //     gameGrid.GetGameTile(drop.a).GetComponentInChildren<NumberBlock>()
+            //     .MoveTo(gameGrid.GetGameTile(drop.b));
+            // }
         }
         private void OnDisable() 
         {

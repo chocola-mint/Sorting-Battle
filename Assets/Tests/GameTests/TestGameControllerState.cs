@@ -35,10 +35,7 @@ public class TestGameControllerState
         Assert.IsTrue(state.Select(new(4, 2)));
         Assert.IsTrue(state.Select(new(4, 3)));
         Assert.IsTrue(state.Select(new(4, 4)));
-        var (selection, drops, shouldRemove) = state.EndSelection();
-        Assert.IsTrue(shouldRemove);
-        Assert.AreEqual(selection.Count, 5);
-        Assert.Greater(drops.Count, 0);
+        state.EndSelection();
         Assert.IsTrue(
             gameGridState.ContentEqual(
                 GameGridState.Deserialize(
@@ -53,9 +50,7 @@ public class TestGameControllerState
         Assert.IsTrue(state.Select(new(2, 2)));
         Assert.IsTrue(state.Select(new(3, 2)));
         Assert.IsFalse(state.Select(new(4, 2)));
-        (selection, drops, shouldRemove) = state.EndSelection();
-        Assert.IsFalse(shouldRemove);
-        Assert.AreEqual(selection.Count, 2);
+        state.EndSelection();
         // Make sure the grid is unchanged.
         Assert.IsTrue(
             gameGridState.ContentEqual(
@@ -71,10 +66,7 @@ public class TestGameControllerState
         Assert.IsTrue(state.Select(new(1, 2)));
         Assert.IsTrue(state.Select(new(2, 2)));
         Assert.IsTrue(state.Select(new(3, 2)));
-        (selection, drops, shouldRemove) = state.EndSelection();
-        Assert.IsTrue(shouldRemove);
-        Assert.AreEqual(selection.Count, 3);
-        Assert.AreEqual(drops.Count, 0);
+        state.EndSelection();
         Assert.IsTrue(
             gameGridState.ContentEqual(
                 GameGridState.Deserialize(

@@ -25,7 +25,7 @@ namespace SortGame
         {
             for(int i = 0; i < rowCount; ++i)
                 for(int j = 0; j < columnCount; ++j) 
-                    this.grid[i, j] = from.grid[i, j];
+                    this.grid[i, j] = new(from.grid[i, j].number);
         }
         public string Serialize()
         {
@@ -61,6 +61,7 @@ namespace SortGame
         public bool IsEmpty(Vector2Int coord) => grid[coord.x, coord.y].IsEmpty();
         public bool IsGarbage(Vector2Int coord) => grid[coord.x, coord.y].IsGarbage();
         public bool IsNumber(Vector2Int coord) => grid[coord.x, coord.y].IsNumber();
+        public bool IsOnGrid(Vector2Int coord) => coord.x < rowCount && coord.x >= 0 && coord.y < columnCount && coord.y >= 0;
         public void Set(Vector2Int coord, int value) => grid[coord.x, coord.y].number = value;
         public void Clear()
         {
@@ -68,9 +69,9 @@ namespace SortGame
                 for(int j = 0; j < columnCount; ++j) 
                     grid[i, j] = new(-1);
         }
-        public void LoadRandom(int minInclusive = 0, int maxExclusive = 100)
+        public void LoadRandom(int minInclusive = 0, int maxExclusive = 100, float rowPercentage = 1.0f)
         {
-            for(int i = 0; i < rowCount; ++i)
+            for(int i = Mathf.FloorToInt(rowCount * rowPercentage); i < rowCount; ++i)
                 for(int j = 0; j < columnCount; ++j)
                     Set(new(i, j), Random.Range(minInclusive, maxExclusive));
         }
@@ -84,32 +85,41 @@ namespace SortGame
             for(int i = 0; i < rowCount; ++i)
                 Set(new(i, columnId), columnValues[i]);
         }
-        public struct SwapOp
+        public void RegisterBlockCallbacks(Vector2Int coord, System.Action<Vector2Int> onMove, System.Action onRemove)
         {
-            public Vector2Int a, b;
+            grid[coord.x, coord.y].onBlockMove += onMove;
+            grid[coord.x, coord.y].onBlockRemove += onRemove;
+        }
+        public void RegisterTileCallbacks(Vector2Int coord, System.Action onSelect, System.Action onDeselect)
+        {
+            grid[coord.x, coord.y].onTileSelect += onSelect;
+            grid[coord.x, coord.y].onTileDeselect += onDeselect;
+        }
+        public void Select(Vector2Int coord)
+        {
+            grid[coord.x, coord.y].Select();
+        }
+        public void Deselect(Vector2Int coord)
+        {
+            grid[coord.x, coord.y].Deselect();
         }
         public void Swap(Vector2Int a, Vector2Int b)
         {
-            var temp = grid[a.x, a.y];
-            grid[a.x, a.y] = grid[b.x, b.y];
-            grid[b.x, b.y] = temp;
+            GameTileState.Swap(grid[a.x, a.y], a, grid[b.x, b.y], b);
+            // var temp = grid[a.x, a.y];
+            // grid[a.x, a.y] = grid[b.x, b.y];
+            // grid[b.x, b.y] = temp;
         }
-        public List<SwapOp> SwapAndPullDown(Vector2Int a, Vector2Int b)
+        public void SwapAndPullDown(Vector2Int a, Vector2Int b)
         {
             bool wasAEmpty = grid[a.x, a.y].IsEmpty();
             bool wasBEmpty = grid[b.x, b.y].IsEmpty();
             Swap(a, b);
-            List<SwapOp> result = new();
-            if(wasAEmpty ^ wasBEmpty) 
-            {
-                result.AddRange(PullDown(a.y));
-                result.AddRange(PullDown(b.y));
-            }
-            return result;
+            PullDown(a.y);
+            PullDown(b.y);
         }
-        public List<SwapOp> PullDown(int column)
+        public void PullDown(int column)
         {
-            List<SwapOp> swaps = new();
             int bottom;
             for(bottom = rowCount - 1; bottom >= 0 && !grid[bottom, column].IsEmpty(); --bottom);
             int offset;
@@ -119,37 +129,36 @@ namespace SortGame
             {
                 (Vector2Int a, Vector2Int b) = (new(i, column), new(i + offset, column));
                 Swap(a, b);
-                swaps.Add(new(){a = a, b = b});
             }
-            return swaps;
         }
-        public List<SwapOp> PushUp(int column, int number)
+        public bool PushUp(int column, int number)
         {
-            List<SwapOp> swaps = new();
+            bool overflow = false;
             int top;
             for(top = 0; top < rowCount && grid[top, column].IsEmpty(); ++top);
             for(int i = top; i < rowCount; ++i)
             {
                 (Vector2Int a, Vector2Int b) = (new(i, column), new(i - 1, column));
                 if(i != 0) Swap(a, b); // Don't actually swap when i is 0, because row -1 doesn't exist.
-                swaps.Add(new(){a = a, b = b});
+                else overflow = true; // Mark overflows.
             }
+            grid[rowCount - 1, column].Remove();
             Set(new(rowCount - 1, column), number);
-            return swaps;
+            return overflow;
         }
-        public List<SwapOp> RemoveTile(Vector2Int coord)
+        public void RemoveTile(Vector2Int coord)
         {
-            Set(coord, GameTileState.Empty);
-            return PullDown(coord.y);
+            grid[coord.x, coord.y].Remove();
+            // Set(coord, GameTileState.Empty);
+            PullDown(coord.y);
         }
-        public List<SwapOp> RemoveTiles(Vector2Int[] coords)
+        public void RemoveTiles(Vector2Int[] coords)
         {
-            List<SwapOp> swaps = new();
             foreach(var coord in coords)
-                Set(coord, GameTileState.Empty);
+                grid[coord.x, coord.y].Remove();
+                // Set(coord, GameTileState.Empty);
             foreach(var coord in coords)
-                swaps.AddRange(PullDown(coord.y));
-            return swaps;
+                PullDown(coord.y);
         }
         public bool ContentEqual(GameGridState other)
         {

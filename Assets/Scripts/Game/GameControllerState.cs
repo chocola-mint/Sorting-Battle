@@ -12,6 +12,7 @@ namespace SortGame
         private readonly RemoveHandler remover;
         private readonly SwapHandler swapper;
         public event System.Action<int> onRemove;
+        private readonly HashSet<int> columnLocks = new();
         public GameControllerState(GameGridState gameGridState, int minimumSortedLength)
         {
             this.gameGridState = gameGridState;
@@ -21,14 +22,18 @@ namespace SortGame
         }
         public bool StartSwapping(Vector2Int target)
         {
+            columnLocks.Add(target.y);
             return swapper.StartSwapping(target);
         }
-        public SwapHandler.Commands SwapTo(Vector2Int target)
+        public void SwapTo(Vector2Int target)
         {
-            return swapper.SwapTo(target);
+            columnLocks.Remove(swapper.cursor.y);
+            columnLocks.Add(target.y);
+            swapper.SwapTo(target);
         }
         public void EndSwapping()
         {
+            columnLocks.Clear();
             swapper.EndSwapping();
         }
         public void BeginSelection()
@@ -37,14 +42,15 @@ namespace SortGame
         }
         public bool Select(Vector2Int target)
         {
+            columnLocks.Add(target.y);
             return remover.Select(target);
         }
-        public (List<Vector2Int>, List<GameGridState.SwapOp>, bool) EndSelection()
+        public void EndSelection()
         {
-            var (selection, swaps, shouldRemove) = remover.EndSelection(minimumSortedLength);
+            columnLocks.Clear();
+            var (selection, shouldRemove) = remover.EndSelection(minimumSortedLength);
             if(shouldRemove) onRemove?.Invoke(selection.Count);
             else onRemove?.Invoke(0);
-            return (selection, swaps, shouldRemove);
         }
     }
 }

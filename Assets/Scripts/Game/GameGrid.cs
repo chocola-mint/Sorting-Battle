@@ -37,17 +37,18 @@ namespace SortGame
                 foreach(Transform tile in row)
                     yield return tile.GetComponent<GameTile>();
         }
-        public void LoadRandomNumbers()
+        public void LoadRandomNumbers(float rowPercentage = 1)
         {
             #if UNITY_EDITOR
             
             if(UnityEditor.EditorApplication.isPlaying)
             {
                 // Runtime GameGridState exists here.
-                state.LoadRandom();
+                state.LoadRandom(rowPercentage: rowPercentage);
                 foreach(var gameTile in allTiles.Value)
-                    Instantiate(numberBlockPrefab, gameTile.transform)
-                    .GetComponent<NumberBlock>().SetNumber(state.Get(gameTile.gridCoord));
+                    if(state.IsNumber(gameTile.gridCoord))
+                        Instantiate(numberBlockPrefab, gameTile.transform)
+                        .GetComponent<NumberBlock>().SetNumber(state.Get(gameTile.gridCoord));
             }
             else 
             {
@@ -57,11 +58,24 @@ namespace SortGame
             }
             #else
             // Runtime GameGridState exists here.
-            state.LoadRandom();
+            state.LoadRandom(rowPercentage: rowPercentage);
             foreach(var gameTile in allTiles.Value)
-                Instantiate(numberBlockPrefab, gameTile.transform)
-                .GetComponent<NumberBlock>().SetNumber(state.grid[gameTile.gridCoord.x, gameTile.gridCoord.y].number);
+                if(state.IsNumber(gameTile.gridCoord))
+                    Instantiate(numberBlockPrefab, gameTile.transform)
+                    .GetComponent<NumberBlock>().SetNumber(state.grid[gameTile.gridCoord.x, gameTile.gridCoord.y].number);
             #endif
+        }
+        public void LoadNumberAt(Vector2Int tileCoord)
+        {
+            Instantiate(numberBlockPrefab, GetGameTile(tileCoord).transform)
+            .GetComponent<NumberBlock>().SetNumber(state.Get(tileCoord));
+        }
+        public bool PushUp(int column)
+        {
+            bool overflow = state.PushUp(column, Random.Range(0, 100));
+            if(overflow) return false;
+            LoadNumberAt(new(rowCount - 1, column));
+            return true;
         }
         public void ClearTiles()
         {

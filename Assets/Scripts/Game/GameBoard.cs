@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using SortGame.GameFunctions;
-
+using ChocoUtil.Algorithms;
 namespace SortGame
 {
     /// <summary>
@@ -16,12 +16,12 @@ namespace SortGame
         private GameGrid gameGrid;
         public GameBoardState state { get; private set; }
         [SerializeField] private int seed = 1337;
-        public void LoadRandomNumbers()
+        public void LoadRandomNumbers(float rowPercentage = 1)
         {
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
             Random.state = state.randomState; // Load this board's random state.
-            gameGrid.LoadRandomNumbers();
+            gameGrid.LoadRandomNumbers(rowPercentage);
             state.randomState = Random.state; // Save afterwards.
         }
         public void ClearTiles()
@@ -51,8 +51,33 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
-            LoadRandomNumbers();
+            LoadRandomNumbers(rowPercentage: 0.8f);
+            StartCoroutine(TileGeneration());
         }
+        bool PushNewRow()
+        {
+            var (newBlocks, overflow) = state.PushNewRow(gameGrid.columnCount - 1);
+            // foreach(var swap in swaps)
+            // {
+            //     if(swap.b.x >= 0)
+            //         gameGrid.GetGameTile(swap.a).GetComponentInChildren<NumberBlock>()
+            //         .MoveTo(gameGrid.GetGameTile(swap.b));
+            // }
+            foreach(var newBlock in newBlocks)
+                gameGrid.LoadNumberAt(newBlock);
+            return overflow;
+        }
+        IEnumerator TileGeneration()
+        {
+            bool gameOver = false;
+            while(!gameOver)
+            {
+                yield return new WaitForSeconds(5.0f);
+                gameOver |= PushNewRow();
+            }
+            Debug.Log("Game over");
+        }
+
 
         // Update is called once per frame
         void Update()

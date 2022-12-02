@@ -16,14 +16,8 @@ public class TestGameGridStatePushUp
             " 1, -1, -1, -1, -1\n" +
             " 2,  5, -1, -1, -1\n" +
             " 3,  4, -1, -1, -1\n");
-        var swaps = state.PushUp(0, 4);
-        Assert.AreEqual(swaps.Count, 3);
-        Assert.AreEqual(swaps[0].a, new Vector2Int(2, 0));
-        Assert.AreEqual(swaps[0].b, new Vector2Int(1, 0));
-        Assert.AreEqual(swaps[1].a, new Vector2Int(3, 0));
-        Assert.AreEqual(swaps[1].b, new Vector2Int(2, 0));
-        Assert.AreEqual(swaps[2].a, new Vector2Int(4, 0));
-        Assert.AreEqual(swaps[2].b, new Vector2Int(3, 0));
+        bool overflow = state.PushUp(0, 4);
+        Assert.IsFalse(overflow);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -42,18 +36,8 @@ public class TestGameGridStatePushUp
             " 3, -1, -1, -1, -1\n" +
             " 4,  5, -1, -1, -1\n" +
             " 5,  4, -1, -1, -1\n");
-        var swaps = state.PushUp(0, 6);
-        Assert.AreEqual(swaps.Count, 5);
-        Assert.AreEqual(swaps[0].a, new Vector2Int(0, 0));
-        Assert.AreEqual(swaps[0].b, new Vector2Int(-1, 0));
-        Assert.AreEqual(swaps[1].a, new Vector2Int(1, 0));
-        Assert.AreEqual(swaps[1].b, new Vector2Int(0, 0));
-        Assert.AreEqual(swaps[2].a, new Vector2Int(2, 0));
-        Assert.AreEqual(swaps[2].b, new Vector2Int(1, 0));
-        Assert.AreEqual(swaps[3].a, new Vector2Int(3, 0));
-        Assert.AreEqual(swaps[3].b, new Vector2Int(2, 0));
-        Assert.AreEqual(swaps[4].a, new Vector2Int(4, 0));
-        Assert.AreEqual(swaps[4].b, new Vector2Int(3, 0));
+        bool overflow = state.PushUp(0, 6);
+        Assert.IsTrue(overflow);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(

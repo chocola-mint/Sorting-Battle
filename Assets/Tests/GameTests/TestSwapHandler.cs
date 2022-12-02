@@ -5,13 +5,9 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using SortGame;
 using SortGame.GameFunctions;
-using Commands = SortGame.GameFunctions.SwapHandler.Commands;
-using SwapOp = SortGame.GameGridState.SwapOp;
 
 public class TestSwapHandler
 {
-    private SwapOp MakeSwapOp(int x1, int y1, int x2, int y2)
-    => new SwapOp(){ a = new(x1, y1), b = new(x2, y2)};
     [Test]
     public void TestSimpleSwap()
     {
@@ -22,13 +18,7 @@ public class TestSwapHandler
         SwapHandler handler = new(state);
         Assert.IsTrue(handler.StartSwapping(new(2, 0)));
         Assert.IsTrue(handler.swappingActive);
-        Commands cmds;
-        cmds = handler.SwapTo(new(2, 1));
-        Assert.IsTrue(cmds.success);
-        Assert.IsFalse(cmds.shouldFall);
-        Assert.AreEqual(cmds.swap, MakeSwapOp(2, 0, 2, 1));
-        Assert.IsNotNull(cmds.drops);
-        Assert.AreEqual(cmds.drops.Count, 0);
+        handler.SwapTo(new(2, 1));
         Assert.IsTrue(
             state.ContentEqual(GameGridState.Deserialize(
                 " 2,  6,  3, -1,  3\n" +
@@ -61,10 +51,7 @@ public class TestSwapHandler
             " 1,  4,  5,  6,  1\n");
         SwapHandler handler = new(state);
         Assert.IsTrue(handler.StartSwapping(new(0, 0)));
-        Commands cmds;
-        cmds = handler.SwapTo(new(2, 0));
-        Assert.IsTrue(cmds.failed);
-        Assert.IsFalse(cmds.success);
+        handler.SwapTo(new(2, 0));
         Assert.IsTrue(
             state.ContentEqual(GameGridState.Deserialize(
                 " 2,  6,  3, -1,  3\n" +

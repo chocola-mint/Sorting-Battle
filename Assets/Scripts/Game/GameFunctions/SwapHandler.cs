@@ -4,24 +4,15 @@ using UnityEngine;
 using System.Linq;
 namespace SortGame.GameFunctions
 {
-    using SwapOp = GameGridState.SwapOp;
     public class SwapHandler
     {
-        public struct Commands
-        {
-            public bool success;
-            public bool failed => !success;
-            public SwapOp swap;
-            public List<SwapOp> drops;
-            public bool shouldFall => drops.Count > 0;
-        }
         private readonly GameGridState gameGridState;
         public SwapHandler(GameGridState gameGridState)
         {
             this.gameGridState = gameGridState;
         }
-        private static readonly Vector2Int Null = new(-10, -10);
-        private Vector2Int cursor = Null;
+        public static readonly Vector2Int Null = new(-10, -10);
+        public Vector2Int cursor { get; private set; } = Null;
         public bool swappingActive => cursor != Null;
         public bool StartSwapping(Vector2Int target)
         {
@@ -32,18 +23,14 @@ namespace SortGame.GameFunctions
         }
         private bool AdjacentToCursor(Vector2Int target)
             => LinAlg.L1Norm(cursor, target) == 1;
-        public Commands SwapTo(Vector2Int target)
+        public void SwapTo(Vector2Int target)
         {
-            Commands cmds = new();
-            cmds.success = cursor != Null && AdjacentToCursor(target) && gameGridState.IsNumber(target);
-            if(cmds.success)
+            bool success = cursor != Null && AdjacentToCursor(target) && gameGridState.IsNumber(target);
+            if(success)
             {
-                cmds.swap = new(){a = cursor, b = target};
-                cmds.drops = gameGridState.SwapAndPullDown(cursor, target);
+                gameGridState.SwapAndPullDown(cursor, target);
                 cursor = target;
-                if(cmds.drops.Any(x => x.a == target)) EndSwapping();
             }
-            return cmds;
         }
         public void EndSwapping()
         {

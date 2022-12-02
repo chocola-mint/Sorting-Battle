@@ -29,15 +29,26 @@ namespace SortGame.GameFunctions
         /// </summary>
         /// <returns>A tuple, containing the removed blocks 
         /// and the SwapOps that come from dropping the blocks above.</returns>
-        public (List<Vector2Int>, List<GameGridState.SwapOp>, bool shouldRemove) EndSelection(int minimumLength = 0)
+        public (List<Vector2Int>, bool shouldRemove) EndSelection(int minimumLength = 0)
         {
             var selection = selectionHandler.EndSelection();
             if(selection.Count >= minimumLength)
             {
-                var swaps = gameGridState.RemoveTiles(selection.ToArray());
-                return (selection, swaps, true);
+                ExpandSelectionToIncludeAdjacentGarbage(selection);
+                gameGridState.RemoveTiles(selection.ToArray());
+                return (selection, true);
             }
-            else return (selection, new(), false);
+            else return (selection, false);
+        }
+        private void ExpandSelectionToIncludeAdjacentGarbage(List<Vector2Int> selection)
+        {
+            HashSet<Vector2Int> garbageTiles = new();
+            foreach(var coord in selection)
+                foreach(var adj in coord.AdjacentPoints())
+                    if(gameGridState.IsOnGrid(adj) && gameGridState.IsGarbage(adj))
+                        garbageTiles.Add(adj);
+            foreach(var garbageTile in garbageTiles)
+                selection.Add(garbageTile);
         }
     }
 }

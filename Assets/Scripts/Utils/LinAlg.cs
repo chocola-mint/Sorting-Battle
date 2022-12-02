@@ -33,5 +33,12 @@ namespace SortGame
         {
             return new(point.x, point.y, z);
         }
+        public static IEnumerable<Vector2Int> AdjacentPoints(this Vector2Int point)
+        {
+            yield return point + Vector2Int.up;
+            yield return point + Vector2Int.right;
+            yield return point + Vector2Int.down;
+            yield return point + Vector2Int.left;
+        }
     }
 }

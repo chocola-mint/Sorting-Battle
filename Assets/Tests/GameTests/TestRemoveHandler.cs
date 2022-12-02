@@ -24,14 +24,13 @@ public class TestRemoveHandler
         handler.Select(new(2, 1));
         handler.Select(new(3, 1));
         handler.Select(new(4, 1));
-        var (removedTiles, swaps, shouldRemove) = handler.EndSelection();
+        var (removedTiles, shouldRemove) = handler.EndSelection();
         Assert.IsTrue(shouldRemove);
         Assert.AreEqual(removedTiles.Count, 4);
         Assert.AreEqual(removedTiles[0], new Vector2Int(1, 1));
         Assert.AreEqual(removedTiles[1], new Vector2Int(2, 1));
         Assert.AreEqual(removedTiles[2], new Vector2Int(3, 1));
         Assert.AreEqual(removedTiles[3], new Vector2Int(4, 1));
-        Assert.AreEqual(swaps.Count, 0);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(

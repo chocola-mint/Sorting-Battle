@@ -13,6 +13,14 @@ namespace SortGame
     {
         [SerializeField]
         private TMP_Text numberDisplay;
+        [System.Serializable]
+        private struct Views
+        {
+            [SerializeField]
+            public GameObject asNumber, asTrash;
+        }
+        [SerializeField] private Views views;
+        private GameGrid gameGrid;
         public GameTile gameTile { get; private set; }
         private int number = 0;
         private PulledFollow pulledFollow;
@@ -21,13 +29,21 @@ namespace SortGame
         private static class AnimState
         {
             public static readonly int Vanish = Animator.StringToHash(nameof(Vanish));
+            public static readonly int PushUp = Animator.StringToHash(nameof(PushUp));
         }
+        public void SetRandomNumber() => SetNumber(Random.Range(0, 100));
         public void SetNumber(int number) {
             if(this.number != number) 
                 numberDisplay.text = number.ToString();
             this.number = number;
         }
         public int GetNumber() => number;
+        public void ToGarbage()
+        {
+            // TODO: Smooth animation?
+            views.asNumber.gameObject.SetActive(false);
+            views.asTrash.gameObject.SetActive(true);
+        }
         private void Reset() 
         {
             numberDisplay = GetComponentInChildren<TMP_Text>();
@@ -35,13 +51,23 @@ namespace SortGame
         }
         private void Awake() 
         {
+            views.asNumber.gameObject.SetActive(true);
+            views.asTrash.gameObject.SetActive(false);
             gameTile = GetComponentInParent<GameTile>();
             pulledFollow = gameObject.GetComponent<PulledFollow>();
             StopFollowPointer();
             graphics = GetComponentsInChildren<Graphic>();
             animator = GetComponent<Animator>();
-            SetNumber(Random.Range(0, 100));
+            SetRandomNumber();
             AutoResize();
+            animator.Play(AnimState.PushUp);
+
+            
+            gameGrid = GetComponentInParent<GameGrid>();
+            gameGrid.state.RegisterBlockCallbacks(gameTile.gridCoord, coord => {
+                MoveTo(gameGrid.GetGameTile(coord));
+            },
+            OnRemove);
         }
         public void AutoResize()
         {

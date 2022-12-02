@@ -16,12 +16,7 @@ public class TestGameGridStatePullDown
             "-1, -1,  4, -1,  5\n" +
             "-1, -1, -1, -1, -1\n" +
             "-1, -1, -1, -1, -1\n");
-        var swaps = state.PullDown(2);
-        Assert.AreEqual(swaps.Count, 2);
-        Assert.AreEqual(swaps[0].a, new Vector2Int(2, 2));
-        Assert.AreEqual(swaps[0].b, new Vector2Int(4, 2));
-        Assert.AreEqual(swaps[1].a, new Vector2Int(1, 2));
-        Assert.AreEqual(swaps[1].b, new Vector2Int(3, 2));
+        state.PullDown(2);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -35,8 +30,7 @@ public class TestGameGridStatePullDown
     public void TestPullDownCase2()
     {
         GameGridState state = new(5, 5);
-        var swaps = state.PullDown(1);
-        Assert.AreEqual(swaps.Count, 0);
+        state.PullDown(1);
         Assert.IsTrue(state.ContentEqual(new(5, 5)));
     }
     [Test]
@@ -48,12 +42,7 @@ public class TestGameGridStatePullDown
             "-1, -1, -1, -1, -1\n" +
             "-1, -1, -1, -1, -1\n" +
             "-1,  1, -1, -1, -1\n");
-        var swaps = state.PullDown(1);
-        Assert.AreEqual(swaps.Count, 2);
-        Assert.AreEqual(swaps[0].a, new Vector2Int(1, 1));
-        Assert.AreEqual(swaps[0].b, new Vector2Int(3, 1));
-        Assert.AreEqual(swaps[1].a, new Vector2Int(0, 1));
-        Assert.AreEqual(swaps[1].b, new Vector2Int(2, 1));
+        state.PullDown(1);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -73,14 +62,7 @@ public class TestGameGridStatePullDown
             "-1,  6, -1, -1, -1\n" +
             "-1,  5, -1, -1, -1\n" +
             "-1,  4, -1, -1, -1\n");
-        var swaps = state.SwapAndPullDown(new(3, 1), new(3, 2));
-        Assert.AreEqual(swaps.Count, 3);
-        Assert.AreEqual(swaps[0].a, new Vector2Int(2, 1));
-        Assert.AreEqual(swaps[0].b, new Vector2Int(3, 1));
-        Assert.AreEqual(swaps[1].a, new Vector2Int(1, 1));
-        Assert.AreEqual(swaps[1].b, new Vector2Int(2, 1));
-        Assert.AreEqual(swaps[2].a, new Vector2Int(3, 2));
-        Assert.AreEqual(swaps[2].b, new Vector2Int(4, 2));
+        state.SwapAndPullDown(new(3, 1), new(3, 2));
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -99,10 +81,7 @@ public class TestGameGridStatePullDown
             "-1,  6, -1, -1, -1\n" +
             "-1,  5, -1, -1, -1\n" +
             "-1,  4, -1, -1, -1\n");
-        var swaps = state.SwapAndPullDown(new(1, 1), new(1, 2));
-        Assert.AreEqual(swaps.Count, 1);
-        Assert.AreEqual(swaps[0].a, new Vector2Int(1, 2));
-        Assert.AreEqual(swaps[0].b, new Vector2Int(4, 2));
+        state.SwapAndPullDown(new(1, 1), new(1, 2));
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -121,8 +100,7 @@ public class TestGameGridStatePullDown
             " 1, -1, -1, -1, -1\n" +
             " 2,  5, -1, -1, -1\n" +
             " 3,  4, -1, -1, -1\n");
-        var swaps = state.SwapAndPullDown(new(3, 0), new(3, 1));
-        Assert.AreEqual(swaps.Count, 0);
+        state.SwapAndPullDown(new(3, 0), new(3, 1));
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -131,8 +109,7 @@ public class TestGameGridStatePullDown
                     " 1, -1, -1, -1, -1\n" +
                     " 5,  2, -1, -1, -1\n" +
                     " 3,  4, -1, -1, -1\n")));
-        swaps = state.SwapAndPullDown(new(2, 0), new(2, 1));
-        Assert.AreEqual(swaps.Count, 0);
+        state.SwapAndPullDown(new(2, 0), new(2, 1));
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -151,8 +128,7 @@ public class TestGameGridStatePullDown
             " 1, -1, -1, -1, -1\n" +
             " 2,  5, -1, -1, -1\n" +
             " 3,  4, -1, -1, -1\n");
-        var swaps = state.SwapAndPullDown(new(4, 2), new(4, 3));
-        Assert.AreEqual(swaps.Count, 0);
+        state.SwapAndPullDown(new(4, 2), new(4, 3));
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(

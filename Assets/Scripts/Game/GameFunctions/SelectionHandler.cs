@@ -63,6 +63,7 @@ namespace SortGame.GameFunctions
             bool canAdd = CanAddToSelection(tileCoord);
             if(canAdd) 
             {
+                gameGridState.Select(tileCoord);
                 currentSelection.Add(tileCoord);
                 Debug.Log($"Added {gameGridState.Get(tileCoord)}");
             }
@@ -77,6 +78,7 @@ namespace SortGame.GameFunctions
         {
             Debug.Log("=== End selection ===");
             List<Vector2Int> selection = new(currentSelection);
+            foreach(var selected in selection) gameGridState.Deselect(selected);
             currentSelection.Clear();
             return selection;
         }
