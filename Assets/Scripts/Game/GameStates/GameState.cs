@@ -29,13 +29,26 @@ namespace SortGame
         protected int tick { get; private set; } = 0;
         public void Tick(int increment = 1)
         {
-            tick += increment;
-            while(scheduler.Count > 0 && scheduler.Keys[0] <= tick)
+            if(increment <= 0) throw new System.ArgumentException("Increment must be greater than 0.");
+            UpdateScheduler(tick + increment);
+        }
+        public void SkipToNextEvent()
+        {
+            if(scheduler.Count > 0)
             {
+                UpdateScheduler(scheduler.Keys[0]);
+            }
+        }
+        private void UpdateScheduler(int targetTick)
+        {
+            while(scheduler.Count > 0 && scheduler.Keys[0] <= targetTick)
+            {
+                tick = scheduler.Keys[0]; // So PushEvent sees the current tick.
                 System.Action @event = scheduler.Values[0];
                 scheduler.RemoveAt(0);
                 @event();
             }
+            tick = targetTick;
         }
         /// <summary>
         /// Push an event to the internal tick-based scheduler.
