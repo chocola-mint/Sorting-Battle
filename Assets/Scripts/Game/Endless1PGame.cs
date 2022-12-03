@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace SortGame
 {
@@ -9,6 +10,7 @@ namespace SortGame
         private Endless1PGameState gameState;
         [SerializeField] private GameBoard p1GameBoard;
         private static readonly WaitForFixedUpdate waitForFixedUpdate = new();
+        [SerializeField] private TMP_Text textMesh;
         // Start is called before the first frame update
         void Start()
         {
@@ -32,6 +34,11 @@ namespace SortGame
         {
             Debug.Log("Game over");
             Debug.Log($"Total score: {p1GameBoard.state.gameScoreState.totalScore}");
+        }
+
+        private void Update() 
+        {
+            textMesh.text = $"Level: {gameState.p1Level}\nScore: {p1GameBoard.state.gameScoreState.totalScore}";
         }
     }
 }
