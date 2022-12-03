@@ -4,27 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 namespace SortGame
 {
-
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : GameController
     {
-        private GameBoard gameBoard;
-        private GameGridSelector selector;
-        private GameGridSwapper swapper;
         [System.Serializable]
         private struct Inputs
         {
             public InputActionReference select;
             public InputActionReference swap;
         }
-        [SerializeField] private Inputs inputs;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            selector = GetComponent<GameGridSelector>();
-            swapper = GetComponent<GameGridSwapper>();
-            gameBoard = GetComponent<GameBoard>();
-        }
+        [SerializeField] private Inputs inputs;        
         private void OnEnable() 
         {
             inputs.select.EnableAndConnect(OnSelect);
@@ -43,16 +31,9 @@ namespace SortGame
         }
         private void OnSwap(InputAction.CallbackContext ctx)
         {
-            // TODO
             if(ctx.started) swapper.StartSwapping(ctx.ReadValue<Vector2>());
             else if(ctx.canceled) swapper.EndSwapping();
             else swapper.SwapTo(ctx.ReadValue<Vector2>());
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
     }
 

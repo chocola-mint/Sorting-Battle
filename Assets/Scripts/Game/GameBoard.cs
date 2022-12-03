@@ -51,33 +51,5 @@ namespace SortGame
             );
             
         }
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-            LoadRandomNumbers(rowPercentage: 0.8f);
-            StartCoroutine(TileGeneration());
-        }
-        bool PushNewRow()
-        {
-            return state.PushNewRow(gameGrid.columnCount - 1);
-        }
-        IEnumerator TileGeneration()
-        {
-            bool gameOver = false;
-            while(!gameOver)
-            {
-                yield return new WaitForSeconds(5.0f);
-                gameOver |= PushNewRow();
-            }
-            Debug.Log("Game over");
-        }
-
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
     }
 }

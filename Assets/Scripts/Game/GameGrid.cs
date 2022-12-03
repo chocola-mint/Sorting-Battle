@@ -86,13 +86,5 @@ namespace SortGame
             ClearTiles();
             state.onNewBlock += NewBlock;
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
     }
-
-
 }
