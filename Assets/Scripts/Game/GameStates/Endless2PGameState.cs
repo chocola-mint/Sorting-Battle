@@ -15,6 +15,7 @@ namespace SortGame
         public System.Func<int> waitInterval;
         public System.Func<int> levelUpInterval;
         public event System.Action onP1Win, onP2Win, onDraw;
+        private const int AttackBufferTickDuration = 120;
         public Endless2PGameState(
             GameBoardState p1GBState, 
             GameBoardState p2GBState)
@@ -74,18 +75,18 @@ namespace SortGame
         private void CheckAttackEvent(GameBoardState subject, ref int lastPressureTick, System.Action checkEvent)
         {
             bool overflow = false;
-            if(tick - lastPressureTick >= 150 + subject.gamePressureState.pressure)
+            if(tick - lastPressureTick >= AttackBufferTickDuration)
             {
                 // Can dump trash from pressure.
                 lastPressureTick = tick;
                 // TODO: Make this consume percentage.
-                int trash = subject.gamePressureState.ConsumePressure(50);
+                int trash = subject.gamePressureState.ConsumePressure(20);
                 if(trash > 0)
                 {
                     int numRows = 1 + (trash / 10);
                     overflow = subject.PushTrashRows(
                         numRows, 
-                        Mathf.RoundToInt(Mathf.Lerp(1, 4, (float) trash / (float) 10.0f)));
+                        Mathf.RoundToInt(Mathf.Lerp(1, subject.gameGridState.columnCount - 1, (float) trash / (float) 10.0f)));
                 }
             }
             if(overflow)
