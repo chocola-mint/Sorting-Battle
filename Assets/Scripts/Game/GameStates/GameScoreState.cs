@@ -10,8 +10,14 @@ namespace SortGame
         public int combo { get; private set; } = 0;
         public int effectiveCombo => Mathf.Min(combo, maxEffectiveCombo);
         public int comboScoreBuffer { get; private set; } = 0;
+        public struct ScoreIncreaseInfo
+        {
+            public int increase;
+            public int removeCount;
+            public int combo;
+        }
         public event System.Action<int> onComboReset;
-        public event System.Action<int> onScoreIncrease;
+        public event System.Action<ScoreIncreaseInfo> onScoreIncrease;
         public struct Config
         {
             public int minimumRemoveCount, baseRemoveScore, maxEffectiveCombo, removeLengthBonus;
@@ -46,7 +52,11 @@ namespace SortGame
             int plusScore = Mathf.CeilToInt(effectiveCombo / comboScoreStep) * (baseRemoveScore + (removeCount - minimumRemoveCount) * removeLengthBonus);
             totalScore += plusScore;
             comboScoreBuffer += plusScore;
-            onScoreIncrease?.Invoke(plusScore);
+            onScoreIncrease?.Invoke(new(){
+                increase = plusScore,
+                removeCount = removeCount,
+                combo = combo,
+                });
         }
 
         private void ResetCombo()

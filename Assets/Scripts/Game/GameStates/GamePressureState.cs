@@ -8,7 +8,8 @@ namespace SortGame
     {
         public int pressure { get; private set; } = 0;
         private readonly int maxPressure;
-        public GamePressureState(int maxPressure = 100)
+        public float pressureRate => (float) pressure / (float) maxPressure;
+        public GamePressureState(int maxPressure = 40)
         {
             this.maxPressure = maxPressure;
         }

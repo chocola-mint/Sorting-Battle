@@ -29,11 +29,11 @@ namespace SortGame
             p1LastPressureTick = 0;
             p2LastPressureTick = 0;
             p1State.gameScoreState.onScoreIncrease += x => {
-                p1State.gamePressureState.Attack(p2State.gamePressureState, x / 25);
+                p1State.gamePressureState.Attack(p2State.gamePressureState, x.removeCount + x.combo / 2);
                 p2LastPressureTick = tick;
             };
             p2State.gameScoreState.onScoreIncrease += x => {
-                p2State.gamePressureState.Attack(p1State.gamePressureState, x / 25);
+                p2State.gamePressureState.Attack(p1State.gamePressureState, x.removeCount + x.combo / 2);
                 p1LastPressureTick = tick;
             };
             // Default implementation: Difficulty ramps up in levels closer to 20.
@@ -74,11 +74,12 @@ namespace SortGame
         private void CheckAttackEvent(GameBoardState subject, ref int lastPressureTick, System.Action checkEvent)
         {
             bool overflow = false;
-            if(tick - lastPressureTick >= 300)
+            if(tick - lastPressureTick >= 150 + subject.gamePressureState.pressure)
             {
                 // Can dump trash from pressure.
                 lastPressureTick = tick;
-                int trash = subject.gamePressureState.ConsumePressure(20);
+                // TODO: Make this consume percentage.
+                int trash = subject.gamePressureState.ConsumePressure(50);
                 if(trash > 0)
                 {
                     int numRows = 1 + (trash / 10);

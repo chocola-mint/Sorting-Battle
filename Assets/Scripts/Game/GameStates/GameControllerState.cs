@@ -49,7 +49,7 @@ namespace SortGame
         {
             columnLocks.Clear();
             var (numberCount, trashCount, shouldRemove) = remover.EndSelection(minimumSortedLength);
-            if(shouldRemove) onRemove?.Invoke(numberCount + trashCount);
+            if(shouldRemove) onRemove?.Invoke(numberCount);
             else onRemove?.Invoke(0);
         }
     }
