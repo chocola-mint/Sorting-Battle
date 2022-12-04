@@ -54,16 +54,9 @@ namespace SortGame
         /// Push an event to the internal tick-based scheduler.
         /// The event is registered to occur after the given delay passes.
         /// </summary>
-        protected int PushEvent(int delayTicks, System.Action @event)
+        protected void PushEvent(int delayTicks, System.Action @event)
         {
             scheduler.Add(tick + delayTicks, @event);
-            return @event.GetHashCode();
-        }
-        protected void Unschedule(int hashCode)
-        {
-            for(int i = scheduler.Count - 1; i >= 0; --i)
-                if(scheduler.Values[i].GetHashCode() == hashCode)
-                    scheduler.RemoveAt(i);
         }
         /// <summary>
         /// Invoke to trigger Game Over event.
