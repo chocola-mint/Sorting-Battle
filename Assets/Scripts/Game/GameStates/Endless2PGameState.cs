@@ -9,7 +9,7 @@ namespace SortGame
     {
         public int level { get; private set; } = 0;
         private GameBoardState p1State, p2State;
-        private Dictionary<GameBoardState, int> lastPressureTick = new();
+        private int p1LastPressureTick, p2LastPressureTick;
         // Array to put each player's board, for convenience.
         private GameBoardState[] playerStates;
         public System.Func<int> waitInterval;
@@ -26,15 +26,15 @@ namespace SortGame
                 p1State,
                 p2State,
             };
-            lastPressureTick[p1State] = 0;
-            lastPressureTick[p2State] = 0;
+            p1LastPressureTick = 0;
+            p2LastPressureTick = 0;
             p1State.gameScoreState.onScoreIncrease += x => {
                 p1State.gamePressureState.Attack(p2State.gamePressureState, x / 25);
-                lastPressureTick[p2State] = tick;
+                p2LastPressureTick = tick;
             };
             p2State.gameScoreState.onScoreIncrease += x => {
                 p2State.gamePressureState.Attack(p1State.gamePressureState, x / 25);
-                lastPressureTick[p1State] = tick;
+                p1LastPressureTick = tick;
             };
             // Default implementation: Difficulty ramps up in levels closer to 20.
             // Difficulty maxes out at level 20.
@@ -69,15 +69,15 @@ namespace SortGame
             Debug.Log($"Level: {level}");
             PushEvent(levelUpInterval(), LevelUpEvent);
         }
-        private void CheckAttackP1Event() => CheckAttackEvent(p1State, CheckAttackP1Event);
-        private void CheckAttackP2Event() => CheckAttackEvent(p2State, CheckAttackP2Event);
-        private void CheckAttackEvent(GameBoardState subject, System.Action checkEvent)
+        private void CheckAttackP1Event() => CheckAttackEvent(p1State, ref p1LastPressureTick, CheckAttackP1Event);
+        private void CheckAttackP2Event() => CheckAttackEvent(p2State, ref p2LastPressureTick, CheckAttackP2Event);
+        private void CheckAttackEvent(GameBoardState subject, ref int lastPressureTick, System.Action checkEvent)
         {
             bool overflow = false;
-            if(tick - lastPressureTick[subject] >= 300)
+            if(tick - lastPressureTick >= 300)
             {
                 // Can dump trash from pressure.
-                lastPressureTick[subject] = tick;
+                lastPressureTick = tick;
                 int trash = subject.gamePressureState.ConsumePressure(20);
                 if(trash > 0)
                 {
