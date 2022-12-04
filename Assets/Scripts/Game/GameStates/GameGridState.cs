@@ -9,8 +9,10 @@ namespace SortGame
         public readonly int rowCount, columnCount;
         public readonly GameTileState[,] grid;
         public event System.Action<Vector2Int> onNewBlock;
-        public GameGridState(int rowCount, int columnCount)
+        private readonly int numberUpperBound = 100;
+        public GameGridState(int rowCount, int columnCount, int numberUpperBound = 100)
         {
+            this.numberUpperBound = numberUpperBound;
             this.rowCount = rowCount;
             this.columnCount = columnCount;
             this.grid = new GameTileState[rowCount, columnCount];
@@ -18,7 +20,8 @@ namespace SortGame
                 for(int j = 0; j < columnCount; ++j) 
                     this.grid[i, j] = new(-1);
         }
-        public GameGridState(GameGridState from) : this(from.rowCount, from.columnCount)
+        public GameGridState(GameGridState from, int numberUpperBound = 100) 
+        : this(from.rowCount, from.columnCount, numberUpperBound)
         {
             InplaceCopy(from);
         }
@@ -75,11 +78,11 @@ namespace SortGame
                 for(int j = 0; j < columnCount; ++j) 
                     grid[i, j] = new(-1);
         }
-        public void LoadRandom(int minInclusive = 0, int maxExclusive = 100, float rowPercentage = 1.0f)
+        public void LoadRandom(float rowPercentage = 1.0f)
         {
             for(int i = Mathf.FloorToInt(rowCount * rowPercentage); i < rowCount; ++i)
                 for(int j = 0; j < columnCount; ++j)
-                    SetNew(new(i, j), Random.Range(minInclusive, maxExclusive));
+                    SetNew(new(i, j), Random.Range(0, numberUpperBound));
         }
         public void RegisterBlockCallbacks(Vector2Int coord, System.Action<Vector2Int> onMove, System.Action onRemove)
         {
@@ -129,6 +132,10 @@ namespace SortGame
                 (Vector2Int a, Vector2Int b) = (new(i, column), new(i + offset, column));
                 Swap(a, b);
             }
+        }
+        public bool PushUp(int column)
+        {
+            return PushUp(column, Random.Range(0, numberUpperBound));
         }
         public bool PushUp(int column, int number)
         {

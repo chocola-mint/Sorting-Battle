@@ -55,10 +55,6 @@ namespace SortGame
             #else
             // Runtime GameGridState exists here.
             state.LoadRandom(rowPercentage: rowPercentage);
-            foreach(var gameTile in allTiles.Value)
-                if(state.IsNumber(gameTile.gridCoord))
-                    Instantiate(numberBlockPrefab, gameTile.transform)
-                    .GetComponent<NumberBlock>().SetNumber(state.grid[gameTile.gridCoord.x, gameTile.gridCoord.y].number);
             #endif
         }
         public void NewBlock(Vector2Int tileCoord)
@@ -67,12 +63,6 @@ namespace SortGame
             .GetComponent<NumberBlock>();
             numberBlock.SetNumber(state.Get(tileCoord));
             if(state.IsTrash(tileCoord)) numberBlock.ToTrash(animate: false);
-        }
-        public bool PushUp(int column)
-        {
-            bool overflow = state.PushUp(column, Random.Range(0, 100));
-            if(overflow) return false;
-            return true;
         }
         public void ClearTiles()
         {

@@ -21,5 +21,11 @@ namespace SortGame
             swapper = GetComponent<GameGridSwapper>();
             gameBoard = GetComponent<GameBoard>();
         }
+        public static void DisableAll()
+        {
+            foreach(var controller in FindObjectsOfType<GameController>())
+                controller.enabled = false;
+        }
+
     }
 }

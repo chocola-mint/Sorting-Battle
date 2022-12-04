@@ -5,37 +5,23 @@ using TMPro;
 
 namespace SortGame
 {
-    public class Endless1PGame : MonoBehaviour
+    public class Endless1PGame : GameBase<Endless1PGameState>
     {
-        private Endless1PGameState gameState;
         [SerializeField] private GameBoard p1GameBoard;
-        private static readonly WaitForFixedUpdate waitForFixedUpdate = new();
         [SerializeField] private TMP_Text textMesh;
         // Start is called before the first frame update
         void Start()
         {
             gameState = new(p1GameBoard.state);
             gameState.onGameOver += OnGameOver;
-            StartCoroutine(CoroTick(fixedUpdateToTick: 1));
-        }
-        private IEnumerator CoroTick(int fixedUpdateToTick)
-        {
-            if(fixedUpdateToTick <= 0) 
-                throw new System.ArgumentException(
-                    $"Argument {nameof(fixedUpdateToTick)} must be greater than 0.");
-            while(true)
-            {
-                gameState.Tick();
-                for(int i = 0; i < fixedUpdateToTick; ++i)
-                    yield return waitForFixedUpdate;
-            }
+            StartTicking(1);
         }
         private void OnGameOver()
         {
             Debug.Log("Game over");
             Debug.Log($"Total score: {p1GameBoard.state.gameScoreState.totalScore}");
+            GameController.DisableAll();
         }
-
         private void Update() 
         {
             textMesh.text = $"Level: {gameState.p1Level}\nScore: {p1GameBoard.state.gameScoreState.totalScore}";

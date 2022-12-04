@@ -9,29 +9,18 @@ namespace SortGame
     {
         public int p1Level { get; private set; } = 0;
         private GameBoardState p1GBState;
-        private System.Func<int> waitInterval;
-        private System.Func<int> levelUpInterval;
+        public System.Func<int> waitInterval;
+        public System.Func<int> levelUpInterval;
         public Endless1PGameState(GameBoardState p1GBState)
         {
             this.p1GBState = p1GBState;
             // Default implementation: Difficulty ramps up in levels closer to 20.
             // Difficulty maxes out at level 20.
-            this.waitInterval = () => {
-                return (int)Mathf.Lerp(150, 60, Ease.InQuad(p1Level / 20.0f));
-            };
-            // Defaulty implementation: Level up after every 300 ticks.
-            this.levelUpInterval = () => 300;
+            this.waitInterval = () => DefaultLevelToWaitIntervalCurve(p1Level);
+            // Default implementation: Level up after every 300 ticks.
+            this.levelUpInterval = () => DefaultLevelIntervalCurve(p1Level);
             PushInitialEvents();
         }
-        public Endless1PGameState(
-            GameBoardState p1GBState, 
-            System.Func<int> waitInterval, System.Func<int> levelUpInterval)
-        {
-            this.p1GBState = p1GBState;
-            this.waitInterval = waitInterval;
-            this.levelUpInterval = levelUpInterval;
-            PushInitialEvents();
-        } 
         private void PushInitialEvents()
         {
             PushEvent(0, LoadEvent);

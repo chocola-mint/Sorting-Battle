@@ -12,6 +12,7 @@ namespace SortGame
             public bool useSeed;
             public int seed;
             public int rowCount, columnCount;
+            public int numberUpperBound;
             public int minimumSortedLength;
             public int baseRemoveScore;
             public int removeLengthBonus;
@@ -22,12 +23,19 @@ namespace SortGame
         public Random.State randomState;
         public readonly GameControllerState gameControllerState;
         public readonly GameScoreState gameScoreState;
+        public readonly GamePressureState gamePressureState;
+        public enum Status
+        {
+            Active, Inactive, Win, Lose
+        }
+        public Status status;
         public GameBoardState(Config config)
         {
             if(config.useSeed) Random.InitState(config.seed);
             randomState = Random.state;
-            gameGridState = new(config.rowCount, config.columnCount);
+            gameGridState = new(config.rowCount, config.columnCount, config.numberUpperBound);
             gameControllerState = new(gameGridState, config.minimumSortedLength);
+            gamePressureState = new();
             // Forward parameters to GameScoreState.
             gameScoreState = new(
                 new(){
@@ -51,8 +59,25 @@ namespace SortGame
             bool anyOverflow = false;
             foreach(var column in columns[0..Mathf.Min(numberOfColumns, columns.Length)])
             {
-                bool overflow = gameGridState.PushUp(column, Random.Range(0, 100));
-                anyOverflow |= overflow;
+                anyOverflow |= gameGridState.PushUp(column);
+            }
+            randomState = Random.state;
+            return anyOverflow;
+        }
+        public bool PushTrashRows(int numberOfRows, int numberOfColumns)
+        {
+            Random.state = randomState;
+            bool anyOverflow = false;
+            for(int i = 0; i < numberOfRows; ++i)
+            {
+                var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
+                int columnLimit = i == 0 
+                ? Mathf.Min(numberOfColumns, columns.Length) 
+                : columns.Length;
+                foreach(var column in columns[0..columnLimit])
+                {
+                    anyOverflow |= gameGridState.PushUp(column, GameTileState.Trash);
+                }
             }
             randomState = Random.state;
             return anyOverflow;

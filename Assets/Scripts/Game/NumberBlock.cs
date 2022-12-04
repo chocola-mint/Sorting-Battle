@@ -27,7 +27,6 @@ namespace SortGame
             // Layer 1
             public static readonly int Trash = Animator.StringToHash(nameof(Trash));
         }
-        public void SetRandomNumber() => SetNumber(Random.Range(0, 100));
         public void SetNumber(int number) {
             if(this.number != number) 
                 numberDisplay.text = number.ToString();
@@ -50,7 +49,6 @@ namespace SortGame
             StopFollowPointer();
             graphics = GetComponentsInChildren<Graphic>();
             animator = GetComponent<Animator>();
-            SetRandomNumber();
             AutoResize();
             animator.Play(AnimState.PushUp, 0);
 

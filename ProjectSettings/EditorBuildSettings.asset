@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Endless1PGame.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Endless2PGame.unity
+    guid: 98cb412c6d274ba48b936163aa0978df
   m_configObjects: {}

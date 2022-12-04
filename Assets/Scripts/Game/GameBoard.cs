@@ -19,6 +19,15 @@ namespace SortGame
         [SerializeField] private int seed = 1337;
         [Tooltip("Enable to use the engine's random state at the time of execution, instead of a fixed seed.")]
         [SerializeField] private bool randomSeed = false;
+        [SerializeField] private int numberUpperBound = 100;
+        /// <summary>
+        /// This method is used to inject random seed (for sharing seeds).
+        /// </summary>
+        public void InjectSeed(int seed)
+        {
+            this.seed = seed;
+            randomSeed = false;
+        }
         public void LoadRandomNumbers(float rowPercentage = 1)
         {
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
@@ -41,6 +50,7 @@ namespace SortGame
                     seed = seed, 
                     rowCount = gameGrid.rowCount,
                     columnCount = gameGrid.columnCount,
+                    numberUpperBound = numberUpperBound,
                     // TODO: Expose these parameters...
                     minimumSortedLength = 3,
                     baseRemoveScore = 50,
