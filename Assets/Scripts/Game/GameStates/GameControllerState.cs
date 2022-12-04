@@ -48,8 +48,8 @@ namespace SortGame
         public void EndSelection()
         {
             columnLocks.Clear();
-            var (selection, shouldRemove) = remover.EndSelection(minimumSortedLength);
-            if(shouldRemove) onRemove?.Invoke(selection.Count);
+            var (numberCount, trashCount, shouldRemove) = remover.EndSelection(minimumSortedLength);
+            if(shouldRemove) onRemove?.Invoke(numberCount + trashCount);
             else onRemove?.Invoke(0);
         }
     }

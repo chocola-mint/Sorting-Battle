@@ -28,17 +28,18 @@ namespace SortGame.GameFunctions
         /// Try to remove the currently-selected tiles.
         /// </summary>
         /// <returns>A tuple, containing the removed blocks 
-        /// and the SwapOps that come from dropping the blocks above.</returns>
-        public (List<Vector2Int>, bool shouldRemove) EndSelection(int minimumLength = 0)
+        /// and whether they should be removed or not.</returns>
+        public (int numberCount, int trashCount, bool shouldRemove) EndSelection(int minimumLength = 0)
         {
             var selection = selectionHandler.EndSelection();
+            int numberCount = selection.Count;
             if(selection.Count >= minimumLength)
             {
                 ExpandSelectionToIncludeAdjacentGarbage(selection);
                 gameGridState.RemoveTiles(selection.ToArray());
-                return (selection, true);
+                return (numberCount, selection.Count - numberCount, true);
             }
-            else return (selection, false);
+            else return (numberCount, 0, false);
         }
         private void ExpandSelectionToIncludeAdjacentGarbage(List<Vector2Int> selection)
         {

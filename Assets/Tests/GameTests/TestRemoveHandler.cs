@@ -24,13 +24,9 @@ public class TestRemoveHandler
         handler.Select(new(2, 1));
         handler.Select(new(3, 1));
         handler.Select(new(4, 1));
-        var (removedTiles, shouldRemove) = handler.EndSelection();
+        var (numberCount, trashCount, shouldRemove) = handler.EndSelection();
         Assert.IsTrue(shouldRemove);
-        Assert.AreEqual(4, removedTiles.Count);
-        Assert.AreEqual(removedTiles[0], new Vector2Int(1, 1));
-        Assert.AreEqual(removedTiles[1], new Vector2Int(2, 1));
-        Assert.AreEqual(removedTiles[2], new Vector2Int(3, 1));
-        Assert.AreEqual(removedTiles[3], new Vector2Int(4, 1));
+        Assert.AreEqual(4, numberCount);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
@@ -55,9 +51,10 @@ public class TestRemoveHandler
         handler.Select(new(3, 2));
         handler.Select(new(3, 3));
         handler.Select(new(3, 4));
-        var (removedTiles, shouldRemove) = handler.EndSelection();
+        var (numberCount, trashCount, shouldRemove) = handler.EndSelection();
         Assert.IsTrue(shouldRemove);
-        Assert.AreEqual(9, removedTiles.Count);
+        Assert.AreEqual(4, numberCount);
+        Assert.AreEqual(5, trashCount);
         Assert.IsTrue(
             state.ContentEqual(
                 GameGridState.Deserialize(
