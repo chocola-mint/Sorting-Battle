@@ -7,10 +7,12 @@ namespace SortGame
 {
     public class Endless1PGameState : GameState
     {
-        private GameBoardState p1GBState;
-        public Endless1PGameState(GameBoardState p1GBState)
+        protected readonly GameBoardState p1GBState;
+        protected readonly float emptyRowPercentage = 0.8f;
+        public Endless1PGameState(GameBoardState p1GBState, float emptyRowPercentage = 0.8f)
         {
             this.p1GBState = p1GBState;
+            this.emptyRowPercentage = emptyRowPercentage;
             InitEvents();
         }
         protected override void InitEvents()
@@ -20,7 +22,7 @@ namespace SortGame
         } 
         private void LoadEvent()
         {
-            p1GBState.gameGridState.LoadRandom(rowPercentage:0.8f);
+            p1GBState.gameGridState.LoadRandom(rowPercentage: emptyRowPercentage);
         }
         protected override sealed void PushNewRowEvent()
         {
