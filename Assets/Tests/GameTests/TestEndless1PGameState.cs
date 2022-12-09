@@ -31,12 +31,14 @@ public class TestEndless1PGameState : Endless1PGameState
     public void BeforeEachTest()
     {
         GameOver();
+        p1GBState.gameGridState.Clear();
         InitEvents();
     }
     [TearDown]
     public void AfterEachTest()
     {
         GameOver();
+        p1GBState.gameGridState.Clear();
     }
     [Test]
     public void TestGridLoaded()
