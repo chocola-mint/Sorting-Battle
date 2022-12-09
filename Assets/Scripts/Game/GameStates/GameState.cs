@@ -24,6 +24,7 @@ namespace SortGame
                     return result;
             }
         }
+        public int level { get; private set; } = 0;
         private readonly SortedList<int, System.Action> scheduler = new(new DuplicateKeyComparer<int>());
         public event System.Action onGameOver;
         protected int tick { get; private set; } = 0;
@@ -51,6 +52,19 @@ namespace SortGame
             tick = targetTick;
         }
         /// <summary>
+        /// Invoke this method to set up initial events.
+        /// <br></br>
+        /// Can be overridden to push more events. 
+        /// The default implementation pushes the LevelUpEvent 
+        /// and should always be invoked via base.InitEvents().
+        /// </summary>
+        protected virtual void InitEvents()
+        {
+            // Level up event is pushed here.
+            PushEvent(GetTickBetweenEachLevelUp(), LevelUpEvent);
+            PushEvent(GetTickBetweenEachNewRow(), PushNewRowEvent);
+        }
+        /// <summary>
         /// Push an event to the internal tick-based scheduler.
         /// The event is registered to occur after the given delay passes.
         /// </summary>
@@ -58,6 +72,16 @@ namespace SortGame
         {
             scheduler.Add(tick + delayTicks, @event);
         }
+        /// <summary>
+        /// The level up event.
+        /// </summary>
+        private void LevelUpEvent()
+        {
+            ++level;
+            Debug.Log($"Level: {level}");
+            PushEvent(GetTickBetweenEachLevelUp(), LevelUpEvent);
+        }
+        protected abstract void PushNewRowEvent();
         /// <summary>
         /// Invoke to trigger Game Over event.
         /// This also clears the scheduler.
@@ -67,9 +91,17 @@ namespace SortGame
             scheduler.Clear();
             onGameOver?.Invoke();
         }
-        protected int DefaultLevelToWaitIntervalCurve(int level)
+        /// <summary>
+        /// Number of ticks to wait between each new row on each board.
+        /// Can be overridden by child classes of GameState.
+        /// </summary>
+        protected virtual int GetTickBetweenEachNewRow()
             => (int)Mathf.Lerp(150, 60, Ease.InQuad(level / 20.0f));
-        protected int DefaultLevelIntervalCurve(int level)
+        /// <summary>
+        /// Number of ticks to wait between level-ups.
+        /// Can be overridden by child classes of GameState.
+        /// </summary>
+        protected virtual int GetTickBetweenEachLevelUp()
             => 300;
     }
 }

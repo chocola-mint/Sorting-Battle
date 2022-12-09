@@ -24,7 +24,7 @@ namespace SortGame
         }
         private void Update() 
         {
-            textMesh.text = $"Level: {gameState.p1Level}\nScore: {p1GameBoard.state.gameScoreState.totalScore}";
+            textMesh.text = $"Level: {gameState.level}\nScore: {p1GameBoard.state.gameScoreState.totalScore}";
         }
     }
 }

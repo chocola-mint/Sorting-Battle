@@ -14,8 +14,6 @@ namespace SortGame
         void Start()
         {
             gameState = new(p1GameBoard.state, p2GameBoard.state);
-            gameState.waitInterval = 
-                () => (int)Mathf.Lerp(300, 100, Ease.InQuad(gameState.level / 20.0f));
             gameState.onP1Win += OnP1Win;
             gameState.onP2Win += OnP2Win;
             gameState.onDraw += OnDraw;

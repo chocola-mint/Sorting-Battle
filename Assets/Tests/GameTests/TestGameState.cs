@@ -14,6 +14,11 @@ public class TestGameState : GameState
         // We invoke GameOver to clear the scheduler.
         GameOver();
     }
+    // ! We don't test PushNewRowEvent here. It won't matter as long as we don't invoke InitEvents.
+    protected override void PushNewRowEvent()
+    {
+        throw new System.NotImplementedException();
+    }
     [Test]
     public void TestSingleEvent()
     {
