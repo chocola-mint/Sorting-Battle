@@ -22,6 +22,7 @@ namespace SortGame
         {
             runtimeModel = ModelLoader.Load(modelAsset, verbose: verbose);
             worker = WorkerFactory.CreateWorker(inferenceBackend, runtimeModel);
+            base.Init();
         }
         protected abstract void GetInputTensors(in Dictionary<string, Tensor> inputs);
         protected override sealed IEnumerator OnAction()

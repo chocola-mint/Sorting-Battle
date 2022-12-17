@@ -9,6 +9,8 @@ namespace SortGame
     {
         protected readonly GameBoardState p1GBState;
         protected readonly float emptyRowPercentage = 0.8f;
+        private int lastComboTick = int.MaxValue;
+        private const int ResetComboTickDuration = 100;
         public Endless1PGameState(GameBoardState p1GBState, float emptyRowPercentage = 0.8f)
         {
             this.p1GBState = p1GBState;
@@ -23,6 +25,14 @@ namespace SortGame
         private void LoadEvent()
         {
             p1GBState.gameGridState.LoadRandom(rowPercentage: emptyRowPercentage);
+        }
+        private void CheckResetComboEvent()
+        {
+            if(tick - lastComboTick >= ResetComboTickDuration)
+            {
+                p1GBState.gameScoreState.ResetCombo();
+            }
+            PushEvent(1, CheckResetComboEvent);
         }
         protected override sealed void PushNewRowEvent()
         {

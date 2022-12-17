@@ -12,7 +12,7 @@ namespace SortGame
             public InputActionReference select;
             public InputActionReference swap;
         }
-        [SerializeField] private Inputs inputs;        
+        [SerializeField] private Inputs inputs;
         private void OnEnable() 
         {
             inputs.select.EnableAndConnect(OnSelect);

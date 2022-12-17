@@ -46,7 +46,7 @@ namespace SortGame.GameFunctions
             return currentSelection.Count == 0 
             || LinAlg.L1Norm(target, currentSelection[^1]) == 1;
         }
-        private bool CanAddToSelection(Vector2Int target)
+        public bool CanAddToSelection(Vector2Int target)
         {
             if(currentSelection.Contains(target)
             || !gameGridState.IsNumber(target)

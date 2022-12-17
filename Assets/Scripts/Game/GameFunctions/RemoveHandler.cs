@@ -41,6 +41,7 @@ namespace SortGame.GameFunctions
             }
             else return (numberCount, 0, false);
         }
+        public bool CanAddToSelection(Vector2Int coord) => selectionHandler.CanAddToSelection(coord);
         private void ExpandSelectionToIncludeAdjacentGarbage(List<Vector2Int> selection)
         {
             HashSet<Vector2Int> garbageTiles = new();
