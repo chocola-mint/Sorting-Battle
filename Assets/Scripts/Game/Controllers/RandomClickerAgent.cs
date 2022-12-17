@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Baseline AI implementation. Picks actions semi-randomly.
+    /// <br></br>
+    /// In summary: It will do consecutive select moves and swap moves separately.
+    /// Whether it decides to select or swap is controlled by the select rate.
+    /// </summary>
     public class RandomClickerAgent : AIController
     {
         [SerializeField] 
@@ -17,7 +23,10 @@ namespace SortGame
         [Min(2)]
         [SerializeField] 
         private int consecutiveSwapCount = 5;
-        [SerializeField] private bool legalTilesOnly = false;
+        [Tooltip("Set to true to constrain random selections to legal tiles whenever possible.")]
+        [SerializeField] 
+        private bool legalTilesOnly = false;
+        // Decision step of the AI. Used to keep track of consecutive actions.
         private int step = 0;
         private enum Action
         {

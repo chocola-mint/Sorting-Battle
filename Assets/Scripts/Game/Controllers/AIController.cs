@@ -11,7 +11,12 @@ namespace SortGame
     {
         [SerializeField] private int decisionPeriod = 10;
         private static readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+        // The "virtual" cursor used by the AI. Used to simplify decision processes, 
+        // removing intricacies surrounding the player's mouse.
         private Vector2Int cursor;
+        /// <summary>
+        /// Utility method.
+        /// </summary>
         protected IEnumerator WaitForTicks(int duration)
         {
             for(int i = 0; i < duration; ++i)
@@ -20,8 +25,13 @@ namespace SortGame
         protected override void Init()
         {
             base.Init();
+            // We have to declare the core loop as a separate coroutine rather than just using
+            // IEnumerator Start(), to avoid name collision.
             StartCoroutine(AICoreLoop());
         }
+        /// <summary>
+        /// The core loop of an AI, which just takes an action and waits for awhile.
+        /// </summary>
         private IEnumerator AICoreLoop()
         {
             while(gameBoard.state.status == GameBoardState.Status.Active)
@@ -32,6 +42,16 @@ namespace SortGame
                 yield return WaitForTicks(decisionPeriod);
             }
         }
+        private void OnDisable() 
+        {
+            // Much like PlayerController, we have to manually disconnect controller input here.
+            selector.EndSelection();
+            swapper.EndSwapping();
+            StopAllCoroutines();
+        }
+        /// <summary>
+        /// Abstract method (coroutine) that should implement an AI's decision process and execution.
+        /// </summary>
         protected abstract IEnumerator OnAction();
         /// <summary>
         /// Move the AI's virtual cursor on the grid.
@@ -56,7 +76,7 @@ namespace SortGame
         /// <summary>
         /// Let the AI swap on a tile. Pressing/releasing the mouse buttons is simulated accordingly.
         /// <br></br>
-        /// To simplify things, the AI lets go after each swap.
+        /// To simplify things, the AI lets go of the cursor after each swap.
         /// </summary>
         protected void Swap(Vector2Int target)
         {
@@ -71,7 +91,6 @@ namespace SortGame
                 swapper.SwapTo(cursor);
                 swapper.EndSwapping();
             }
-
         }
 
     }

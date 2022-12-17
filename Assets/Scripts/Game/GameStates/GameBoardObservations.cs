@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Static class for common observation data AI could use.
+    /// </summary>
     public static class GameBoardObservations
     {
         /// <summary>
