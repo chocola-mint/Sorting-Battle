@@ -34,8 +34,9 @@ namespace SortGame
         }
         public void SwapTo(Vector2 screenPosition)
         {
-            if(!enabled || !currentNumberBlock) return;
-            currentNumberBlock.FollowPointer(screenPosition);
+            if(!enabled) return;
+            if(currentNumberBlock)
+                currentNumberBlock.FollowPointer(screenPosition);
             foreach(var numberBlock in Raycast<NumberBlock>(screenPosition))
             {
                 SwapTo(numberBlock.gameTile.gridCoord);
@@ -44,7 +45,7 @@ namespace SortGame
         }
         public void SwapTo(Vector2Int target)
         {
-            if(!enabled || !currentNumberBlock) return;
+            if(!enabled) return;
             gameControllerState.SwapTo(target);
         }
         public void EndSwapping()

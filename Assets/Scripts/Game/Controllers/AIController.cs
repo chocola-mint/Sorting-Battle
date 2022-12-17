@@ -55,15 +55,21 @@ namespace SortGame
         }
         /// <summary>
         /// Let the AI swap on a tile. Pressing/releasing the mouse buttons is simulated accordingly.
+        /// <br></br>
+        /// To simplify things, the AI lets go after each swap.
         /// </summary>
         protected void Swap(Vector2Int target)
         {
+            swapper.StartSwapping(cursor);
             bool cursorReleased = MoveCursor(target);
-            if(!swapper.enabled) swapper.StartSwapping(cursor);
+            if(!swapper.enabled) 
+            {
+                swapper.StartSwapping(cursor);
+            }
             else 
             {
-                if(cursorReleased) swapper.EndSwapping();
                 swapper.SwapTo(cursor);
+                swapper.EndSwapping();
             }
 
         }

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using SortGame.GameFunctions;
 using ChocoUtil.Algorithms;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 namespace SortGame
 {
     /// <summary>
@@ -28,6 +31,21 @@ namespace SortGame
             this.seed = seed;
             randomSeed = false;
         }
+#if UNITY_EDITOR
+        [ContextMenu("Save grid state")]
+        public void SaveGridState()
+        {
+            var path = EditorUtility.SaveFilePanel("Save grid state as CSV",
+            "", $"GameGridState_{System.DateTime.Now}.csv", "csv");
+            if(path.Length != 0)
+            {
+                using(var writer = new System.IO.StreamWriter(path))
+                {
+                    writer.Write(state.gameGridState.Serialize());
+                }
+            }
+        }
+#endif
         public void LoadRandomNumbers(float rowPercentage = 1)
         {
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();

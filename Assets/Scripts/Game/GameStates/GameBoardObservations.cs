@@ -92,5 +92,19 @@ namespace SortGame
             }
             return result;
         }
+        public static List<Vector2Int> GetAllSwappableTiles(
+            this GameBoardState gameBoardState)
+        {
+            List<Vector2Int> result = new();
+            for(int i = 0; i < gameBoardState.gameGridState.rowCount; ++i)
+                for(int j = 0; j < gameBoardState.gameGridState.columnCount; ++j)
+                {
+                    Vector2Int coord = new(i, j);
+                    if(gameBoardState.gameControllerState.CanSwap(coord)) 
+                        result.Add(coord);
+                }
+            return result;
+
+        }
     }
 }

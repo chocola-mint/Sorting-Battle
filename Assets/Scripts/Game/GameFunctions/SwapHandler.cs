@@ -16,16 +16,25 @@ namespace SortGame.GameFunctions
         public bool swappingActive => cursor != Null;
         public bool StartSwapping(Vector2Int target)
         {
-            if(gameGridState.IsEmpty(target)) return false;
+            if(!CanStartSwapping(target)) return false;
             Debug.Log("=== Begin swapping ===");
             cursor = target;
             return true;
+        }
+        public bool CanStartSwapping(Vector2Int target)
+            => gameGridState.IsNumber(target);
+        public bool CanSwapTo(Vector2Int target)
+            => cursor != Null && AdjacentToCursor(target) && gameGridState.IsNumber(target);
+        public bool CanSwap(Vector2Int target)
+        {
+            if(!swappingActive) return CanStartSwapping(target);
+            else return CanSwapTo(target);
         }
         private bool AdjacentToCursor(Vector2Int target)
             => LinAlg.L1Norm(cursor, target) == 1;
         public void SwapTo(Vector2Int target)
         {
-            bool success = cursor != Null && AdjacentToCursor(target) && gameGridState.IsNumber(target);
+            bool success = CanSwapTo(target);
             if(success)
             {
                 gameGridState.SwapAndPullDown(cursor, target);

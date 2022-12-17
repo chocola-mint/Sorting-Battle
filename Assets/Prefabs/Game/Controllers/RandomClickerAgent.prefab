@@ -47,5 +47,7 @@ MonoBehaviour:
   gameBoardComponent: {fileID: 0}
   decisionPeriod: 1
   tickPerClick: 4
-  consecutiveSelectCount: 40
-  consecutiveSwapCount: 10
+  selectRate: 0.588
+  consecutiveSelectCount: 20
+  consecutiveSwapCount: 5
+  legalTilesOnly: 1

@@ -6,7 +6,9 @@ namespace SortGame
 {
     public class RandomClickerAgent : AIController
     {
-        [SerializeField] private int tickPerClick = 10;
+        [SerializeField] 
+        private int tickPerClick = 10;
+        [SerializeField]
         [Range(0, 1)]
         private float selectRate = 0.8f;
         [SerializeField] 
@@ -15,6 +17,7 @@ namespace SortGame
         [Min(2)]
         [SerializeField] 
         private int consecutiveSwapCount = 5;
+        [SerializeField] private bool legalTilesOnly = false;
         private int step = 0;
         private enum Action
         {
@@ -26,28 +29,46 @@ namespace SortGame
         protected override void Init()
         {
             allTiles = gameBoard.state.GetAllTiles();
+            SwitchAction();
             base.Init();
+        }
+        private Vector2Int GetTileToClick()
+        {
+            if(legalTilesOnly)
+            {
+                if(currentAction == Action.Select)
+                {
+                    var selectableTiles = gameBoard.state.GetAllSelectableTiles();
+                    if(selectableTiles.Count > 0)
+                        return selectableTiles[Random.Range(0, selectableTiles.Count)];
+                }
+                else if(currentAction == Action.Swap)
+                {
+                    var swappableTiles = gameBoard.state.GetAllSwappableTiles();
+                    if(swappableTiles.Count > 0)
+                        return swappableTiles[Random.Range(0, swappableTiles.Count)];
+                }
+            }
+            return allTiles[Random.Range(0, allTiles.Count)];
         }
         protected override IEnumerator OnAction()
         {
-            ++step;
-            var tileToClick = allTiles[Random.Range(0, allTiles.Count)];
-            Debug.Log($"{gameObject.name}: Click {tileToClick}");
             if(currentAction == Action.Select)
             {
+                Select(GetTileToClick());
                 if(step >= consecutiveSelectCount)
-                    SwitchAction(tileToClick);
-                Select(tileToClick);
+                    SwitchAction();
             }
             else if(currentAction == Action.Swap)
             {
+                Swap(GetTileToClick());
                 if(step >= consecutiveSwapCount)
-                    SwitchAction(tileToClick);
-                Swap(tileToClick);
+                    SwitchAction();
             }
+            ++step;
             yield return WaitForTicks(tickPerClick);
         }
-        private void SwitchAction(Vector2Int tileToClick)
+        private void SwitchAction()
         {
             if(Random.value <= selectRate) 
                 currentAction = Action.Select;
