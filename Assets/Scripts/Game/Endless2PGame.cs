@@ -36,6 +36,14 @@ namespace SortGame
         {
             Debug.Log("Game over");
             GameController.DisableAll();
+            StartCoroutine(CoroGameOver());
+        }
+        private IEnumerator CoroGameOver()
+        {
+            var handleP1Clear = StartCoroutine(p1GameBoard.CoroAnimateClearTiles());
+            var handleP2Clear = StartCoroutine(p2GameBoard.CoroAnimateClearTiles());
+            yield return handleP1Clear;
+            yield return handleP2Clear;
         }
         void Update() 
         {

@@ -7,7 +7,7 @@ namespace SortGame
     public class GamePressureState
     {
         public int pressure { get; private set; } = 0;
-        private readonly int maxPressure;
+        public readonly int maxPressure;
         public float pressureRate => (float) pressure / (float) maxPressure;
         public GamePressureState(int maxPressure = 40)
         {

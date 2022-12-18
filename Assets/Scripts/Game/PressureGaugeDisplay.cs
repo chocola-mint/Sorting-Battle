@@ -13,17 +13,20 @@ namespace SortGame
         [SerializeField] GameBoard gameBoard;
         private GamePressureState state;
         private Image image;
+        [SerializeField] [Min(0.01f)]
+        float fillRateOverTime = 4;
         // Start is called before the first frame update
         void Start()
         {
             state = gameBoard.state.gamePressureState;
             image = GetComponent<Image>();
+            image.fillAmount = state.pressureRate;
         }
 
         // Update is called once per frame
         void Update()
         {
-            image.fillAmount = state.pressureRate;
+            image.fillAmount = Mathf.MoveTowards(image.fillAmount, state.pressureRate, Time.deltaTime * fillRateOverTime);
             image.color = gradient.Evaluate(image.fillAmount);
         }
     }

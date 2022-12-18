@@ -152,19 +152,20 @@ namespace SortGame
             SetNew(new(rowCount - 1, column), number);
             return overflow;
         }
-        public void RemoveTile(Vector2Int coord)
+        public void RemoveTile(Vector2Int coord, bool pullDown = true)
         {
             grid[coord.x, coord.y].Remove();
             // Set(coord, GameTileState.Empty);
-            PullDown(coord.y);
+            if(pullDown) PullDown(coord.y);
         }
-        public void RemoveTiles(Vector2Int[] coords)
+        public void RemoveTiles(Vector2Int[] coords, bool pullDown = true)
         {
             foreach(var coord in coords)
                 grid[coord.x, coord.y].Remove();
                 // Set(coord, GameTileState.Empty);
-            foreach(var coord in coords)
-                PullDown(coord.y);
+            if(pullDown)
+                foreach(var coord in coords)
+                    PullDown(coord.y);
         }
         public bool ContentEqual(GameGridState other)
         {

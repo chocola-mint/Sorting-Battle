@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChocoUtil.Algorithms;
 
 namespace SortGame
 {
@@ -14,6 +15,8 @@ namespace SortGame
     {
         [SerializeField] 
         private int tickPerClick = 10;
+        [SerializeField]
+        private int tickPerPush = 30;
         [SerializeField]
         [Range(0, 1)]
         private float selectRate = 0.8f;
@@ -62,20 +65,28 @@ namespace SortGame
         }
         protected override IEnumerator OnAction()
         {
-            if(currentAction == Action.Select)
+            if(gameBoard.state.GetBoardHeight() < gameBoard.state.gameControllerState.minimumSortedLength)
             {
-                Select(GetTileToClick());
-                if(step >= consecutiveSelectCount)
-                    SwitchAction();
+                Push();
+                yield return WaitForTicks(tickPerPush);
+                yield break;
             }
-            else if(currentAction == Action.Swap)
+            switch (currentAction)
             {
-                Swap(GetTileToClick());
-                if(step >= consecutiveSwapCount)
-                    SwitchAction();
+                case Action.Select:
+                    Select(GetTileToClick());
+                    if (step >= consecutiveSelectCount)
+                        SwitchAction();
+                    yield return WaitForTicks(tickPerClick);
+                    break;
+                case Action.Swap:
+                    Swap(GetTileToClick());
+                    if (step >= consecutiveSwapCount)
+                        SwitchAction();
+                    yield return WaitForTicks(tickPerClick);
+                    break;
             }
             ++step;
-            yield return WaitForTicks(tickPerClick);
         }
         private void SwitchAction()
         {

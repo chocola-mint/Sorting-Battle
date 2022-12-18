@@ -24,6 +24,10 @@ namespace SortGame
         public readonly GameControllerState gameControllerState;
         public readonly GameScoreState gameScoreState;
         public readonly GamePressureState gamePressureState;
+        /// <summary>
+        /// Callback event that's invoked when PushNewRow causes overflow and triggerEvent is set to true.
+        /// </summary>
+        public event System.Action onOverflow;
         public enum Status
         {
             Active, Inactive, Win, Lose
@@ -51,8 +55,7 @@ namespace SortGame
         }
         // ! A GameBoardState can have multiple events that must be triggered manually.
         // ! The environment is supposed to invoke them appropriately according to the specification.
-
-        public bool PushNewRow(int numberOfColumns)
+        public bool PushNewRow(int numberOfColumns, bool triggerEvent = false)
         {
             Random.state = randomState;
             var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
@@ -62,6 +65,7 @@ namespace SortGame
                 anyOverflow |= gameGridState.PushUp(column);
             }
             randomState = Random.state;
+            if(anyOverflow && triggerEvent) onOverflow?.Invoke();
             return anyOverflow;
         }
         public bool PushTrashRows(int numberOfRows, int numberOfColumns)

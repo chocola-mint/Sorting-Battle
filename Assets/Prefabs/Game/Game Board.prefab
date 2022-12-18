@@ -353,6 +353,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   gameBoard: {fileID: 293388531314259307}
+  fillRateOverTime: 1
 --- !u!1001 &7939327485800237803
 PrefabInstance:
   m_ObjectHideFlags: 0
