@@ -15,12 +15,12 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
+            gameState = new(p1GameBoard.state, p2GameBoard.state);
             if(startGameImmediately)StartGame();
         }
         public override void StartGame()
         {
             GameController.EnableAll();
-            gameState = new(p1GameBoard.state, p2GameBoard.state);
             gameState.onP1Win += OnP1Win;
             gameState.onP2Win += OnP2Win;
             gameState.onDraw += OnDraw;
