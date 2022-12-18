@@ -107,7 +107,14 @@ namespace SortGame
                         result.Add(coord);
                 }
             return result;
-
+        }
+        public static int GetBoardHeight(this GameBoardState gameBoardState)
+        {
+            for(int i = 0; i < gameBoardState.gameGridState.rowCount; ++i)
+                for(int j = 0; j < gameBoardState.gameGridState.columnCount; ++j)
+                    if(!gameBoardState.gameGridState.IsEmpty(new(i, j)))
+                        return gameBoardState.gameGridState.rowCount - i;
+            return 0;
         }
     }
 }

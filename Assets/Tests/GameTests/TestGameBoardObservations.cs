@@ -148,4 +148,28 @@ public class TestGameBoardObservations
                 new(4, 4), 
             });
     }
+    [Test]
+    public void TestGetBoardHeight()
+    {
+        GameBoardState state = new(new(){
+            rowCount = 5,
+            columnCount = 5,
+        });
+        // Empty board.
+        Assert.AreEqual(0, state.GetBoardHeight());
+        state.gameGridState.InplaceCopy(GameGridState.Deserialize(
+            "-1, -1, -1, -1, -1\n" +
+            "-1, -1, -1, -1, -1\n" +
+            "-1, -1, -1, -1, -1\n" +
+            "15,  5,  5,  6, -1\n" +
+            " 1,  4, -2,  6,  5\n"));
+        Assert.AreEqual(2, state.GetBoardHeight());
+        state.gameGridState.InplaceCopy(GameGridState.Deserialize(
+            "-1, -1, -2, -1, -1\n" +
+            "-1, -1, -2, -1, -1\n" +
+            "-1, -1,  8, -1, -1\n" +
+            "15,  5,  5,  6, -1\n" +
+            " 1,  4, -2,  6,  5\n"));
+        Assert.AreEqual(5, state.GetBoardHeight());
+    }
 }
