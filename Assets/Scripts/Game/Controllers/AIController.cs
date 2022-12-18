@@ -92,6 +92,13 @@ namespace SortGame
                 swapper.EndSwapping();
             }
         }
+        /// <summary>
+        /// Let the AI push a new row.
+        /// </summary>
+        protected void Push()
+        {
+            gameBoard.state.PushNewRow(gameBoard.state.gameGridState.columnCount - 1);
+        }
 
     }
 }

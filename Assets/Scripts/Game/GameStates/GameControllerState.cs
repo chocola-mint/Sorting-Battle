@@ -45,6 +45,8 @@ namespace SortGame
             columnLocks.Add(target.y);
             return remover.Select(target);
         }
+        public bool CanAddToSelection(Vector2Int target) => remover.CanAddToSelection(target);
+        public bool CanSwap(Vector2Int target) => swapper.CanSwap(target);
         public void EndSelection()
         {
             columnLocks.Clear();

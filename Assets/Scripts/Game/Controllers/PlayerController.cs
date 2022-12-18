@@ -11,17 +11,20 @@ namespace SortGame
         {
             public InputActionReference select;
             public InputActionReference swap;
+            public InputActionReference push;
         }
         [SerializeField] private Inputs inputs;
         private void OnEnable() 
         {
             inputs.select.EnableAndConnect(OnSelect);
             inputs.swap.EnableAndConnect(OnSwap);
+            inputs.push.EnableAndConnect(OnPush);
         }
         private void OnDisable() 
         {
             inputs.select.DisableAndDisconnect(OnSelect);
             inputs.swap.DisableAndDisconnect(OnSwap);
+            inputs.push.DisableAndDisconnect(OnPush);
         }
         private void OnSelect(InputAction.CallbackContext ctx)
         {
@@ -34,6 +37,11 @@ namespace SortGame
             if(ctx.started) swapper.StartSwapping(ctx.ReadValue<Vector2>());
             else if(ctx.canceled) swapper.EndSwapping();
             else swapper.SwapTo(ctx.ReadValue<Vector2>());
+        }
+        private void OnPush(InputAction.CallbackContext ctx)
+        {
+            if(ctx.performed) 
+                gameBoard.state.PushNewRow(gameBoard.state.gameGridState.columnCount - 1);
         }
     }
 
