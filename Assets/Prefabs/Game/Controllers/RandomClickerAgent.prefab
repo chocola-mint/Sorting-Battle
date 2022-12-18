@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBoardComponent: {fileID: 0}
-  decisionPeriod: 1
-  tickPerClick: 4
-  selectRate: 0.588
-  consecutiveSelectCount: 20
-  consecutiveSwapCount: 5
+  tickPerClick: 8
+  selectRate: 0.501
+  consecutiveSelectCount: 10
+  consecutiveSwapCount: 6
   legalTilesOnly: 1

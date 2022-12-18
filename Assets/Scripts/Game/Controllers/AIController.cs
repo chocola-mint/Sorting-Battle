@@ -9,7 +9,6 @@ namespace SortGame
     /// </summary>
     public abstract class AIController : GameController
     {
-        [SerializeField] private int decisionPeriod = 10;
         private static readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
         // The "virtual" cursor used by the AI. Used to simplify decision processes, 
         // removing intricacies surrounding the player's mouse.
@@ -37,9 +36,7 @@ namespace SortGame
             while(gameBoard.state.status == GameBoardState.Status.Active)
             {
                 var waitConstraintAfterAction = OnAction();
-                if(waitConstraintAfterAction != null) 
-                    yield return waitConstraintAfterAction;
-                yield return WaitForTicks(decisionPeriod);
+                yield return waitConstraintAfterAction;
             }
         }
         private void OnDisable() 
