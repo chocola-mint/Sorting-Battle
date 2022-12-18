@@ -25,6 +25,10 @@ namespace SortGame
             foreach(var controller in FindObjectsOfType<GameController>())
                 controller.enabled = false;
         }
-
+        public static void EnableAll()
+        {
+            foreach(var controller in FindObjectsOfType<GameController>())
+                controller.enabled = true;
+        }
     }
 }

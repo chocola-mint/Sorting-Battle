@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using ChocoUtil.Algorithms;
+using UnityEngine.Events;
 
 namespace SortGame
 {
@@ -10,9 +10,16 @@ namespace SortGame
     {
         [SerializeField] private GameBoard p1GameBoard, p2GameBoard;
         [SerializeField] private TMP_Text p1TextMesh, p2TextMesh;
+        [SerializeField] private bool startGameImmediately = true;
+        [SerializeField] private GameOverOverlay gameOverOverlay;
         // Start is called before the first frame update
         void Start()
         {
+            if(startGameImmediately)StartGame();
+        }
+        public override void StartGame()
+        {
+            GameController.EnableAll();
             gameState = new(p1GameBoard.state, p2GameBoard.state);
             gameState.onP1Win += OnP1Win;
             gameState.onP2Win += OnP2Win;
@@ -22,15 +29,17 @@ namespace SortGame
         }
         private void OnP1Win()
         {
-
+            Debug.Log("P1 Win");
+            if(gameOverOverlay) gameOverOverlay.SetResultText("P1 Win!");
         }
         private void OnP2Win()
         {
-
+            Debug.Log("P2 Win");
+            if(gameOverOverlay) gameOverOverlay.SetResultText("P2 Win!");
         }
         private void OnDraw()
         {
-
+            if(gameOverOverlay) gameOverOverlay.SetResultText("Draw...");
         }
         private void OnGameOver()
         {
@@ -44,6 +53,8 @@ namespace SortGame
             var handleP2Clear = StartCoroutine(p2GameBoard.CoroAnimateClearTiles());
             yield return handleP1Clear;
             yield return handleP2Clear;
+            if(gameOverOverlay) gameOverOverlay.gameObject.SetActive(true);
+            else Debug.LogWarning("No game over overlay!");
         }
         void Update() 
         {

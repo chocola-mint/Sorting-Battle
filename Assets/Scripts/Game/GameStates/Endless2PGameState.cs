@@ -13,8 +13,8 @@ namespace SortGame
             GameBoardState p2GBState)
         {
             p1GBState.status = p2GBState.status = GameBoardState.Status.Active;
-            RegisterPlayer(p1GBState, onP1Win);
-            RegisterPlayer(p2GBState, onP2Win);
+            RegisterPlayer(p1GBState, () => onP1Win?.Invoke());
+            RegisterPlayer(p2GBState, () => onP2Win?.Invoke());
             InitEvents();
         }
         // This override makes rows appear less frequently in this game mode.

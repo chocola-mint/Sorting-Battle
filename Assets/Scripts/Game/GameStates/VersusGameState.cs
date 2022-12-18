@@ -25,12 +25,23 @@ namespace SortGame
             private const int PressureTickDuration = 120;
             private const int MaxPressurePerAttack = 20;
             private const int TrashPerAdditionalRow = 10; // How much trash equals one additional row.
+            private int lastComboTick = int.MaxValue;
+            private const int ResetComboTickDuration = 200;
             public PlayerState(VersusGameState versusGameState, GameBoardState gameBoardState, System.Action onWin)
             {
                 this.gameState = versusGameState;
                 this.gameBoardState = gameBoardState;
                 this.onWin = onWin;
                 gameBoardState.gameScoreState.onScoreIncrease += Attack;
+                // This does not affect gameplay. It just makes the UI easier to implement.
+                // Treat as if everyone loses all pressure upon game over.
+                versusGameState.onGameOver += () => {
+                    gameBoardState.gamePressureState.ConsumePressure(gameBoardState.gamePressureState.maxPressure);
+                };
+                gameBoardState.onOverflow += () => {
+                    gameBoardState.status = GameBoardState.Status.Lose;
+                    if(versusGameState.CheckGameResultState()) versusGameState.GameOver();
+                };
                 // Load per-player events here.
                 versusGameState.PushEvent(0, LoadEvent);
                 versusGameState.PushEvent(1, CheckReceiveTrashEvent);
@@ -72,6 +83,14 @@ namespace SortGame
             private void LoadEvent()
             {
                 gameBoardState.gameGridState.LoadRandom(rowPercentage:0.8f);
+            }
+            private void CheckResetComboEvent()
+            {
+                if(gameState.tick - lastComboTick >= ResetComboTickDuration)
+                {
+                    gameBoardState.gameScoreState.ResetCombo();
+                }
+                gameState.PushEvent(1, CheckResetComboEvent);
             }
             private void CheckReceiveTrashEvent()
             {
@@ -169,7 +188,8 @@ namespace SortGame
         {
             foreach(var player in playerStates)
             {
-                if(player.gameBoardState.PushNewRow(player.gameBoardState.gameGridState.columnCount - 1))
+                // We set triggerEvent to false here to take care of the edge case of a draw.
+                if(player.gameBoardState.PushNewRow(player.gameBoardState.gameGridState.columnCount - 1, triggerEvent: false))
                     player.gameBoardState.status = GameBoardState.Status.Lose;
             }
             if(CheckGameResultState()) GameOver();

@@ -9,6 +9,7 @@ namespace SortGame
         protected T gameState;
         protected static readonly WaitForFixedUpdate waitForFixedUpdate = new();
         private Coroutine clockHandle;
+        public abstract void StartGame();
         protected void StartTicking(int fixedUpdateToTick) 
         { 
             clockHandle = StartCoroutine(CoroTick(fixedUpdateToTick));

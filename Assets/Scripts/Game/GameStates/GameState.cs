@@ -28,6 +28,7 @@ namespace SortGame
         private readonly SortedList<int, System.Action> scheduler = new(new DuplicateKeyComparer<int>());
         public event System.Action onGameOver;
         protected int tick { get; private set; } = 0;
+        public bool isGameOver { get; private set; } = false;
         public void Tick(int increment = 1)
         {
             if(increment <= 0) throw new System.ArgumentException("Increment must be greater than 0.");
@@ -89,7 +90,14 @@ namespace SortGame
         protected void GameOver() 
         { 
             scheduler.Clear();
+            isGameOver = true;
             onGameOver?.Invoke();
+        }
+        protected void Restart()
+        {
+            scheduler.Clear();
+            isGameOver = false;
+            InitEvents();
         }
         /// <summary>
         /// Number of ticks to wait between each new row on each board.

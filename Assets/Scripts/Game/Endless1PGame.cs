@@ -9,9 +9,17 @@ namespace SortGame
     {
         [SerializeField] private GameBoard p1GameBoard;
         [SerializeField] private TMP_Text textMesh;
+        [SerializeField] private TransitionOverlay transitionOverlay;
+        [SerializeField] private bool startGameImmediately = true;
+        [SerializeField] private GameOverOverlay gameOverOverlay;
         // Start is called before the first frame update
         void Start()
         {
+            if(startGameImmediately)StartGame();
+        }
+        public override void StartGame()
+        {
+            GameController.EnableAll();
             gameState = new(p1GameBoard.state);
             gameState.onGameOver += OnGameOver;
             StartTicking(1);
@@ -21,6 +29,13 @@ namespace SortGame
             Debug.Log("Game over");
             Debug.Log($"Total score: {p1GameBoard.state.gameScoreState.totalScore}");
             GameController.DisableAll();
+        }
+        private IEnumerator CoroGameOver()
+        {
+            var handleP1Clear = StartCoroutine(p1GameBoard.CoroAnimateClearTiles());
+            yield return handleP1Clear;
+            if(gameOverOverlay) gameOverOverlay.gameObject.SetActive(true);
+            else Debug.LogWarning("No game over overlay!");
         }
         private void Update() 
         {

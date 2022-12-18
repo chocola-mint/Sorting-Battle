@@ -67,6 +67,7 @@ namespace SortGame
         {
             if(gameBoard.state.GetBoardHeight() < gameBoard.state.gameControllerState.minimumSortedLength)
             {
+                yield return WaitForTicks(tickPerPush);
                 Push();
                 yield return WaitForTicks(tickPerPush);
                 yield break;
