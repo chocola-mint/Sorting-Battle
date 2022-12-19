@@ -14,8 +14,6 @@ namespace SortGame
     {
         void OnDeselect();
     }
-    // TODO: Switch to using GameControllerState.
-    // TODO: Also, add GameGridRemover.
     public class GameGridSelector : GameGridOperatorBase
     {
         public void Select(Vector2 screenPosition)
@@ -34,7 +32,6 @@ namespace SortGame
         }
         public void BeginSelection()
         {
-            CancelOtherOperatorsAndActivateThis();
             gameControllerState.BeginSelection();
         }
         public void EndSelection()
@@ -48,6 +45,12 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
+            gameControllerState.onBeginSelection += () => {
+                enabled = true;
+            };
+            gameControllerState.onEndSelection += () => {
+                enabled = false;
+            };
             enabled = false;
         }
 

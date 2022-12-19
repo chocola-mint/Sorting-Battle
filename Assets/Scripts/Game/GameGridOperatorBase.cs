@@ -13,22 +13,13 @@ namespace SortGame
         protected GraphicRaycaster raycaster;
         protected GameGrid gameGrid;
         private List<RaycastResult> raycastResults = new();
-        private GameGridOperatorBase[] otherOperators;
         protected GameControllerState gameControllerState { get; private set; }
         protected void Awake() 
         {
             raycaster = GetComponent<GraphicRaycaster>();    
             gameGrid = GetComponentInChildren<GameGrid>();
-            otherOperators = GetComponents<GameGridOperatorBase>().Where(x => x != this).ToArray();
             gameControllerState = GetComponent<GameBoard>().state.gameControllerState;
-        }
-        protected void CancelOtherOperatorsAndActivateThis()
-        {
-            foreach(var op in otherOperators) op.enabled = false;
-            this.enabled = true;
-        }
-
-        protected IEnumerable<RaycastResult> Raycast(Vector2 screenPosition)
+        }        protected IEnumerable<RaycastResult> Raycast(Vector2 screenPosition)
         {
             raycastResults.Clear();
             raycaster.Raycast(

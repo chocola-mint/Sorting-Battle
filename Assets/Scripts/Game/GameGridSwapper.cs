@@ -12,11 +12,20 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
+            gameControllerState.onStartSwapping += () => {
+                enabled = true;
+            };
+            gameControllerState.onEndSwapping += () => {
+                if(currentNumberBlock)
+                {
+                    currentNumberBlock.StopFollowPointer();
+                    enabled = false;
+                }
+            };
             enabled = false;
         }
         public void StartSwapping(Vector2 screenPosition)
         {
-            CancelOtherOperatorsAndActivateThis();
             foreach(var numberBlock in Raycast<NumberBlock>(screenPosition))
             {
                 if(StartSwapping(numberBlock.gameTile.gridCoord))
@@ -29,7 +38,6 @@ namespace SortGame
         }
         public bool StartSwapping(Vector2Int target)
         {
-            CancelOtherOperatorsAndActivateThis();
             return gameControllerState.StartSwapping(target);
         }
         public void SwapTo(Vector2 screenPosition)
@@ -50,10 +58,6 @@ namespace SortGame
         }
         public void EndSwapping()
         {
-            if(currentNumberBlock)
-            {
-                currentNumberBlock.StopFollowPointer();
-            }
             gameControllerState.EndSwapping();
         }
         private void OnDisable() 
