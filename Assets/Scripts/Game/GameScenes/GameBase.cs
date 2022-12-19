@@ -5,7 +5,8 @@ using UnityEngine;
 namespace SortGame
 {
     /// <summary>
-    /// Base class for all game modes based on GameState implementations.
+    /// Base class for all game scenes based on GameState implementations.
+    /// Game scenes represent GameStates in Unity.
     /// </summary>
     public abstract class GameBase<T> : MonoBehaviour where T : GameState
     {
