@@ -18,15 +18,19 @@ namespace SortGame
         private Model runtimeModel;
         private IWorker worker;
         private readonly Dictionary<string, Tensor> inputBuffer = new();
-        protected override void Init()
+        protected override sealed void AIInit()
         {
             // Load NN model from asset.
             runtimeModel = ModelLoader.Load(modelAsset, verbose: verbose);
             // Create the async thread that runs inference for us.
             worker = WorkerFactory.CreateWorker(inferenceBackend, runtimeModel);
-            // Invoke AIController's Init to start the core loop.
-            base.Init();
+            // Invoke the neural network's init method.
+            NNInit();
         }
+        /// <summary>
+        /// Invoked just before the core loop starts.
+        /// </summary>
+        protected abstract void NNInit();
         private void OnDestroy() 
         {
             // Clean up memory allocated via Barracuda.

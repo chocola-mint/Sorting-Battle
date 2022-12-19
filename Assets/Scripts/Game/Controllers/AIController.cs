@@ -21,13 +21,19 @@ namespace SortGame
             for(int i = 0; i < duration; ++i)
                 yield return waitForFixedUpdate;
         }
-        protected override void Init()
+        protected override sealed void Init()
         {
             base.Init();
+            // Call the AI's actual init method.
+            AIInit();
             // We have to declare the core loop as a separate coroutine rather than just using
             // IEnumerator Start(), to avoid name collision.
             StartCoroutine(AICoreLoop());
         }
+        /// <summary>
+        /// Invoked just before the core loop starts.
+        /// </summary>
+        protected abstract void AIInit();
         /// <summary>
         /// The core loop of an AI, which just takes an action and waits for awhile.
         /// </summary>

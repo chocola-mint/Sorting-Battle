@@ -38,11 +38,10 @@ namespace SortGame
         }
         private Action currentAction = Action.Select;
         private List<Vector2Int> allTiles;
-        protected override void Init()
+        protected override void AIInit()
         {
             allTiles = gameBoard.state.GetAllTiles();
             SwitchAction();
-            base.Init();
         }
         private Vector2Int GetTileToClick()
         {
