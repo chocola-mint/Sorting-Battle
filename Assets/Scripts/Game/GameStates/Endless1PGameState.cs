@@ -5,6 +5,9 @@ using ChocoUtil.Algorithms;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Implementation of the Endless 1P Game mode.
+    /// </summary>
     public class Endless1PGameState : GameState
     {
         protected readonly GameBoardState p1GBState;

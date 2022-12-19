@@ -5,6 +5,10 @@ using SortGame.GameFunctions;
 using ChocoUtil.Algorithms;
 namespace SortGame
 {
+    /// <summary>
+    /// A class that represents a game board, which contains a grid, a controller, a score value,
+    /// and a pressure value.
+    /// </summary>
     public class GameBoardState
     {
         public struct Config

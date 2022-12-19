@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// A class that contains information about a single tile.
+    /// </summary>
     public class GameTileState
     {
         public int number;

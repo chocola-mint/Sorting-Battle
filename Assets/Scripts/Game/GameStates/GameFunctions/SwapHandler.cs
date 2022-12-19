@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 namespace SortGame.GameFunctions
 {
+    /// <summary>
+    /// An object that handles swapping operations on the GameGridState.
+    /// </summary>
     public class SwapHandler
     {
         private readonly GameGridState gameGridState;

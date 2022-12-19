@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 namespace SortGame.GameFunctions
 {
+    /// <summary>
+    /// An object that handles selection operations on the GameGridState.
+    /// </summary>
     public class SelectionHandler
     {
         private readonly GameGridState gameGridState;

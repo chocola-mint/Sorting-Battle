@@ -7,6 +7,10 @@ using static System.TupleExtensions;
 
 namespace SortGame.GameFunctions
 {
+    /// <summary>
+    /// An object that handles removal operations on the GameGridState.
+    /// Implemented using <see cref="SelectionHandler"></see>.
+    /// </summary>
     public class RemoveHandler
     {
         private readonly GameGridState gameGridState;

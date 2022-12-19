@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// A class that manages a game grid.
+    /// </summary>
     public class GameGridState
     {
         public readonly int rowCount, columnCount;

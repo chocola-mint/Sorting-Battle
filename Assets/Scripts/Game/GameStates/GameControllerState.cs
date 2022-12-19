@@ -5,6 +5,10 @@ using SortGame.GameFunctions;
 
 namespace SortGame
 {
+    /// <summary>
+    /// A class that represents a player's controller's states, and what a player
+    /// is allowed to do.
+    /// </summary>
     public class GameControllerState
     {
         private readonly GameGridState gameGridState;

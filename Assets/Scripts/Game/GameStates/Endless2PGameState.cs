@@ -5,6 +5,9 @@ using ChocoUtil.Algorithms;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Implementation of the Endless 2P Game mode.
+    /// </summary>
     public class Endless2PGameState : VersusGameState
     {
         public event System.Action onP1Win, onP2Win, onDraw;

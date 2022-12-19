@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// A class that manages a player's score.
+    /// </summary>
     public class GameScoreState
     {
         public int totalScore { get; private set; } = 0;

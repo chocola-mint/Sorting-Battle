@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// A class that manages a player's pressure.
+    /// </summary>
     public class GamePressureState
     {
         public int pressure { get; private set; } = 0;
