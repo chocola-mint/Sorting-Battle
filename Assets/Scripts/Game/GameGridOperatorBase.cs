@@ -19,7 +19,8 @@ namespace SortGame
             raycaster = GetComponent<GraphicRaycaster>();    
             gameGrid = GetComponentInChildren<GameGrid>();
             gameControllerState = GetComponent<GameBoard>().state.gameControllerState;
-        }        protected IEnumerable<RaycastResult> Raycast(Vector2 screenPosition)
+        }        
+        protected IEnumerable<RaycastResult> Raycast(Vector2 screenPosition)
         {
             raycastResults.Clear();
             raycaster.Raycast(
@@ -29,7 +30,6 @@ namespace SortGame
                 raycastResults);
             return raycastResults.AsEnumerable();
         }
-
         protected IEnumerable<T> Raycast<T>(Vector2 screenPosition) where T : MonoBehaviour
         {
             raycastResults.Clear();

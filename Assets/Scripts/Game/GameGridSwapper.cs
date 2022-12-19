@@ -12,6 +12,7 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
+            // Make "enabled" reflect swapping state.
             gameControllerState.onStartSwapping += () => {
                 enabled = true;
             };
@@ -19,8 +20,8 @@ namespace SortGame
                 if(currentNumberBlock)
                 {
                     currentNumberBlock.StopFollowPointer();
-                    enabled = false;
                 }
+                enabled = false;
             };
             enabled = false;
         }

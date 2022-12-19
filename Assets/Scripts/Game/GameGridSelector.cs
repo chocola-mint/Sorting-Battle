@@ -45,6 +45,7 @@ namespace SortGame
         // Start is called before the first frame update
         void Start()
         {
+            // Make "enabled" reflect selection state.
             gameControllerState.onBeginSelection += () => {
                 enabled = true;
             };

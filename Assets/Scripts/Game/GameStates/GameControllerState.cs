@@ -20,6 +20,7 @@ namespace SortGame
             this.minimumSortedLength = minimumSortedLength;
             remover = new(gameGridState);
             swapper = new(gameGridState);
+            // ! If useInterrupts is set to true, make swapping and selecting interrupt each other.
             if(useInterrupts)
             {
                 onStartSwapping += EndSelection;
