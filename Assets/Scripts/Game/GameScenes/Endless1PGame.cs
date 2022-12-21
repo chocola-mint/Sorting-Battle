@@ -8,6 +8,7 @@ namespace SortGame
     public class Endless1PGame : GameBase<Endless1PGameState>
     {
         [SerializeField] private GameBoard p1GameBoard;
+        [SerializeField] private PlayerType p1PlayerType;
         [SerializeField] private TMP_Text textMesh;
         [SerializeField] private bool startGameImmediately = true;
         [SerializeField] private GameOverOverlay gameOverOverlay;
@@ -15,6 +16,7 @@ namespace SortGame
         void Start()
         {
             gameState = new(p1GameBoard.state);
+            p1PlayerType.CreatePrefabInstance(p1GameBoard, "P1");
             if(startGameImmediately)StartGame();
         }
         public override void StartGame()

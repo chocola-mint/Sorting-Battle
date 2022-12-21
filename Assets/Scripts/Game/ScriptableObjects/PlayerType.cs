@@ -12,9 +12,10 @@ namespace SortGame
     public class PlayerType : ScriptableObject
     {
         [SerializeField] private GameController gameControllerPrefab;
-        public GameController CreatePrefabInstance(GameBoard gameBoardComponent)
+        public GameController CreatePrefabInstance(GameBoard gameBoardComponent, string name = "Player")
         {
             var instance = Instantiate(gameControllerPrefab);
+            instance.name = name;
             instance.gameBoardComponent = gameBoardComponent;
             return instance;
         }

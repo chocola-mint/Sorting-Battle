@@ -9,6 +9,7 @@ namespace SortGame
     public class Endless2PGame : GameBase<Endless2PGameState>
     {
         [SerializeField] private GameBoard p1GameBoard, p2GameBoard;
+        [SerializeField] private PlayerType p1PlayerType, p2PlayerType;
         [SerializeField] private TMP_Text p1TextMesh, p2TextMesh;
         [SerializeField] private bool startGameImmediately = true;
         [SerializeField] private GameOverOverlay gameOverOverlay;
@@ -16,6 +17,8 @@ namespace SortGame
         void Start()
         {
             gameState = new(p1GameBoard.state, p2GameBoard.state);
+            p1PlayerType.CreatePrefabInstance(p1GameBoard, "P1");
+            p2PlayerType.CreatePrefabInstance(p2GameBoard, "P2");
             if(startGameImmediately)StartGame();
         }
         public override void StartGame()

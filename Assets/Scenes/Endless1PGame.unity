@@ -561,7 +561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797811266825347751, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3797811266825347751, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1101,7 +1101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8459387347043729532, guid: 98ae676aa2d8804478876621533922a8, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8459387347043729532, guid: 98ae676aa2d8804478876621533922a8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3201,67 +3201,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1912359658404334573, guid: ff136dcd981c6d74f8af492f470e979d, type: 3}
   m_PrefabInstance: {fileID: 3097067247794444598}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &973033514
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -6783734343263632443, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: gameBoard
-      value: 
-      objectReference: {fileID: 3097067247794444599}
-    - target: {fileID: 8498129179771875786, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062181025225411385, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fa78fa64a0ba8c541bde93db93802d15, type: 3}
 --- !u!1001 &1064275273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6047,6 +5986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p1GameBoard: {fileID: 3097067247794444599}
+  p1PlayerType: {fileID: 11400000, guid: aa6ee9215b1963b42840880f09d562de, type: 2}
   textMesh: {fileID: 240420756}
   startGameImmediately: 0
   gameOverOverlay: {fileID: 171189995}
