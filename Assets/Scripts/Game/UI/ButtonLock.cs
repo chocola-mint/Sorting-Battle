@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Utility component that locks down a button.
+    /// </summary>
     [RequireComponent(typeof(Button))]
     public class ButtonLock : MonoBehaviour
     {

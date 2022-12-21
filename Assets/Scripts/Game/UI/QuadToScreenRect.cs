@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Utility component that transforms a Rect mesh or a Square sprite so that it covers
+    /// the Main Camera's view.
+    /// </summary>
     public class QuadToScreenRect : MonoBehaviour
     {
         [SerializeField][Min(0)] float distanceFromCamera = 0;

@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using System.Linq;
 namespace SortGame
 {
+    /// <summary>
+    /// Utility component that disables raycast on a button and its children 
+    /// while it is not interactable.
+    /// </summary>
     [RequireComponent(typeof(Button))]
     public class SuppressRaycastWhileNotInteractable : MonoBehaviour
     {

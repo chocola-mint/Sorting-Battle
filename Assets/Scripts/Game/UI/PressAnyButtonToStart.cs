@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Class that implements the common "press any button to start" behaviour seen in games.
+    /// </summary>
     public class PressAnyButtonToStart : MonoBehaviour
     {
         [SerializeField] InputActionReference anyButton;

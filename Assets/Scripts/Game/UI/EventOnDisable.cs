@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Utility class that fires an event when the object is disabled.
+    /// </summary>
     public class EventOnDisable : MonoBehaviour
     {
         public UnityEngine.Events.UnityEvent onDisable;

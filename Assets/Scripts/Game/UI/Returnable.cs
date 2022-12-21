@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Utility component that implements recursive "Return" behaviour in UI hierarchies.
+    /// </summary>
     public class Returnable : MonoBehaviour
     {
         public UnityEvent onReturn;

@@ -5,6 +5,9 @@ using TMPro;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Class that implements adjustable blinking and vanishing behaviour on TMP text meshes.
+    /// </summary>
     [RequireComponent(typeof(TMP_Text))]
     public class TextBlink : MonoBehaviour
     {

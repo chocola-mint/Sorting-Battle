@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 namespace SortGame
 {
+    /// <summary>
+    /// Utility component that enables pressing Esc to quit the game anywhere.
+    /// Only enabled on non-web platforms.
+    /// </summary>
     public class EscapeToQuitGame : MonoBehaviour
     {
         [RuntimeInitializeOnLoadMethod]
