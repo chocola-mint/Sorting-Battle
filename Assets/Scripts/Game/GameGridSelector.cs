@@ -42,16 +42,19 @@ namespace SortGame
         {
             EndSelection();
         }
+        private void OnDestroy() 
+        {
+            gameControllerState.onBeginSelection -= Enable;
+            gameControllerState.onEndSelection -= Disable;
+        }
+        private void Enable() => enabled = true;
+        private void Disable() => enabled = false;
         // Start is called before the first frame update
         void Start()
         {
             // Make "enabled" reflect selection state.
-            gameControllerState.onBeginSelection += () => {
-                enabled = true;
-            };
-            gameControllerState.onEndSelection += () => {
-                enabled = false;
-            };
+            gameControllerState.onBeginSelection += Enable;
+            gameControllerState.onEndSelection += Disable;
             enabled = false;
         }
 
