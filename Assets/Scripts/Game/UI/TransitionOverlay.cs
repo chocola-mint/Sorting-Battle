@@ -53,6 +53,14 @@ namespace SortGame
             StopAllCoroutines();
             StartCoroutine(CoroMoveToScene(sceneName));
         }
+        /// <summary>
+        /// Shortcut that takes in the scene asset instead. Will use the name of the asset as scene name.
+        /// </summary>
+        /// <param name="sceneAsset"></param>
+        public void MoveToScene(Object sceneAsset)
+        {
+            MoveToScene(sceneAsset.name);
+        }
         private IEnumerator CoroMoveToScene(string sceneName)
         {
             // Start the async load scene task.
