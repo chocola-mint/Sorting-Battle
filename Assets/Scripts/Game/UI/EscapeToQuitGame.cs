@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Utility component that enables pressing Esc to quit the game anywhere.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Utility component that implements recursive "Return" behaviour in UI hierarchies.

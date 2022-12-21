@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Utility component that transforms a Rect mesh or a Square sprite so that it covers

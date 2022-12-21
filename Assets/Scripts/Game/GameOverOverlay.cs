@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using TransitionOverlay = SortGame.UI.TransitionOverlay;
 namespace SortGame
 {
     public class GameOverOverlay : MonoBehaviour

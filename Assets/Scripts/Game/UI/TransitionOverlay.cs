@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Component that handles transition effects for the scene it is in.

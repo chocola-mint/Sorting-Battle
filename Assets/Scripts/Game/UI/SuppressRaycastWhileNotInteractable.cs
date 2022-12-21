@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Utility component that disables raycast on a button and its children 

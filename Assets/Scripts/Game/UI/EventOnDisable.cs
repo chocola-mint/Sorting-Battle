@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Utility class that fires an event when the object is disabled.

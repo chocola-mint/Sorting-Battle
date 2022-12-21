@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Utility component that locks down a button.

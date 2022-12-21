@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Class that implements the common "press any button to start" behaviour seen in games.

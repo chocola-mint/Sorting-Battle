@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace SortGame
+namespace SortGame.UI
 {
     /// <summary>
     /// Class that implements adjustable blinking and vanishing behaviour on TMP text meshes.

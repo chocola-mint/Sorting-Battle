@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SortGame
+namespace SortGame.UI
 {
     public interface IOnShowReceiver
     {
@@ -27,10 +27,12 @@ namespace SortGame
         [SerializeField, Tooltip("The default animator to go to on Awake.")] 
         private Animator defaultAnimator;
         private int minimumAnimatorCount = 0;
+        private Selectable[] childSelectables;
         private void Awake() 
         {
             showTriggerHash = Animator.StringToHash(showTrigger);
             hideTriggerHash = Animator.StringToHash(hideTrigger);
+            childSelectables = GetComponentsInChildren<Selectable>(true);
             if(TryGetComponent<Returnable>(out var returnable)) {
                 returnable.onReturn.AddListener(Return);
                 returnButton.onClick.AddListener(returnable.Return);
@@ -74,12 +76,14 @@ namespace SortGame
         }
         private void Show(Animator animator)
         {
+            animator.ResetTrigger(hideTriggerHash);
             animator.SetTrigger(showTriggerHash);
             foreach(var receiver in animator.GetComponents<IOnShowReceiver>())
                 receiver.OnShow();
         }
         private void Hide(Animator animator)
         {
+            animator.ResetTrigger(showTriggerHash);
             animator.SetTrigger(hideTriggerHash);
             foreach(var receiver in animator.GetComponents<IOnHideReceiver>())
                 receiver.OnHide();
@@ -92,8 +96,14 @@ namespace SortGame
         private IEnumerator CoroWaitForActiveAnimators(List<Animator> activeAnimators)
         {
             returnButton.interactable = false;
+            foreach(var selectable in childSelectables)
+                selectable.interactable = false;
+
             foreach(var animator in activeAnimators) 
                 yield return animator.WaitUntilCurrentStateIsDone();
+                
+            foreach(var selectable in childSelectables)
+                selectable.interactable = true;
             // This makes it so the return button cannot be used 
             // to make the animator count go below the minimum. (Root level)
             if(animators.Count > minimumAnimatorCount)
