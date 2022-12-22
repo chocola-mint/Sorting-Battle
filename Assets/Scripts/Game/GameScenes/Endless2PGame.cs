@@ -64,8 +64,8 @@ namespace SortGame
         }
         private IEnumerator CoroGameOver()
         {
-            var handleP1Clear = StartCoroutine(p1GameBoard.CoroAnimateClearTiles());
-            var handleP2Clear = StartCoroutine(p2GameBoard.CoroAnimateClearTiles());
+            var handleP1Clear = StartCoroutine(p1GameBoard.CoroAnimateClearTilesRowByRow());
+            var handleP2Clear = StartCoroutine(p2GameBoard.CoroAnimateClearTilesRowByRow());
             yield return handleP1Clear;
             yield return handleP2Clear;
             if(gameOverOverlay) gameOverOverlay.gameObject.SetActive(true);
