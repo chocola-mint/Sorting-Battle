@@ -59,50 +59,6 @@ namespace SortGame
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
         }
-        public IEnumerator CoroAnimateClearTiles(float waitSecondsBetweenEachRemove = 0.1f)
-        {
-            var wait = new WaitForSeconds(waitSecondsBetweenEachRemove);
-            for(int i = state.gameGridState.rowCount - 1; i >= 0; --i)
-                for(int j = 0; j < state.gameGridState.columnCount; ++j)
-                {
-                    state.gameGridState.RemoveTile(new(i, j), pullDown: false);
-                    yield return wait;
-                }
-        }
-        public IEnumerator CoroAnimateClearTilesPullDown(float waitSecondsBetweenEachRemove = 0.1f)
-        {
-            var wait = new WaitForSeconds(waitSecondsBetweenEachRemove);
-            bool rowEmpty = true;
-            int j = -1;
-            do
-            {
-                rowEmpty = true;
-                if(j == -1)
-                    for(j = 0; j < state.gameGridState.columnCount; ++j)
-                    {
-                        bool isEmpty = state.gameGridState.IsEmpty(new(state.gameGridState.rowCount - 1, j));
-                        rowEmpty &= isEmpty;
-                        if(!isEmpty)
-                        {
-                            state.gameGridState.RemoveTile(new(state.gameGridState.rowCount - 1, j), pullDown: true);
-                            yield return wait;
-                        }
-                    }
-                else
-                {
-                    for(j = state.gameGridState.columnCount - 1; j >= 0; --j)
-                    {
-                        bool isEmpty = state.gameGridState.IsEmpty(new(state.gameGridState.rowCount - 1, j));
-                        rowEmpty &= isEmpty;
-                        if(!isEmpty)
-                        {
-                            state.gameGridState.RemoveTile(new(state.gameGridState.rowCount - 1, j), pullDown: true);
-                            yield return wait;
-                        }
-                    }
-                }
-            } while (!rowEmpty);
-        }
 
         private void Awake() 
         {   
