@@ -14,6 +14,7 @@ namespace SortGame
         [SerializeField] private TMP_Text p1TextMesh, p2TextMesh;
         [SerializeField] private bool startGameImmediately = true;
         [SerializeField] private GameOverOverlay gameOverOverlay;
+        [SerializeField] private bool injectRandomSeed = true;
         private void Awake() 
         {
             if(settings != null)
@@ -24,6 +25,12 @@ namespace SortGame
             }
             Debug.Assert(p1PlayerType != null);
             Debug.Assert(p2PlayerType != null);
+            if(injectRandomSeed)
+            { 
+                int seed = (int)System.DateTime.Now.Ticks;
+                p1GameBoard.InjectSeed(seed);
+                p2GameBoard.InjectSeed(seed);
+            }
         }
         // Start is called before the first frame update
         void Start()

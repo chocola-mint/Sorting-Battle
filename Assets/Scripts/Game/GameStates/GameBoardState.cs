@@ -61,6 +61,7 @@ namespace SortGame
         // ! The environment is supposed to invoke them appropriately according to the specification.
         public bool PushNewRow(int numberOfColumns, bool triggerEvent = false)
         {
+            var stateBefore = Random.state;
             Random.state = randomState;
             var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
             bool anyOverflow = false;
@@ -69,11 +70,13 @@ namespace SortGame
                 anyOverflow |= gameGridState.PushUp(column);
             }
             randomState = Random.state;
+            Random.state = stateBefore;
             if(anyOverflow && triggerEvent) onOverflow?.Invoke();
             return anyOverflow;
         }
         public bool PushTrashRows(int numberOfRows, int numberOfColumns)
         {
+            var stateBefore = Random.state;
             Random.state = randomState;
             bool anyOverflow = false;
             for(int i = 0; i < numberOfRows; ++i)
@@ -88,6 +91,7 @@ namespace SortGame
                 }
             }
             randomState = Random.state;
+            Random.state = stateBefore;
             return anyOverflow;
         }
         
