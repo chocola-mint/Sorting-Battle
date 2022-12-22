@@ -28,8 +28,8 @@ namespace SortGame
         }
         private void OnDestroy() 
         {
-            gameControllerState.onBeginSelection -= Enable;
-            gameControllerState.onEndSelection -= Disable;
+            gameControllerState.onStartSwapping -= Enable;
+            gameControllerState.onEndSwapping -= Disable;
         }
         public void StartSwapping(Vector2 screenPosition)
         {
