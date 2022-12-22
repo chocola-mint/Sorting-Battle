@@ -14,10 +14,17 @@ namespace SortGame.UI
     /// </summary>
     public class TransitionOverlay : MonoBehaviour
     {
+        public enum TransitionCleanupMode
+        {
+            Destroy,
+            Disable,
+            DoNothing,
+        }
+        [SerializeField] TransitionCleanupMode cleanupMode = TransitionCleanupMode.DoNothing;
         // ! These objects should set themselves to inactive once they are done.
-        [Tooltip("Sequence of GameObjects that contain transition effects. Should turn themselves inactive after they end.")]
+        [Tooltip("Sequence of GameObjects that contain transition effects. Should use TransitionDoneMarker to mark the end of a transition")]
         [SerializeField] List<GameObject> entrance, exit;
-        public UnityEvent onEntranceTransitionOver;
+        public UnityEvent onEntranceTransitionOver, onExitTransitionStart;
         private void Start() 
         {
             StartCoroutine(CoroEnterScene());    
@@ -29,10 +36,21 @@ namespace SortGame.UI
             {
                 // Instantiate transition object.
                 var transition = Instantiate(transitionPrefab);
-                // Then wait for the transition object to turn itself off.
-                yield return new WaitUntil(() => !transition.activeSelf);
-                // Finally, destroy the transition object.
-                Destroy(transition);
+                // Then wait for the transition to end.
+                yield return new WaitUntil(() => transition.TryGetComponent<TransitionDoneMarker>(out _));
+                // Finally, cleanup.
+                switch(cleanupMode)
+                {
+                    case TransitionCleanupMode.Destroy:
+                        Destroy(transition);
+                        break;
+                    case TransitionCleanupMode.Disable:
+                        transition.SetActive(false);
+                        break;
+                    case TransitionCleanupMode.DoNothing:
+                        default:
+                        break;
+                }
             }
         }
         private IEnumerator CoroEnterScene()
@@ -50,6 +68,7 @@ namespace SortGame.UI
         /// </summary>
         public void MoveToScene(string sceneName)
         {
+            onExitTransitionStart.Invoke();
             StopAllCoroutines();
             StartCoroutine(CoroMoveToScene(sceneName));
         }

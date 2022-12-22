@@ -74,6 +74,12 @@ namespace SortGame.UI
             }
             if(activeAnimators.Count > 0) HandleReturnButtonState(activeAnimators);
         }
+        public void End()
+        {
+            // End means all buttons are unselectable.
+            foreach(var selectable in childSelectables)
+                selectable.interactable = false;
+        }
         private void Show(Animator animator)
         {
             animator.ResetTrigger(hideTriggerHash);
@@ -95,19 +101,17 @@ namespace SortGame.UI
         }
         private IEnumerator CoroWaitForActiveAnimators(List<Animator> activeAnimators)
         {
-            returnButton.interactable = false;
             foreach(var selectable in childSelectables)
                 selectable.interactable = false;
 
             foreach(var animator in activeAnimators) 
                 yield return animator.WaitUntilCurrentStateIsDone();
-                
-            foreach(var selectable in childSelectables)
-                selectable.interactable = true;
+
             // This makes it so the return button cannot be used 
             // to make the animator count go below the minimum. (Root level)
             if(animators.Count > minimumAnimatorCount)
-                returnButton.interactable = true;
+                foreach(var selectable in childSelectables)
+                    selectable.interactable = true;
         }
     }
 }

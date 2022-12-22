@@ -551,6 +551,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Game Over
       objectReference: {fileID: 0}
+    - target: {fileID: 3797811266825347750, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 530843555}
     - target: {fileID: 3797811266825347751, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1176,11 +1180,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
-      propertyPath: entrance.Array.size
+      propertyPath: exit.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
+      propertyPath: exit.Array.data[0]
+      value: 
+      objectReference: {fileID: 2247640944346840029, guid: f83e6d907e90ffc4aac41ba60ee90c91, type: 3}
+    - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
+      propertyPath: entrance.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
       propertyPath: entrance.Array.data[0]
+      value: 
+      objectReference: {fileID: 2247640944346840029, guid: 6d36a8e20978c6e4b9d60645b04000dd, type: 3}
+    - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
+      propertyPath: entrance.Array.data[1]
       value: 
       objectReference: {fileID: 5284880280992226252, guid: 0d1cb7a177037c449be5579fd0f29a91, type: 3}
     - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
