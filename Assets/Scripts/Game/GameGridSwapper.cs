@@ -9,21 +9,27 @@ namespace SortGame
     public class GameGridSwapper : GameGridOperatorBase
     {
         private NumberBlock currentNumberBlock;
+        private void Enable() => enabled = true;
+        private void Disable() 
+        {
+            if(currentNumberBlock)
+            {
+                currentNumberBlock.StopFollowPointer();
+            }
+            enabled = false;
+        }
         // Start is called before the first frame update
         void Start()
         {
             // Make "enabled" reflect swapping state.
-            gameControllerState.onStartSwapping += () => {
-                enabled = true;
-            };
-            gameControllerState.onEndSwapping += () => {
-                if(currentNumberBlock)
-                {
-                    currentNumberBlock.StopFollowPointer();
-                }
-                enabled = false;
-            };
+            gameControllerState.onStartSwapping += Enable;
+            gameControllerState.onEndSwapping += Disable;
             enabled = false;
+        }
+        private void OnDestroy() 
+        {
+            gameControllerState.onBeginSelection -= Enable;
+            gameControllerState.onEndSelection -= Disable;
         }
         public void StartSwapping(Vector2 screenPosition)
         {
