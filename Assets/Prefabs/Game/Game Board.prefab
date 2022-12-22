@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 1337
   randomSeed: 0
-  numberUpperBound: 100
+  numberUpperBound: 10
 --- !u!223 &8489702094765334055
 Canvas:
   m_ObjectHideFlags: 0
