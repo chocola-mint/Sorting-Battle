@@ -82,11 +82,8 @@ namespace SortGame
 #region Per-Player Events
             private void LoadEvent()
             {
-                var stateBefore = Random.state;
-                Random.state = gameBoardState.randomState;
-                gameBoardState.gameGridState.LoadRandom(rowPercentage:0.8f);
-                gameBoardState.randomState = Random.state;
-                Random.state = stateBefore;
+                using(new RandomScope(gameBoardState))
+                    gameBoardState.gameGridState.LoadRandom(rowPercentage:0.8f);
             }
             private void CheckResetComboEvent()
             {

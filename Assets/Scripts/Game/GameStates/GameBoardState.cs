@@ -9,7 +9,7 @@ namespace SortGame
     /// A class that represents a game board, which contains a grid, a controller, a score value,
     /// and a pressure value.
     /// </summary>
-    public class GameBoardState
+    public class GameBoardState : IRandomThread
     {
         public struct Config
         {
@@ -24,7 +24,7 @@ namespace SortGame
             public float comboScoreStep;
         }
         public readonly GameGridState gameGridState;
-        public Random.State randomState;
+        public Random.State randomState { get; set; }
         public readonly GameControllerState gameControllerState;
         public readonly GameScoreState gameScoreState;
         public readonly GamePressureState gamePressureState;
@@ -61,38 +61,36 @@ namespace SortGame
         // ! The environment is supposed to invoke them appropriately according to the specification.
         public bool PushNewRow(int numberOfColumns, bool triggerEvent = false)
         {
-            var stateBefore = Random.state;
-            Random.state = randomState;
-            var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
-            bool anyOverflow = false;
-            foreach(var column in columns[0..Mathf.Min(numberOfColumns, columns.Length)])
+            using(new RandomScope(this))
             {
-                anyOverflow |= gameGridState.PushUp(column);
+                var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
+                bool anyOverflow = false;
+                foreach(var column in columns[0..Mathf.Min(numberOfColumns, columns.Length)])
+                {
+                    anyOverflow |= gameGridState.PushUp(column);
+                }
+                if(anyOverflow && triggerEvent) onOverflow?.Invoke();
+                return anyOverflow;
             }
-            randomState = Random.state;
-            Random.state = stateBefore;
-            if(anyOverflow && triggerEvent) onOverflow?.Invoke();
-            return anyOverflow;
         }
         public bool PushTrashRows(int numberOfRows, int numberOfColumns)
         {
-            var stateBefore = Random.state;
-            Random.state = randomState;
-            bool anyOverflow = false;
-            for(int i = 0; i < numberOfRows; ++i)
+            using(new RandomScope(this))
             {
-                var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
-                int columnLimit = i == 0 
-                ? Mathf.Min(numberOfColumns, columns.Length) 
-                : columns.Length;
-                foreach(var column in columns[0..columnLimit])
+                bool anyOverflow = false;
+                for(int i = 0; i < numberOfRows; ++i)
                 {
-                    anyOverflow |= gameGridState.PushUp(column, GameTileState.Trash);
+                    var columns = RandLib.RandomIntegerSequence(0, gameGridState.columnCount);
+                    int columnLimit = i == 0 
+                    ? Mathf.Min(numberOfColumns, columns.Length) 
+                    : columns.Length;
+                    foreach(var column in columns[0..columnLimit])
+                    {
+                        anyOverflow |= gameGridState.PushUp(column, GameTileState.Trash);
+                    }
                 }
+                return anyOverflow;
             }
-            randomState = Random.state;
-            Random.state = stateBefore;
-            return anyOverflow;
         }
         
     }

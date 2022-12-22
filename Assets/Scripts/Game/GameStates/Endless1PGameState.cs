@@ -33,7 +33,8 @@ namespace SortGame
         } 
         private void LoadEvent()
         {
-            p1GBState.gameGridState.LoadRandom(rowPercentage: emptyRowPercentage);
+            using(new RandomScope(p1GBState))
+                p1GBState.gameGridState.LoadRandom(rowPercentage: emptyRowPercentage);
         }
         private void CheckResetComboEvent()
         {

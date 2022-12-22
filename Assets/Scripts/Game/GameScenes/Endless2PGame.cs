@@ -27,7 +27,7 @@ namespace SortGame
             Debug.Assert(p2PlayerType != null);
             if(injectRandomSeed)
             { 
-                int seed = (int)System.DateTime.Now.Ticks;
+                int seed = Random.Range(int.MinValue, int.MaxValue);
                 p1GameBoard.InjectSeed(seed);
                 p2GameBoard.InjectSeed(seed);
             }

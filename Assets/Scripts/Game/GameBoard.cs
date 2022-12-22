@@ -50,9 +50,8 @@ namespace SortGame
         {
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
-            Random.state = state.randomState; // Load this board's random state.
-            gameGrid.LoadRandomNumbers(rowPercentage);
-            state.randomState = Random.state; // Save afterwards.
+            using(new RandomScope(state))
+                gameGrid.LoadRandomNumbers(rowPercentage);
         }
         public void ClearTiles()
         {
