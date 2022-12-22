@@ -21,7 +21,11 @@ namespace SortGame
         protected override sealed void AIInit()
         {
             // Load NN model from asset.
+        #if UNITY_EDITOR
             runtimeModel = ModelLoader.Load(modelAsset, verbose: verbose);
+        #else
+            runtimeModel = ModelLoader.Load(modelAsset);
+        #endif
             // Create the async thread that runs inference for us.
             worker = WorkerFactory.CreateWorker(inferenceBackend, runtimeModel);
             // Invoke the neural network's init method.
