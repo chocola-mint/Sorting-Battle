@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5008250385661176749
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4856217718939581992, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: distanceFromCamera
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581993, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d9f0543e3286ca409d2d66903343587, type: 3}
+    - target: {fileID: 4856217718939581993, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581993, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581993, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581993, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a10eb870d46cc3740b418563d13ccbd2, type: 2}
+    - target: {fileID: 4856217718939581998, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_Name
+      value: DiamondLoop
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856217718939581999, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+--- !u!1 &496558666365130115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4856217718939581998, guid: 16267ecacedc6a044acae04d5afac0c0, type: 3}
+  m_PrefabInstance: {fileID: 5008250385661176749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2796174185857102401
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496558666365130115}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3693108b02df1384dbd6c7a204af483f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
