@@ -75,10 +75,17 @@ namespace SortGame.UI
         /// <summary>
         /// Shortcut that takes in the scene asset instead. Will use the name of the asset as scene name.
         /// </summary>
-        /// <param name="sceneAsset"></param>
         public void MoveToScene(Object sceneAsset)
         {
             MoveToScene(sceneAsset.name);
+        }
+        /// <summary>
+        /// Shortcut that takes in a <see cref="SceneKey"></see> ScriptableObject.
+        /// </summary>
+        /// <param name="sceneKey"></param>
+        public void MoveToScene(SceneKey sceneKey)
+        {
+            MoveToScene(sceneKey.GetName());
         }
         private IEnumerator CoroMoveToScene(string sceneName)
         {

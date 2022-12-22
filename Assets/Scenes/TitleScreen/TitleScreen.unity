@@ -773,15 +773,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SortGame.TransitionOverlay, SortGame
+      value: SortGame.UI.TransitionOverlay, SortGame.UI
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+      objectReference: {fileID: 11400000, guid: 0fb12d20aa204534893852f93e59a2ec, type: 2}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: SortGame.SceneKey, SortGame
       objectReference: {fileID: 0}
     - target: {fileID: 7485442864674315427, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_text
@@ -947,7 +947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: SortGame.TransitionOverlay, SortGame
+      value: SortGame.UI.TransitionOverlay, SortGame.UI
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -956,14 +956,14 @@ PrefabInstance:
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 102900000, guid: 98cb412c6d274ba48b936163aa0978df, type: 3}
+      objectReference: {fileID: 11400000, guid: 177f01955eb7e644b91de5b3ce88b5e1, type: 2}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: SortGame.PlayerType, SortGame
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: SortGame.SceneKey, SortGame
       objectReference: {fileID: 0}
     - target: {fileID: 7485442864674315427, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_text
@@ -1254,15 +1254,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SortGame.TransitionOverlay, SortGame
+      value: SortGame.UI.TransitionOverlay, SortGame.UI
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 102900000, guid: 98cb412c6d274ba48b936163aa0978df, type: 3}
+      objectReference: {fileID: 11400000, guid: 177f01955eb7e644b91de5b3ce88b5e1, type: 2}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: SortGame.SceneKey, SortGame
       objectReference: {fileID: 0}
     - target: {fileID: 7485442864674315427, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_text
@@ -8829,8 +8829,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showTrigger: Show
   hideTrigger: Hide
-  returnButton: {fileID: 1521942262}
   defaultAnimator: {fileID: 1796929438}
+  returnButton: {fileID: 1521942262}
 --- !u!1 &1825956148
 GameObject:
   m_ObjectHideFlags: 0

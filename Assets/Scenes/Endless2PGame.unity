@@ -76515,7 +76515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onRestart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onRestart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -76531,7 +76531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onRestart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveToScene
+      value: RestartScene
       objectReference: {fileID: 0}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onReturnToTitleScreen.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -76556,7 +76556,7 @@ PrefabInstance:
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onRestart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 102900000, guid: 98cb412c6d274ba48b936163aa0978df, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onReturnToTitleScreen.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SortGame.UI.TransitionOverlay, SortGame.UI
@@ -76564,14 +76564,14 @@ PrefabInstance:
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onReturnToTitleScreen.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 102900000, guid: 8a22636c1fa5d534685d4440f6d0d4c9, type: 3}
+      objectReference: {fileID: 11400000, guid: f8f60021a7ba6814f96da3929ece8c97, type: 2}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onRestart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7120118450787353117, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}
       propertyPath: onReturnToTitleScreen.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: SortGame.SceneKey, SortGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95761afa0a0c98047879ff696e9b65b9, type: 3}

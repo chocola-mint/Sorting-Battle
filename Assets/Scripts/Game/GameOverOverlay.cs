@@ -9,7 +9,6 @@ namespace SortGame
 {
     public class GameOverOverlay : MonoBehaviour
     {
-        [SerializeField] Object titleScreenScene;
         [SerializeField] TMP_Text resultText;
         [SerializeField] UnityEvent onRestart, onReturnToTitleScreen;
         public void SetResultText(string content)
