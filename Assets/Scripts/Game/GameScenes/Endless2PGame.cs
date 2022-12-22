@@ -73,8 +73,8 @@ namespace SortGame
         }
         void Update() 
         {
-            p1TextMesh.text = $"Score: {p1GameBoard.state.gameScoreState.totalScore}";
-            p2TextMesh.text = $"Score: {p2GameBoard.state.gameScoreState.totalScore}";
+            p1TextMesh.text = $"<size={p1TextMesh.fontSize - 4}>Score</size>\n{p1GameBoard.state.gameScoreState.totalScore:00000}";
+            p2TextMesh.text = $"<size={p2TextMesh.fontSize - 4}>Score</size>\n{p2GameBoard.state.gameScoreState.totalScore:00000}";
         }
     }
 }
