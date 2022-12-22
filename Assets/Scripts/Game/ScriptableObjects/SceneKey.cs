@@ -7,7 +7,7 @@ namespace SortGame
 {
     /// <summary>
     /// Data wrapper around <see cref="SceneReference"></see> for easy access via UnityEvents.
-    /// This approach is still preferred over direct reference via <see cref="Object></see> because
+    /// This approach is still preferred over direct reference via <see cref="Object"></see> because
     /// the <see cref="SceneReference"></see> does additional checks for us.
     /// </summary>
     [CreateAssetMenu(fileName = "SceneKey", menuName = "SortGame/SceneKey", order = 1)]
