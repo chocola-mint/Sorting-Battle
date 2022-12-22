@@ -8,11 +8,23 @@ namespace SortGame
 {
     public class Endless2PGame : GameBase<Endless2PGameState>
     {
+        [SerializeField] private Endless2PGameSettings settings;
         [SerializeField] private GameBoard p1GameBoard, p2GameBoard;
         [SerializeField] private PlayerType p1PlayerType, p2PlayerType;
         [SerializeField] private TMP_Text p1TextMesh, p2TextMesh;
         [SerializeField] private bool startGameImmediately = true;
         [SerializeField] private GameOverOverlay gameOverOverlay;
+        private void Awake() 
+        {
+            if(settings != null)
+            {
+                // Apply overrides.
+                if(settings.p1PlayerTypeOverride != null) p1PlayerType = settings.p1PlayerTypeOverride;
+                if(settings.p2PlayerTypeOverride != null) p2PlayerType = settings.p2PlayerTypeOverride;
+            }
+            Debug.Assert(p1PlayerType != null);
+            Debug.Assert(p2PlayerType != null);
+        }
         // Start is called before the first frame update
         void Start()
         {

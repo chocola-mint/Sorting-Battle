@@ -6920,6 +6920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7a58fe8d84bcb42a9af92d717873f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: b8631b4a45babb94caaa62bfeed6ffe5, type: 2}
   p1GameBoard: {fileID: 3097067247794444599}
   p2GameBoard: {fileID: 1950412227}
   p1PlayerType: {fileID: 11400000, guid: aa6ee9215b1963b42840880f09d562de, type: 2}
