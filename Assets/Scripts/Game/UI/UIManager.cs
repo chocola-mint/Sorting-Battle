@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace SortGame.UI
 {
@@ -28,6 +29,7 @@ namespace SortGame.UI
         private int minimumAnimatorCount = 0;
         private Selectable[] childSelectables;
         protected Returnable returnable { get; private set; }
+        public UnityEvent onTransitionStart;
         protected void Awake() 
         {
             showTriggerHash = Animator.StringToHash(showTrigger);
@@ -80,6 +82,7 @@ namespace SortGame.UI
         }
         private void Show(Animator animator)
         {
+            onTransitionStart.Invoke();
             animator.ResetTrigger(hideTriggerHash);
             animator.SetTrigger(showTriggerHash);
             foreach(var receiver in animator.GetComponents<IOnShowReceiver>())
@@ -87,6 +90,7 @@ namespace SortGame.UI
         }
         private void Hide(Animator animator)
         {
+            onTransitionStart.Invoke();
             animator.ResetTrigger(showTriggerHash);
             animator.SetTrigger(hideTriggerHash);
             foreach(var receiver in animator.GetComponents<IOnHideReceiver>())

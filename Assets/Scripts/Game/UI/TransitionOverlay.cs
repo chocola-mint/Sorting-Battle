@@ -93,6 +93,7 @@ namespace SortGame.UI
             var task = SceneManager.LoadSceneAsync(sceneName);
             task.allowSceneActivation = false;
             // Process exit transitions.
+            cleanupMode = TransitionCleanupMode.DoNothing;
             if(exit != null)
             {
                 if(exit.Count > 0)

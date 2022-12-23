@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3659375476042930355
+--- !u!1 &8068203859545507250
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4954081014339011818}
-  - component: {fileID: 3050918075093668723}
-  - component: {fileID: 5700436500077997469}
-  - component: {fileID: 8780445483129205158}
+  - component: {fileID: 2032664692336052247}
+  - component: {fileID: -7338306151866867529}
+  - component: {fileID: 4857102012104507164}
   m_Layer: 0
-  m_Name: GameGridSelectorSFXSource
+  m_Name: SFXSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4954081014339011818
+--- !u!4 &2032664692336052247
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659375476042930355}
+  m_GameObject: {fileID: 8068203859545507250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,13 +33,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &3050918075093668723
+--- !u!82 &-7338306151866867529
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659375476042930355}
+  m_GameObject: {fileID: 8068203859545507250}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -130,34 +129,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5700436500077997469
+--- !u!114 &4857102012104507164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659375476042930355}
+  m_GameObject: {fileID: 8068203859545507250}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95523372d00ecc4449fe140f733bc6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 0b16f634479d4b740b76bcd134176b6c, type: 2}
---- !u!114 &8780445483129205158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659375476042930355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d59e3e83914ed14f83fe33b0f349fd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameGridSelector: {fileID: 0}
-  selectSFX: {fileID: 11400000, guid: 264011eb8bbddf14a8758be4d534503a, type: 2}
-  selectFinishSFX: {fileID: 11400000, guid: 20f3c8ba637b5ac4a8e95ea1e8cbdbab, type: 2}
-  initialPitch: 1
-  pitchStep: 0.1
-  SFXSourcePrefab: {fileID: 4857102012104507164, guid: 43ea969c62388cd498f9eecf1be535d5, type: 3}

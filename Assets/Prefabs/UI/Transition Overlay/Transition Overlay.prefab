@@ -95,8 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9b20d198dbd2b469d5388a3721f4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cleanupMode: 0
   entrance: []
   exit: []
   onEntranceTransitionOver:
+    m_PersistentCalls:
+      m_Calls: []
+  onExitTransitionStart:
     m_PersistentCalls:
       m_Calls: []
