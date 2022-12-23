@@ -18,7 +18,7 @@ namespace SortGame
                     yield return wait;
                 }
         }
-        public static IEnumerator CoroAnimateClearTilesRowByRow(this GameBoard gameBoard, float waitSecondsBetweenEachRemove = 0.25f)
+        public static IEnumerator CoroAnimateClearTilesRowByRow(this GameBoard gameBoard, float waitSecondsBetweenEachRemove = 0.4f)
         {
             GameBoardState state = gameBoard.state;
             var wait = new WaitForSeconds(waitSecondsBetweenEachRemove);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SortGame
 {
@@ -8,6 +9,7 @@ namespace SortGame
     /// Base class for all game scenes based on GameState implementations.
     /// Game scenes represent GameStates in Unity.
     /// </summary>
+    [RequireComponent(typeof(GameEventDelegate))]
     public abstract class GameBase<T> : MonoBehaviour where T : GameState
     {
         protected T gameState;

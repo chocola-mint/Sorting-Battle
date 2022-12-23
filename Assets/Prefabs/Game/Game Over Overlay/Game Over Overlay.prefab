@@ -682,9 +682,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77713d5edf5ceaf4f845ad1533b2bb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionOverlay: {fileID: 0}
-  titleScreenScene: {fileID: 102900000, guid: 8a22636c1fa5d534685d4440f6d0d4c9, type: 3}
   resultText: {fileID: 3797811266279638644}
+  onEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  onRestart:
+    m_PersistentCalls:
+      m_Calls: []
+  onReturnToTitleScreen:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3797811266901240657
 GameObject:
   m_ObjectHideFlags: 0

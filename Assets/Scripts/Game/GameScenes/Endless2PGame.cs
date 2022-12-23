@@ -15,6 +15,7 @@ namespace SortGame
         [SerializeField] private bool startGameImmediately = true;
         [SerializeField] private GameOverOverlay gameOverOverlay;
         [SerializeField] private bool injectRandomSeed = true;
+        private GameEventDelegate gameEventDelegate;
         private void Awake() 
         {
             if(settings != null)
@@ -31,6 +32,7 @@ namespace SortGame
                 p1GameBoard.InjectSeed(seed);
                 p2GameBoard.InjectSeed(seed);
             }
+            gameEventDelegate = GetComponent<GameEventDelegate>();
         }
         // Start is called before the first frame update
         void Start()
@@ -67,16 +69,19 @@ namespace SortGame
         {
             Debug.Log("Game over");
             GameController.DisableAll();
+            StopTicking();
             StartCoroutine(CoroGameOver());
         }
         private IEnumerator CoroGameOver()
         {
+            gameEventDelegate.onGameOverStart.Invoke();
             var handleP1Clear = StartCoroutine(p1GameBoard.CoroAnimateClearTilesRowByRow());
             var handleP2Clear = StartCoroutine(p2GameBoard.CoroAnimateClearTilesRowByRow());
             yield return handleP1Clear;
             yield return handleP2Clear;
             if(gameOverOverlay) gameOverOverlay.gameObject.SetActive(true);
             else Debug.LogWarning("No game over overlay!");
+            gameEventDelegate.onGameOverEnd.Invoke();
         }
         void Update() 
         {

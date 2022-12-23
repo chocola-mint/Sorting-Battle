@@ -24,7 +24,11 @@ namespace SortGame
         }
         public void PlayRandom()
         {
-            audioSource.clip = trackList.GetRandomClip();
+            PlayClip(trackList.GetRandomClip());
+        }
+        public void PlayClip(AudioClip clip)
+        {
+            audioSource.clip = clip;
             audioSource.Play();
         }
         public void Stop(float falloffDuration)
