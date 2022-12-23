@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SortGame
+namespace SortGame.Sound
 {
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(SFXSource))]

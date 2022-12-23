@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChocoUtil.Algorithms;
 
-namespace SortGame
+namespace SortGame.Sound
 {
     [RequireComponent(typeof(AudioSource))]
     public class Jukebox : MonoBehaviour

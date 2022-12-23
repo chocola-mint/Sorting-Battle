@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SortGame
+namespace SortGame.Sound
 {
     /// <summary>
     /// A data container holding a <see cref="AudioClip"></see> and its volume scale.

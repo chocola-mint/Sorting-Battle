@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SortGame
+namespace SortGame.Sound
 {
     [RequireComponent(typeof(AudioSource))]
     public class SFXSource : MonoBehaviour

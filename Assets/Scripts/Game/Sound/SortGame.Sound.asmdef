@@ -1,0 +1,17 @@
+{
+    "name": "SortGame.Sound",
+    "rootNamespace": "SortGame.Sound",
+    "references": [
+        "GUID:c51399467bc9aa04696f9669b8677699",
+        "GUID:b1a00e3607eddf04d91f684792f6994a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
