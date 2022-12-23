@@ -1,0 +1,17 @@
+{
+    "name": "SortGame.Core",
+    "rootNamespace": "",
+    "references": [
+        "GUID:dcdd7bfc9e88aaa458fe5c63502083df",
+        "GUID:c51399467bc9aa04696f9669b8677699"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
