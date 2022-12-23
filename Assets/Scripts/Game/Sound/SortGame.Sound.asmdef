@@ -3,7 +3,8 @@
     "rootNamespace": "SortGame.Sound",
     "references": [
         "GUID:c51399467bc9aa04696f9669b8677699",
-        "GUID:b1a00e3607eddf04d91f684792f6994a"
+        "GUID:b1a00e3607eddf04d91f684792f6994a",
+        "GUID:dcdd7bfc9e88aaa458fe5c63502083df"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
