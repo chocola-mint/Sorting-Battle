@@ -18,6 +18,7 @@ namespace SortGame
                 if(settings.BGMVolume != null) audioSource.volume = (float) settings.BGMVolume;
             }
         }
+        public void SetPitch(float pitch) => audioSource.pitch = pitch;
         public void PlaySFX(SoundWrapper sound)
         {
             if(settings != null && settings.SFXVolume != null)
