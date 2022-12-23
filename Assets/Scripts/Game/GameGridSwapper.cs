@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SortGame
 {
-    // TODO: Switch to using GameControllerState.
     public class GameGridSwapper : GameGridOperatorBase
     {
         private NumberBlock currentNumberBlock;
