@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace SortGame.GameFunctions
+namespace SortGame.Core.GameFunctions
 {
     /// <summary>
     /// An object that handles swapping operations on the GameGridState.

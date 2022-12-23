@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SortGame.GameFunctions;
+using SortGame.Core.GameFunctions;
 using ChocoUtil.Algorithms;
-namespace SortGame
+namespace SortGame.Core
 {
     /// <summary>
     /// A class that represents a game board, which contains a grid, a controller, a score value,

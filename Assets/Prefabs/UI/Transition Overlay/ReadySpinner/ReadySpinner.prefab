@@ -265,12 +265,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3413621823946146044}
-        m_TargetAssemblyTypeName: SortGame.SFXSource, SortGame
+        m_TargetAssemblyTypeName: SortGame.Sound.SFXSource, SortGame.Sound
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: ef5a2b889badc65449341fd515be91af, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SortGame.SoundWrapper, SortGame
+          m_ObjectArgumentAssemblyTypeName: SortGame.Sound.SoundWrapper, SortGame.Sound
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -693,12 +693,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6390193960331989677}
-        m_TargetAssemblyTypeName: SortGame.SFXSource, SortGame
+        m_TargetAssemblyTypeName: SortGame.Sound.SFXSource, SortGame.Sound
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 031ebe99c361b7842966768676ee037d, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SortGame.SoundWrapper, SortGame
+          m_ObjectArgumentAssemblyTypeName: SortGame.Sound.SoundWrapper, SortGame.Sound
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -969,12 +969,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4506714953113326187}
-        m_TargetAssemblyTypeName: SortGame.SFXSource, SortGame
+        m_TargetAssemblyTypeName: SortGame.Sound.SFXSource, SortGame.Sound
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: ef5a2b889badc65449341fd515be91af, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SortGame.SoundWrapper, SortGame
+          m_ObjectArgumentAssemblyTypeName: SortGame.Sound.SoundWrapper, SortGame.Sound
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1090,7 +1090,7 @@ MonoBehaviour:
     m_Bits: 4294967295
 --- !u!95 &6344839530526179614
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1107,7 +1107,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &8535115323963972541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,12 +1385,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5785998594822313668}
-        m_TargetAssemblyTypeName: SortGame.SFXSource, SortGame
+        m_TargetAssemblyTypeName: SortGame.Sound.SFXSource, SortGame.Sound
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: ef5a2b889badc65449341fd515be91af, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SortGame.SoundWrapper, SortGame
+          m_ObjectArgumentAssemblyTypeName: SortGame.Sound.SoundWrapper, SortGame.Sound
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

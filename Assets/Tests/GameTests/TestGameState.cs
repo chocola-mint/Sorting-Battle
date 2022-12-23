@@ -4,7 +4,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.TestTools;
-using SortGame;
+using SortGame.Core;
 
 public class TestGameState : GameState
 {

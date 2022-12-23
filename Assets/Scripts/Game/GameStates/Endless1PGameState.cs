@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChocoUtil.Algorithms;
 
-namespace SortGame
+namespace SortGame.Core
 {
     /// <summary>
     /// Implementation of the Endless 1P Game mode.

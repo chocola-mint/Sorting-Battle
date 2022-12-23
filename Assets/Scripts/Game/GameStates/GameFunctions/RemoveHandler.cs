@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static System.TupleExtensions;
 
-namespace SortGame.GameFunctions
+namespace SortGame.Core.GameFunctions
 {
     /// <summary>
     /// An object that handles removal operations on the GameGridState.

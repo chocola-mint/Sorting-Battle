@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SortGame.GameFunctions;
 using ChocoUtil.Coroutines;
 namespace SortGame
 {

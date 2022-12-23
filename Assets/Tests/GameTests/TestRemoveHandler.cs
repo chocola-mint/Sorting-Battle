@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using SortGame;
-using SortGame.GameFunctions;
+using SortGame.Core;
+using SortGame.Core.GameFunctions;
 using static System.TupleExtensions;
 
 public class TestRemoveHandler

@@ -1368,7 +1368,7 @@ RectTransform:
   m_Pivot: {x: 0, y: 0.5}
 --- !u!95 &564978137
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1385,7 +1385,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &564978138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_ReverseArrangement: 0
 --- !u!95 &586299211
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1499,7 +1499,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &634924454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_ReverseArrangement: 0
 --- !u!95 &634924458
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1585,7 +1585,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &693522375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1703,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
       propertyPath: onEntranceTransitionOver.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8459387347043729533, guid: 98ae676aa2d8804478876621533922a8, type: 3}
       propertyPath: onExitTransitionStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -9136,7 +9136,7 @@ RectTransform:
   m_Pivot: {x: 0, y: 0}
 --- !u!95 &1796929438
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9153,7 +9153,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1796929439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9188,12 +9188,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1796929441}
-        m_TargetAssemblyTypeName: SortGame.SFXSource, SortGame
+        m_TargetAssemblyTypeName: SortGame.Sound.SFXSource, SortGame.Sound
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: bbdf6366fd0049f48a5d47689b435747, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SortGame.SoundWrapper, SortGame
+          m_ObjectArgumentAssemblyTypeName: SortGame.Sound.SoundWrapper, SortGame.Sound
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9667,7 +9667,7 @@ RectTransform:
   m_Pivot: {x: 0, y: 0.5}
 --- !u!95 &1983583886
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9684,7 +9684,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1983583888
 MonoBehaviour:
   m_ObjectHideFlags: 0

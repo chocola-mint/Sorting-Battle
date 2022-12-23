@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SortGame.GameFunctions;
+using SortGame.Core.GameFunctions;
 
-namespace SortGame
+namespace SortGame.Core
 {
     /// <summary>
     /// A class that represents a player's controller's states, and what a player

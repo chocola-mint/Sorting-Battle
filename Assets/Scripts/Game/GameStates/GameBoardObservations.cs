@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace SortGame
+namespace SortGame.Core
 {
     /// <summary>
     /// Static class for common observation data AI could use.

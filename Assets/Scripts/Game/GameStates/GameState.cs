@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChocoUtil.Algorithms;
 
-namespace SortGame
+namespace SortGame.Core
 {
     /// <summary>
     /// Abstract base class for all game modes.

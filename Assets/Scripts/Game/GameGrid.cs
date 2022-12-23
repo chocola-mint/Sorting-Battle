@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using SortGame.Core;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SortGame;
 using UnityEngine.UI;
+using SortGame.Core;
 
 namespace SortGame
 {

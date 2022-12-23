@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-namespace SortGame.GameFunctions
+namespace SortGame.Core.GameFunctions
 {
     /// <summary>
     /// An object that handles selection operations on the GameGridState.

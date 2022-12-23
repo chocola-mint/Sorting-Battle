@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace SortGame
+namespace SortGame.Core
 {
     /// <summary>
     /// Abstract base classes for game modes that have more than 1 player.

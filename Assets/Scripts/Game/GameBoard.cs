@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using SortGame.GameFunctions;
+using SortGame.Core.GameFunctions;
+using SortGame.Core;
 using ChocoUtil.Algorithms;
 #if UNITY_EDITOR
 using UnityEditor;
