@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using SortGame.Core.GameFunctions;
 using SortGame.Core;
-using ChocoUtil.Algorithms;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
