@@ -19,7 +19,20 @@ namespace SortGame.Core
             List<Vector2Int> result = new();
             for(int i = 0; i < gameBoardState.gameGridState.rowCount; ++i)
                 for(int j = 0; j < gameBoardState.gameGridState.columnCount; ++j)
-                result.Add(new(i, j));
+                    result.Add(new(i, j));
+            return result;
+        }
+        public static List<float> GetAllTilesAsFloat(this GameBoardState gameBoardState, bool rowMajor = true)
+        {
+            List<float> result = new();
+            if(rowMajor)
+                for(int i = 0; i < gameBoardState.gameGridState.rowCount; ++i)
+                    for(int j = 0; j < gameBoardState.gameGridState.columnCount; ++j)
+                        result.Add(gameBoardState.gameGridState.Get(new(i, j)));
+            else 
+                for(int j = 0; j < gameBoardState.gameGridState.columnCount; ++j)
+                    for(int i = 0; i < gameBoardState.gameGridState.rowCount; ++i)
+                        result.Add(gameBoardState.gameGridState.Get(new(i, j)));
             return result;
         }
         /// <summary>

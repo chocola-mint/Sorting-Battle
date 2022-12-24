@@ -6307,7 +6307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p1GameBoard: {fileID: 3097067247794444599}
-  p1PlayerType: {fileID: 11400000, guid: aa6ee9215b1963b42840880f09d562de, type: 2}
+  p1PlayerType: {fileID: 11400000, guid: 81016753f7b0dff4bb529145e06a6136, type: 2}
   textMesh: {fileID: 240420756}
   startGameImmediately: 0
   gameOverOverlay: {fileID: 171189995}

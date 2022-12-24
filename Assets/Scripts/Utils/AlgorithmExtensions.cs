@@ -53,6 +53,14 @@ namespace SortGame
         {
             return IsMonotoneIncreasing(values) || IsMonotoneDecreasing(values);
         }
+        public static int ArgMax<T>(this List<T> values) where T : System.IComparable
+        {
+            if(values.Count == 0) return -1;
+            int maxIndex = 0;
+            for(int i = 1; i < values.Count; ++i)
+                if(values[i].CompareTo(values[maxIndex]) > 0) maxIndex = i;
+            return maxIndex;
+        }
     }
 
 

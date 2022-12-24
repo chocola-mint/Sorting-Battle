@@ -15,7 +15,7 @@ namespace SortGame
         [SerializeField] bool verbose = true;
         #endif
         [SerializeField] WorkerFactory.Type inferenceBackend;
-        private Model runtimeModel;
+        protected Model runtimeModel { get; private set; }
         private IWorker worker;
         private readonly Dictionary<string, Tensor> inputBuffer = new();
         protected override sealed void AIInit()
@@ -56,8 +56,8 @@ namespace SortGame
             var modelOutput = worker.PeekOutput();
             // Wait for the output tensor to be complete, and then forward it to ExecuteModelOutput.
             yield return new WaitForCompletion(modelOutput);
-            yield return ExecuteModelOutput(in modelOutput);
+            yield return ExecuteModelOutput(modelOutput);
         }
-        protected abstract IEnumerator ExecuteModelOutput(in Tensor modelOutput);
+        protected abstract IEnumerator ExecuteModelOutput(Tensor modelOutput);
     }
 }

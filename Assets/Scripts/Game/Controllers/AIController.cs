@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SortGame.Core;
+using SortGame.Core.GameFunctions;
 
 namespace SortGame
 {
@@ -72,10 +73,19 @@ namespace SortGame
         /// </summary>
         protected void Select(Vector2Int target)
         {
-            bool cursorReleased = MoveCursor(target);
+            bool isOnBoard = gameBoard.state.gameGridState.IsOnGrid(target);
+            bool cursorReleased = !isOnBoard || MoveCursor(target);
             if(cursorReleased) selector.EndSelection();
+            if(!isOnBoard) return;
             if(!selector.enabled) selector.BeginSelection();
             selector.Select(cursor);
+        }
+        protected int SimulateSelect(List<Vector2Int> sequence)
+        {
+            SelectionHandler selectionHandler = new(new(gameBoard.state.gameGridState));
+            selectionHandler.BeginSelection();
+            foreach(var target in sequence) selectionHandler.Select(target);
+            return selectionHandler.EndSelection().Count;
         }
         /// <summary>
         /// Let the AI swap on a tile. Pressing/releasing the mouse buttons is simulated accordingly.
@@ -84,6 +94,8 @@ namespace SortGame
         /// </summary>
         protected void Swap(Vector2Int target)
         {
+            bool isOnBoard = gameBoard.state.gameGridState.IsOnGrid(target);
+            if(!isOnBoard) return;
             swapper.StartSwapping(cursor);
             bool cursorReleased = MoveCursor(target);
             if(!swapper.enabled) 

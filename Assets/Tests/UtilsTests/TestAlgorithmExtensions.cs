@@ -50,4 +50,13 @@ public class TestAlgorithmExtensions
         List<int> numbers = new(input);
         return numbers.IsMonotonic();
     }
+    
+    [Test, Timeout(100)]
+    [TestCase(0, 1, 2, 3, 4, 5, 6, 7, 8, ExpectedResult=8)]
+    [TestCase(0, -1, -2, -3, -4, -5, -6, -7, -8, ExpectedResult=0)]
+    [TestCase(2, 5, 7, -3, -5, -6, ExpectedResult=2)]
+    public int TestArgMax(params int[] input)
+    {
+        return new List<int>(input).ArgMax();
+    }
 }
