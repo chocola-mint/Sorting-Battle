@@ -23,7 +23,8 @@ namespace SortGame
             for(int actionId = 0; actionId < modelAction.Length; ++actionId)
             {
                 ActionIdToAction(actionId, out var actionType, out var moveToCoords);
-                if(moveToCoords.Any(coord => !gameBoard.state.gameGridState.IsOnGrid(coord))) 
+                if(moveToCoords.Any(coord => !gameBoard.state.gameGridState.IsOnGrid(coord) 
+                || !gameBoard.state.gameGridState.IsNumber(coord))) 
                     continue;
                 // if(actionType == ActionType.Select && moveToCoords.Count < 3) continue;
                 if(actionType == ActionType.Select && SimulateSelect(moveToCoords) < 3) continue;
