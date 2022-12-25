@@ -19,7 +19,7 @@ namespace SortGame.Core.GameFunctions
         public bool StartSwapping(Vector2Int target)
         {
             if(!CanStartSwapping(target)) return false;
-            Debug.Log("=== Begin swapping ===");
+            // Debug.Log("=== Begin swapping ===");
             cursor = target;
             return true;
         }
@@ -45,7 +45,7 @@ namespace SortGame.Core.GameFunctions
         }
         public void EndSwapping()
         {
-            Debug.Log("=== End swapping ===");
+            // Debug.Log("=== End swapping ===");
             cursor = Null;
         }
     }

@@ -68,18 +68,18 @@ namespace SortGame.Core.GameFunctions
             {
                 gameGridState.Select(tileCoord);
                 currentSelection.Add(tileCoord);
-                Debug.Log($"Added {gameGridState.Get(tileCoord)}");
+                // Debug.Log($"Added {gameGridState.Get(tileCoord)}");
             }
             return canAdd;
         }
         public void BeginSelection()
         {
-            Debug.Log("=== Begin selection ===");
+            // Debug.Log("=== Begin selection ===");
             currentSelection.Clear();
         }
         public List<Vector2Int> EndSelection()
         {
-            Debug.Log("=== End selection ===");
+            // Debug.Log("=== End selection ===");
             List<Vector2Int> selection = new(currentSelection);
             foreach(var selected in selection) gameGridState.Deselect(selected);
             currentSelection.Clear();

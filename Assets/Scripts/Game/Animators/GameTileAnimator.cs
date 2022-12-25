@@ -19,7 +19,7 @@ namespace SortGame
         
         public void OnSelect()
         {
-            Debug.Log($"Set trigger {nameof(Params.BeginHighlight)}");
+            // Debug.Log($"Set trigger {nameof(Params.BeginHighlight)}");
             animator.SetTrigger(Params.BeginHighlight);
         }
 
