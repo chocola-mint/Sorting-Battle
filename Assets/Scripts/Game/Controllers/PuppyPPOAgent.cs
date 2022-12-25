@@ -37,18 +37,19 @@ namespace SortGame
             switch(selectedActionType)
             {
                 case ActionType.Select:
+                    selector.BeginSelection();
                     foreach(var step in steps)
                     {
-                        Select(step);
+                        selector.Select(step);
                         yield return WaitForTicks(tickPerClick);
                     }
+                    selector.EndSelection();
                     break;
                 case ActionType.Swap:
-                    foreach(var step in steps)
-                    {
-                        Swap(step);
-                        yield return WaitForTicks(tickPerClick);
-                    }
+                    swapper.StartSwapping(steps[0]);
+                    swapper.SwapTo(steps[1]);
+                    swapper.EndSwapping();
+                    yield return WaitForTicks(tickPerClick);
                     break;
             }
         }
