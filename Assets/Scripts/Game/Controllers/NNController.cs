@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Barracuda;
+using ChocoUtil.Debugging;
 
 namespace SortGame
 {
@@ -26,7 +27,7 @@ namespace SortGame
             #endif
             runtimeModel = ModelLoader.Load(modelAsset, verbose: verbose);
             // Create the async thread that runs inference for us.
-            worker = WorkerFactory.CreateWorker(inferenceBackend, runtimeModel, verbose: verbose);
+            worker = WorkerFactory.CreateWorker(inferenceBackend, runtimeModel);
             // Invoke the neural network's init method.
             NNInit();
         }

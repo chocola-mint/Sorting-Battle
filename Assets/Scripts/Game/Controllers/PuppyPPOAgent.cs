@@ -11,23 +11,30 @@ namespace SortGame
         private enum ActionType
         {
             Swap, 
-            Select
+            Select,
+            Push,
         }
         [SerializeField] 
         private int tickPerClick = 10;
+        [SerializeField]
+        private int tickPerPush = 30;
         protected override IEnumerator ExecuteModelOutput(Tensor modelOutput)
         {
             var modelAction = modelOutput.ToReadOnlyArray();
+
             List<float> actionWeights = new();
             List<(ActionType, List<Vector2Int>)> actionValues = new();
             for(int actionId = 0; actionId < modelAction.Length; ++actionId)
             {
                 ActionIdToAction(actionId, out var actionType, out var moveToCoords);
-                if(moveToCoords.Any(coord => !gameBoard.state.gameGridState.IsOnGrid(coord) 
-                || !gameBoard.state.gameGridState.IsNumber(coord))) 
-                    continue;
-                // if(actionType == ActionType.Select && moveToCoords.Count < 3) continue;
-                if(actionType == ActionType.Select && SimulateSelect(moveToCoords) < 3) continue;
+                if(actionType == ActionType.Select || actionType == ActionType.Swap)
+                {
+                    if(moveToCoords.Any(coord => !gameBoard.state.gameGridState.IsOnGrid(coord) 
+                    || !gameBoard.state.gameGridState.IsNumber(coord))) 
+                        continue;
+                    // if(actionType == ActionType.Select && moveToCoords.Count < 3) continue;
+                    if(actionType == ActionType.Select && SimulateSelect(moveToCoords) < 3) continue;
+                }
                 actionWeights.Add(modelAction[actionId]);
                 actionValues.Add((actionType, moveToCoords));
             }
@@ -51,14 +58,24 @@ namespace SortGame
                     swapper.EndSwapping();
                     yield return WaitForTicks(tickPerClick);
                     break;
+                case ActionType.Push:
+                    Push();
+                    yield return WaitForTicks(tickPerPush);
+                    break;
             }
         }
-        private static void ActionIdToAction(int actionId, out ActionType actionType, out List<Vector2Int> moveSequence)
+        private void ActionIdToAction(int actionId, out ActionType actionType, out List<Vector2Int> moveSequence)
         {
             moveSequence = new();
+            if(actionId == runtimeModel.outputs[0].Length - 1)
+            {
+                actionType = ActionType.Push;
+                return;
+            }
             int positionId = actionId / 32;
             int moveId = actionId % 32;
             int moveDirection = moveId / 8;
+            int moveType = moveId % 8;
             // Convert moveDirection (0~31 / 8 -> 0~3) to offset vector.
             Vector2Int move = Vector2Int.zero;
             switch (moveDirection)
@@ -77,8 +94,6 @@ namespace SortGame
                     move = new(1, 0);
                     break;
             }
-            // Convert moveId to moveType.
-            int moveType = moveId % 8;
             if (moveType == 0)
             {
                 actionType = ActionType.Swap;
