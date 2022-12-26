@@ -18,9 +18,10 @@ namespace SortGame.Core
         {
             this.p1GBState = p1GBState;
             this.emptyRowPercentage = emptyRowPercentage;
-            // This does not affect gameplay. It just makes the UI easier to implement.
-            // Treat as if everyone loses all pressure upon game over.
             onGameOver += () => {
+                p1GBState.status = GameBoardState.Status.Lose;
+                // This does not affect gameplay. It just makes the UI easier to implement.
+                // Treat as if everyone loses all pressure upon game over.
                 p1GBState.gamePressureState.ConsumePressure(p1GBState.gamePressureState.maxPressure);
             };
             p1GBState.onOverflow += GameOver;

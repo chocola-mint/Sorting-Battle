@@ -8,6 +8,10 @@ namespace SortGame.UI
     {
         [SerializeField] private RectTransform rectTransform;
         private readonly Vector3[] corners = new Vector3[4];
+        private void Start() 
+        {
+            transform.SetParent(null);    
+        }
         // Update is called once per frame
         void Update()
         {
