@@ -14,23 +14,24 @@ namespace SortGame
             public InputActionReference push;
         }
         [SerializeField] private Inputs inputs;
+        private void Awake() 
+        {
+            onEnable += () => {
+                if(pusher) pusher.enabled = true;
+                inputs.select.EnableAndConnect(OnSelect);
+                inputs.swap.EnableAndConnect(OnSwap);
+                inputs.push.EnableAndConnect(OnPush);
+            };
+            onDisable += () => {
+                if(pusher) pusher.enabled = false;
+                inputs.select.DisableAndDisconnect(OnSelect);
+                inputs.swap.DisableAndDisconnect(OnSwap);
+                inputs.push.DisableAndDisconnect(OnPush);
+            };
+        }
         protected override void Init()
         {
             base.Init();
-        }
-        private void OnEnable() 
-        {
-            pusher.enabled = true;
-            inputs.select.EnableAndConnect(OnSelect);
-            inputs.swap.EnableAndConnect(OnSwap);
-            inputs.push.EnableAndConnect(OnPush);
-        }
-        private void OnDisable() 
-        {
-            pusher.enabled = false;
-            inputs.select.DisableAndDisconnect(OnSelect);
-            inputs.swap.DisableAndDisconnect(OnSwap);
-            inputs.push.DisableAndDisconnect(OnPush);
         }
         private void OnSelect(InputAction.CallbackContext ctx)
         {
