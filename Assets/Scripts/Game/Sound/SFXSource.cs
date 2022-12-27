@@ -20,14 +20,23 @@ namespace SortGame.Sound
             if(settings != null)
             {
                 // Apply overrides.
-                if(settings.BGMVolume != null) audioSource.volume = (float) settings.BGMVolume;
+                audioSource.volume = settings.SFXVolume;
+                settings.onSFXVolumeChanged += SetVolume;
             }
             isInitialized = true;
         }
+        private void OnDestroy() 
+        {
+            if(settings != null)
+            {
+                settings.onBGMVolumeChanged -= SetVolume;
+            }
+        }
+        private void SetVolume(float volume) => audioSource.volume = volume;
         public void PlaySFX(SoundWrapper sound)
         {
             if(!isInitialized) Init();
-            if(settings != null && settings.SFXVolume != null)
+            if(settings != null)
                 audioSource.PlayOneShot(sound.clip, sound.volumeScale * (float) settings.SFXVolume);
             else audioSource.PlayOneShot(sound.clip, sound.volumeScale);
         }

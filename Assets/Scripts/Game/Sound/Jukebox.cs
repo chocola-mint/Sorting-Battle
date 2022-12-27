@@ -18,10 +18,19 @@ namespace SortGame.Sound
             if(settings != null)
             {
                 // Apply overrides.
-                if(settings.BGMVolume != null) audioSource.volume = (float) settings.BGMVolume;
+                audioSource.volume = settings.BGMVolume;
+                settings.onBGMVolumeChanged += SetVolume;
             }
             if(playOnAwake) PlayRandom();
         }
+        private void OnDestroy() 
+        {
+            if(settings != null)
+            {
+                settings.onBGMVolumeChanged -= SetVolume;
+            }
+        }
+        private void SetVolume(float volume) => audioSource.volume = volume;
         public void PlayRandom()
         {
             PlayClip(trackList.GetRandomClip());
