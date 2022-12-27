@@ -41,7 +41,7 @@ namespace SortGame
         private void OnPush(InputAction.CallbackContext ctx)
         {
             if(ctx.performed) 
-                gameBoard.state.PushNewRow(gameBoard.state.gameGridState.columnCount - 1, triggerEvent: true);
+                gameBoard.PushRowManually();
         }
     }
 

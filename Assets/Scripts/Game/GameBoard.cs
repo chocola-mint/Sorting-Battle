@@ -55,7 +55,10 @@ namespace SortGame
             if(!gameGrid) gameGrid = GetComponentInChildren<GameGrid>();
             gameGrid.ClearTiles();
         }
-
+        public void PushRowManually()
+        {
+            state.PushNewRow(state.gameGridState.columnCount - 1, triggerEvent: true);
+        }
         private void Awake() 
         {   
             gameGrid = GetComponentInChildren<GameGrid>();

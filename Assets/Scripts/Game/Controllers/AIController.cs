@@ -113,7 +113,7 @@ namespace SortGame
         /// </summary>
         protected void Push()
         {
-            gameBoard.state.PushNewRow(gameBoard.state.gameGridState.columnCount - 1, triggerEvent: true);
+            gameBoard.PushRowManually();
         }
 
     }
