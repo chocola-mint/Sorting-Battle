@@ -26,6 +26,8 @@ namespace SortGame
         protected override sealed void Init()
         {
             base.Init();
+            // Disable the pusher UI.
+            pusher.enabled = false;
             // Call the AI's actual init method.
             AIInit();
             // We have to declare the core loop as a separate coroutine rather than just using
@@ -113,7 +115,7 @@ namespace SortGame
         /// </summary>
         protected void Push()
         {
-            gameBoard.PushRowManually();
+            pusher.Push();
         }
 
     }

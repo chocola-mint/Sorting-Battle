@@ -14,14 +14,20 @@ namespace SortGame
             public InputActionReference push;
         }
         [SerializeField] private Inputs inputs;
+        protected override void Init()
+        {
+            base.Init();
+        }
         private void OnEnable() 
         {
+            pusher.enabled = true;
             inputs.select.EnableAndConnect(OnSelect);
             inputs.swap.EnableAndConnect(OnSwap);
             inputs.push.EnableAndConnect(OnPush);
         }
         private void OnDisable() 
         {
+            pusher.enabled = false;
             inputs.select.DisableAndDisconnect(OnSelect);
             inputs.swap.DisableAndDisconnect(OnSwap);
             inputs.push.DisableAndDisconnect(OnPush);
@@ -41,7 +47,7 @@ namespace SortGame
         private void OnPush(InputAction.CallbackContext ctx)
         {
             if(ctx.performed) 
-                gameBoard.PushRowManually();
+                pusher.Push();
         }
     }
 

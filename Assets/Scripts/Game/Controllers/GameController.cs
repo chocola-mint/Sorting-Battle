@@ -11,15 +11,23 @@ namespace SortGame
     {
         public GameBoard gameBoardComponent;
         protected GameBoard gameBoard => gameBoardComponent;
+        private System.Lazy<GameBoardPusher> pusherCache;
         protected GameGridSelector selector { get; private set; }
         protected GameGridSwapper swapper { get; private set; }
+        protected GameBoardPusher pusher => pusherCache.Value;
+        private void Awake() 
+        {
+            pusherCache = new(() => gameBoard.GetComponent<GameBoardPusher>(), false);
+        }
         private void Start() 
+        {
+            Init();
+        }        
+        protected virtual void Init() 
         {
             selector = gameBoard.GetComponent<GameGridSelector>();
             swapper = gameBoard.GetComponent<GameGridSwapper>();
-            Init();
-        }        
-        protected virtual void Init() {}
+        }
         public static void DisableAll()
         {
             foreach(var controller in FindObjectsOfType<GameController>())
