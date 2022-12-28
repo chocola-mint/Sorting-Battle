@@ -13,9 +13,10 @@ namespace SortGame
     [RequireComponent(typeof(GameEventDelegate))]
     public abstract class GameBase<T> : MonoBehaviour where T : GameState
     {
+        [SerializeField] private PauseManager pauseManager;
         protected T gameState;
-        protected static readonly WaitForFixedUpdate waitForFixedUpdate = new();
-        private Coroutine clockHandle;
+        private int fixedUpdatesUntilTick = 0;
+        private int fixedUpdateToTick = -1;
         /// <summary>
         /// Invoke to start the game.
         /// </summary>
@@ -26,25 +27,52 @@ namespace SortGame
         /// <param name="fixedUpdateToTick">FixedUpdates per tick.</param>
         protected void StartTicking(int fixedUpdateToTick) 
         { 
-            clockHandle = StartCoroutine(CoroTick(fixedUpdateToTick));
+            this.fixedUpdateToTick = fixedUpdateToTick;
         }
         /// <summary>
         /// Stop the ticking of the game's timer.
         /// </summary>
         protected void StopTicking()
         {
-            StopCoroutine(clockHandle);
+            fixedUpdateToTick = -1;
         }
-        private IEnumerator CoroTick(int fixedUpdateToTick)
+        private void OnEnable() 
         {
-            if(fixedUpdateToTick <= 0) 
-                throw new System.ArgumentException(
-                    $"Argument {nameof(fixedUpdateToTick)} must be greater than 0.");
-            while(true)
+            if(pauseManager)
+            {
+                pauseManager.onPause += OnPause;
+                pauseManager.onUnpause += OnUnpause;
+            }
+        }
+        private void OnDisable()
+        {
+            if(pauseManager)
+            {
+                pauseManager.onPause -= OnPause;
+                pauseManager.onUnpause -= OnUnpause;
+            }
+        }
+        private void OnPause() 
+        {
+            Time.timeScale = 0;
+            GameController.DisableAll();
+        }
+        private void OnUnpause() 
+        {
+            Time.timeScale = 1;
+            GameController.EnableAll();
+        }
+        private void FixedUpdate() 
+        {
+            if(fixedUpdateToTick < 0 
+            || (pauseManager != null && pauseManager.isPaused)) return;
+            if(fixedUpdatesUntilTick == 0)
             {
                 gameState.Tick();
-                for(int i = 0; i < fixedUpdateToTick; ++i)
-                    yield return waitForFixedUpdate;
+                fixedUpdatesUntilTick = fixedUpdateToTick;
+            }
+            else {
+                --fixedUpdatesUntilTick;
             }
         }
     }

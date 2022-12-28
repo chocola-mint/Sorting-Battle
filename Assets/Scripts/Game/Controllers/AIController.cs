@@ -12,6 +12,7 @@ namespace SortGame
     public abstract class AIController : GameController
     {
         private static readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+        private Coroutine coreLoopHandle;
         // The "virtual" cursor used by the AI. Used to simplify decision processes, 
         // removing intricacies surrounding the player's mouse.
         private Vector2Int cursor;
@@ -32,7 +33,13 @@ namespace SortGame
             AIInit();
             // We have to declare the core loop as a separate coroutine rather than just using
             // IEnumerator Start(), to avoid name collision.
-            StartCoroutine(AICoreLoop());
+            coreLoopHandle = StartCoroutine(AICoreLoop());
+        }
+        private void OnEnable() 
+        {
+            // Since "disable" causes coroutines to stop, we check if there's a stopped coroutine
+            // and restart it here.
+            if(coreLoopHandle != null) coreLoopHandle = StartCoroutine(AICoreLoop());
         }
         /// <summary>
         /// Invoked just before the core loop starts.

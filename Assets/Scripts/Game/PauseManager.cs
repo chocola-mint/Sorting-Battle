@@ -15,12 +15,21 @@ namespace SortGame
         /// upon Destroy if the receiver is on a GameObject.
         /// </summary>
         public event System.Action onPause, onUnpause;
+        public bool isPaused { get; private set; } = false;
+        private void OnEnable() 
+        {
+            isPaused = false;
+        }
         public void Pause()
         {
+            if(isPaused) return;
+            isPaused = true;
             onPause?.Invoke();
         }
         public void Unpause()
         {
+            if(!isPaused) return;
+            isPaused = false;
             onUnpause?.Invoke();
         }
     }

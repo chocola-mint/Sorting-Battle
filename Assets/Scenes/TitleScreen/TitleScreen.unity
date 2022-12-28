@@ -1736,7 +1736,7 @@ PrefabInstance:
       propertyPath: onEntranceTransitionOver.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 8459387347043729535, guid: 98ae676aa2d8804478876621533922a8, type: 3}
+    - target: {fileID: 0}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
