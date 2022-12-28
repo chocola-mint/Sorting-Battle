@@ -20,7 +20,7 @@ namespace SortGame.UI
     [RequireComponent(typeof(Returnable))]
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] string showTrigger, hideTrigger;
+        [SerializeField] string showTrigger = "Show", hideTrigger = "Hide";
         private int showTriggerHash, hideTriggerHash;
         private List<Animator> animators = new();
         private Coroutine waitHandle;
@@ -73,6 +73,17 @@ namespace SortGame.UI
                 activeAnimators.Add(animators[^1]);
             }
             if(activeAnimators.Count > 0) HandleReturnButtonState(activeAnimators);
+        }
+        public void ReturnAll()
+        {
+            for(int i = animators.Count - 1; i >= 1; --i) Hide(animators[i]);
+            if(animators.Count > 0) 
+            {
+                Show(animators[0]);
+                HandleReturnButtonState(new List<Animator>(animators));
+            }
+            animators.Clear();
+            animators.Add(defaultAnimator);
         }
         public void End()
         {
