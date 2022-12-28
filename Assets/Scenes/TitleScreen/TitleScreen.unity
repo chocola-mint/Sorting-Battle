@@ -8438,12 +8438,12 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1426182388}
-        m_TargetAssemblyTypeName: SortGame.SFXSource, SortGame
+        m_TargetAssemblyTypeName: SortGame.Sound.SFXSource, SortGame.Sound
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: bbdf6366fd0049f48a5d47689b435747, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SortGame.SoundWrapper, SortGame
+          m_ObjectArgumentAssemblyTypeName: SortGame.Sound.SoundWrapper, SortGame.Sound
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
