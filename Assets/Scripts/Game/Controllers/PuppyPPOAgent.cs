@@ -111,7 +111,7 @@ namespace SortGame
         }
         protected override void GetInputTensors(in Dictionary<string, Tensor> inputs)
         {
-            var allTilesAsFloat = gameBoard.state.GetAllTilesAsFloat(rowMajor: true).ToArray();
+            var allTilesAsFloat = gameBoard.state.GetAllTilesAsFloat(normalize: false).ToArray();
             inputs[runtimeModel.inputs[0].name] = new Tensor(
                 1, 1, 1, allTilesAsFloat.Length, // n, h, w, c
                 allTilesAsFloat); // Tensor content (flattened)
