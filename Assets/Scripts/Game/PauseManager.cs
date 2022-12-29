@@ -23,12 +23,14 @@ namespace SortGame
         public void Pause()
         {
             if(isPaused) return;
+            Debug.Log("Pause");
             isPaused = true;
             onPause?.Invoke();
         }
         public void Unpause()
         {
             if(!isPaused) return;
+            Debug.Log("Unpause");
             isPaused = false;
             onUnpause?.Invoke();
         }

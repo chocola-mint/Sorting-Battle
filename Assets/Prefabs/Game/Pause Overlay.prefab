@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 66830068500179059}
   - component: {fileID: 66830068500179061}
-  - component: {fileID: 66830068500179060}
+  - component: {fileID: 2320368136461318389}
   m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
@@ -157,7 +157,7 @@ MonoBehaviour:
   onReturn:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &66830068500179060
+--- !u!114 &2320368136461318389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 66830068500179058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4753f80a6dd7d514e84f02e545c1a5d7, type: 3}
+  m_Script: {fileID: 11500000, guid: c61d808e77110314a8eaf809301a62c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   showTrigger: Show
@@ -175,6 +175,10 @@ MonoBehaviour:
   onTransitionStart:
     m_PersistentCalls:
       m_Calls: []
+  pauseButton: {fileID: 66830069014676223}
+  pauseManager: {fileID: 11400000, guid: 78763037fb640fa459159d0aee109ec5, type: 2}
+  gameEventDelegate: {fileID: 0}
+  transitionOverlay: {fileID: 0}
 --- !u!1 &66830069014676221
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +300,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 66830068500179060}
+      - m_Target: {fileID: 2320368136461318389}
         m_TargetAssemblyTypeName: SortGame.UI.UIManager, SortGame.UI
         m_MethodName: GoTo
         m_Mode: 2
@@ -437,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -450,7 +454,7 @@ PrefabInstance:
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 66830068500179060}
+      objectReference: {fileID: 2320368136461318389}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -465,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReturnAll
+      value: Unpause
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -473,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SortGame.UI.UIManager, SortGame.UI
+      value: SortGame.UI.PauseOverlayManager, SortGame.UI
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -598,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -615,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2320368136461318389}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -623,7 +627,7 @@ PrefabInstance:
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 66830068500179060}
+      objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -638,7 +642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartScene
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -650,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SortGame.UI.TransitionOverlay, SortGame.UI
+      value: SortGame.UI.PauseOverlayManager, SortGame.UI
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -890,11 +894,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -907,7 +911,7 @@ PrefabInstance:
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2320368136461318389}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -930,7 +934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReturnAll
+      value: GoToScene
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -942,7 +946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SortGame.UI.UIManager, SortGame.UI
+      value: SortGame.UI.PauseOverlayManager, SortGame.UI
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -953,12 +957,16 @@ PrefabInstance:
       value: SortGame.PauseManager, SortGame
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: f8f60021a7ba6814f96da3929ece8c97, type: 2}
+    - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: f8f60021a7ba6814f96da3929ece8c97, type: 2}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: SortGame.SceneKey, SortGame.Utils
       objectReference: {fileID: 0}
     - target: {fileID: 3990771948071951784, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
