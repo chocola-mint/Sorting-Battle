@@ -103,5 +103,26 @@ namespace SortGame.UI
             task.allowSceneActivation = true;
             yield return task;
         }
+        public void Quit()
+        {
+            onExitTransitionStart.Invoke();
+            StopAllCoroutines();
+            StartCoroutine(CoroQuitApplication());
+        }
+        private IEnumerator CoroQuitApplication()
+        {
+            // Process exit transitions.
+            cleanupMode = TransitionCleanupMode.DoNothing;
+            if(exit != null)
+            {
+                if(exit.Count > 0)
+                    yield return ProcessTransitions(exit);
+            }
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.ExitPlaymode();
+            #else
+            Application.Quit();
+            #endif
+        }
     }
 }
