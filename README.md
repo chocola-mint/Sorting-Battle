@@ -24,5 +24,5 @@ The important classes are:
 * Notable exceptions:
     * The [TextMesh Pro](/Assets/TextMesh%20Pro/) directory uses the [Unity Companion License](https://unity.com/legal/licenses/unity-companion-license) instead. Unfortunately by design we are forced to include the directory.
     * [ChocoUtil](/Assets/Scripts/ChocoUtil/) is a hard-fork of CHM's personal Unity utilities available [here](https://github.com/chocola-mint/ChocoUtil), and inherits the original MIT license.
-    * This project uses a number of external assets (all of which uses some variant of the Creative Commons license that permits redistribution). Their licenses are attached in their own directories.
+    * This project uses a number of [external assets](/Assets/External/) (all of which uses some variant of the Creative Commons license that permits redistribution). Their licenses are attached in their own directories.
     * This project has dependencies over other open-source projects. For details, refer to the [packages](/Packages/packages-lock.json) metadata.
