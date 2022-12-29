@@ -18,6 +18,7 @@ namespace SortGame.Sound
         {
             BGMVolume = SFXVolume = 0.5f;
         }
+
         public void SetBGMVolume(float value) 
         {
             BGMVolume = value;

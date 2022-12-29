@@ -29,7 +29,7 @@ namespace SortGame.Sound
         {
             if(settings != null)
             {
-                settings.onBGMVolumeChanged -= SetVolume;
+                settings.onSFXVolumeChanged -= SetVolume;
             }
         }
         private void SetVolume(float volume) => audioSource.volume = volume;
@@ -37,7 +37,7 @@ namespace SortGame.Sound
         {
             if(!isInitialized) Init();
             if(settings != null)
-                audioSource.PlayOneShot(sound.clip, sound.volumeScale * (float) settings.SFXVolume);
+                audioSource.PlayOneShot(sound.clip, sound.volumeScale * settings.SFXVolume);
             else audioSource.PlayOneShot(sound.clip, sound.volumeScale);
         }
     }
