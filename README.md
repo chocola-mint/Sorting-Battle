@@ -20,6 +20,7 @@ The important classes are:
 * Unless specified otherwise in its own directory, all source code under the **[Assets](/Assets/)** folder is licensed under the **[GNU General Public License v3.0](/LICENSE)**. "Source code" includes:
     * Text files written in programming languages: **.cs**, **.js**, etc.
     * Shader graphs.
+    * ONNX assets.
     * Other Unity-specific assets: Scene data, prefab data, ScriptableObject data.
 * Notable exceptions:
     * The [TextMesh Pro](/Assets/TextMesh%20Pro/) directory uses the [Unity Companion License](https://unity.com/legal/licenses/unity-companion-license) instead. Unfortunately by design we are forced to include the directory.
