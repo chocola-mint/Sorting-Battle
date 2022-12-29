@@ -35,18 +35,24 @@ namespace SortGame
         }
         private void OnSelect(InputAction.CallbackContext ctx)
         {
+            if(!selector) return;
+
             if(ctx.started) selector.BeginSelection();
             else if(ctx.canceled) selector.EndSelection();
             selector.Select(ctx.ReadValue<Vector2>());
         }
         private void OnSwap(InputAction.CallbackContext ctx)
         {
+            if(!swapper) return;
+
             if(ctx.started) swapper.StartSwapping(ctx.ReadValue<Vector2>());
             else if(ctx.canceled) swapper.EndSwapping();
             else swapper.SwapTo(ctx.ReadValue<Vector2>());
         }
         private void OnPush(InputAction.CallbackContext ctx)
         {
+            if(!pusher) return;
+
             if(ctx.performed) 
                 pusher.Push();
         }

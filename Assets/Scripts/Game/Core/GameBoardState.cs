@@ -39,8 +39,8 @@ namespace SortGame.Core
         public Status status;
         public GameBoardState(Config config)
         {
-            if(config.useSeed) Random.InitState(config.seed);
-            randomState = Random.state;
+            if(config.useSeed) IRandomThread.InitRandom(this, config.seed);
+            else randomState = Random.state;
             gameGridState = new(config.rowCount, config.columnCount, config.numberUpperBound);
             gameControllerState = new(gameGridState, config.minimumSortedLength);
             gamePressureState = new();

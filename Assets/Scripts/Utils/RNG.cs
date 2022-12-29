@@ -10,6 +10,14 @@ namespace SortGame
     public interface IRandomThread
     {
         public Random.State randomState { get; set; }
+        protected static void InitRandom(IRandomThread thread, int seed)
+        {
+            using(new RandomScope(thread))
+            {
+                Random.InitState(seed);
+                thread.randomState = Random.state;
+            }
+        }
     }
     /// <summary>
     /// A utility object that can apply a temporary <see cref="Random.State"></see> scope.
