@@ -1716,7 +1716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3754973420245970495, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_text
-      value: Resume the game.
+      value: Configure game settings.
       objectReference: {fileID: 0}
     - target: {fileID: 3754973420245970495, guid: 2fae3707924f5474cb301e26cb751b39, type: 3}
       propertyPath: m_fontSize
