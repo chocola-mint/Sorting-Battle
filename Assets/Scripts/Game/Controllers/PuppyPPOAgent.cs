@@ -18,6 +18,18 @@ namespace SortGame
         private int tickPerClick = 10;
         [SerializeField]
         private int tickPerPush = 30;
+        [SerializeField]
+        private bool useNoise = false;
+        [SerializeField][Min(0)]
+        private float maxNoise = 1.0f;
+        [SerializeField]
+        private bool useRandomPercentile = false;
+        [SerializeField, Range(0.0f, 1.0f)]
+        private float argRandomPercentile = 0.95f;
+        [SerializeField, Min(0)]
+        private int minRandomDelay = 0;
+        [SerializeField, Min(0)]
+        private int maxRandomDelay = 10;
         private List<(ActionType, List<Vector2Int>)> actionTable = null;
         private (ActionType, List<Vector2Int>) previousActionCache = (ActionType.Push, null);
         protected override IEnumerator ExecuteModelOutput(Tensor modelOutput)
@@ -38,7 +50,7 @@ namespace SortGame
                     || (moveToCoords[0] == previousActionCache.Item2[0] 
                     && moveToCoords[1] == previousActionCache.Item2[1]))) 
                     continue;
-                actionWeights.Add(modelAction[actionId]);
+                actionWeights.Add(GetActionWeight(modelAction, actionId));
                 actionValues.Add((actionType, moveToCoords));
             }
             if(actionWeights.Count == 0) 
@@ -70,10 +82,27 @@ namespace SortGame
                     break;
             }
             previousActionCache = (selectedActionType, steps);
+            if(maxRandomDelay - minRandomDelay > 0)
+                yield return WaitForTicks(Random.Range(minRandomDelay, maxRandomDelay));
         }
         private void ActionIdToAction(int actionId, out ActionType actionType, out List<Vector2Int> moveSequence)
         {
             (actionType, moveSequence) = actionTable[actionId];
+        }
+        private float GetActionWeight(float[] modelAction, int actionId)
+        {
+            if(useNoise)
+                return modelAction[actionId] + Random.Range(0.0f, maxNoise);
+            else return modelAction[actionId];
+        }
+        private int SelectActionIndex(List<float> actionWeights)
+        {
+            if(useRandomPercentile)
+            {
+                var choices = actionWeights.ArgTopPercentile(argRandomPercentile);
+                return choices[Random.Range(0, choices.Count)];
+            }
+            else return actionWeights.ArgMax();
         }
         protected override void GetInputTensors(in Dictionary<string, Tensor> inputs)
         {

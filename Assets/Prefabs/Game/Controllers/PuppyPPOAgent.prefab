@@ -48,4 +48,11 @@ MonoBehaviour:
   modelAsset: {fileID: 5022602860645237092, guid: 460d2467cca5ee54699bbb083daafb33, type: 3}
   verbose: 1
   inferenceBackend: 513
-  tickPerClick: 5
+  tickPerClick: 10
+  tickPerPush: 30
+  useNoise: 0
+  maxNoise: 1
+  useRandomPercentile: 0
+  argRandomPercentile: 0.865
+  minRandomDelay: 25
+  maxRandomDelay: 45

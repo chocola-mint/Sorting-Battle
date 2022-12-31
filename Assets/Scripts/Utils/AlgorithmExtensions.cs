@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mathf = UnityEngine.Mathf;
 
 namespace SortGame
 {
@@ -60,6 +61,18 @@ namespace SortGame
             for(int i = 1; i < values.Count; ++i)
                 if(values[i].CompareTo(values[maxIndex]) > 0) maxIndex = i;
             return maxIndex;
+        }
+        public static List<int> ArgTopPercentile<T>(this List<T> values, float cutoffPercentage = 0.95f) where T : System.IComparable
+        {
+            List<int> result = new();
+            if(values.Count == 0) return result;
+            SortedDictionary<T, int> dict = new();
+            for(int i = 0; i < values.Count; ++i)
+                dict.Add(values[i], i);
+            List<int> indices = new(dict.Values);
+            for(int i = Mathf.FloorToInt(values.Count * cutoffPercentage); i < values.Count; ++i)
+                result.Add(indices[i]);
+            return result;
         }
     }
 
