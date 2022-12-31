@@ -18,6 +18,8 @@ namespace SortGame
         private int tickPerClick = 10;
         [SerializeField]
         private int tickPerPush = 30;
+        private List<(ActionType, List<Vector2Int>)> actionTable = null;
+        private (ActionType, List<Vector2Int>) previousActionCache = (ActionType.Push, null);
         protected override IEnumerator ExecuteModelOutput(Tensor modelOutput)
         {
             var modelAction = modelOutput.ToReadOnlyArray();
@@ -27,18 +29,22 @@ namespace SortGame
             for(int actionId = 0; actionId < modelAction.Length; ++actionId)
             {
                 ActionIdToAction(actionId, out var actionType, out var moveToCoords);
-                if(actionType == ActionType.Select || actionType == ActionType.Swap)
-                {
-                    if(moveToCoords.Any(coord => !gameBoard.state.gameGridState.IsOnGrid(coord) 
-                    || !gameBoard.state.gameGridState.IsNumber(coord))) 
-                        continue;
-                    // if(actionType == ActionType.Select && moveToCoords.Count < 3) continue;
-                    if(actionType == ActionType.Select && SimulateSelect(moveToCoords) < 3) continue;
-                }
+                if(moveToCoords != null && moveToCoords.Any(x => !gameBoard.state.gameGridState.IsNumber(x))) continue;
+                if(actionType == ActionType.Select && SimulateSelect(moveToCoords) < 3) continue;
+                if(previousActionCache.Item1 == ActionType.Swap 
+                && actionType == ActionType.Swap
+                && ((moveToCoords[0] == previousActionCache.Item2[1] 
+                    && moveToCoords[1] == previousActionCache.Item2[0])
+                    || (moveToCoords[0] == previousActionCache.Item2[0] 
+                    && moveToCoords[1] == previousActionCache.Item2[1]))) 
+                    continue;
                 actionWeights.Add(modelAction[actionId]);
                 actionValues.Add((actionType, moveToCoords));
             }
-            if(actionWeights.Count == 0) yield break; // Early return if all moves are illegal.
+            if(actionWeights.Count == 0) 
+            {
+                yield break; // Early return if all moves are illegal.
+            } 
             int maxIndex = actionWeights.ArgMax();
             var (selectedActionType, steps) = actionValues[maxIndex];
             switch(selectedActionType)
@@ -63,55 +69,15 @@ namespace SortGame
                     yield return WaitForTicks(tickPerPush);
                     break;
             }
+            previousActionCache = (selectedActionType, steps);
         }
         private void ActionIdToAction(int actionId, out ActionType actionType, out List<Vector2Int> moveSequence)
         {
-            moveSequence = new();
-            if(actionId == runtimeModel.outputs[0].Length - 1)
-            {
-                actionType = ActionType.Push;
-                return;
-            }
-            int positionId = actionId / 32;
-            int moveId = actionId % 32;
-            int moveDirection = moveId / 8;
-            int moveType = moveId % 8;
-            // Convert moveDirection (0~31 / 8 -> 0~3) to offset vector.
-            Vector2Int move = Vector2Int.zero;
-            switch (moveDirection)
-            {
-                case 0:
-                    move = new(0, -1);
-                    break;
-                case 1:
-                    move = new(0, 1);
-                    break;
-                case 2:
-                    move = new(-1, 0);
-                    break;
-                case 3:
-                default:
-                    move = new(1, 0);
-                    break;
-            }
-            if (moveType == 0)
-            {
-                actionType = ActionType.Swap;
-                Vector2Int a = new(positionId / 5, positionId % 5);
-                Vector2Int b = a + move;
-                moveSequence.AddRange(new[] { a, b });
-            }
-            else
-            {
-                actionType = ActionType.Select;
-                moveSequence.Add(new(positionId / 5, positionId % 5));
-                for (int step = 1; step < moveType + 2; ++step)
-                    moveSequence.Add(moveSequence[^1] + move);
-            }
+            (actionType, moveSequence) = actionTable[actionId];
         }
         protected override void GetInputTensors(in Dictionary<string, Tensor> inputs)
         {
-            var allTilesAsFloat = gameBoard.state.GetAllTilesAsFloat(normalize: false).ToArray();
+            var allTilesAsFloat = gameBoard.state.GetAllTilesAsFloat(normalize: true).ToArray();
             inputs[runtimeModel.inputs[0].name] = new Tensor(
                 1, 1, 1, allTilesAsFloat.Length, // n, h, w, c
                 allTilesAsFloat); // Tensor content (flattened)
@@ -119,6 +85,42 @@ namespace SortGame
         protected override void NNInit()
         {
             Debug.Assert(runtimeModel.inputs.Count == 1);
+            // Generate action table. (See: action_table_generator.py)
+            actionTable = new();
+            int rowCount = gameBoard.state.gameGridState.rowCount;
+            int columnCount = gameBoard.state.gameGridState.columnCount;
+            Vector2Int[] directions = new[]{ 
+                Vector2Int.up, 
+                Vector2Int.down, 
+                Vector2Int.right, 
+                Vector2Int.left 
+            };
+            for(int i = 0; i < rowCount; ++i)
+                for(int j = 0; j < columnCount; ++j)
+                    foreach(var dir in directions)
+                    {
+                        Vector2Int a = new(i, j);
+                        Vector2Int b = a + dir;
+                        if(gameBoard.state.gameGridState.IsOnGrid(b))
+                            actionTable.Add((ActionType.Swap, new(){ a, b }));
+                    }
+            
+            for(int i = 0; i < rowCount; ++i)
+                for(int j = 0; j < columnCount; ++j)
+                    foreach(var dir in directions)
+                        for(int length = 2; length < 9; ++length)
+                        {
+                            Vector2Int start = new(i, j);
+                            Vector2Int end = start + dir * length;
+                            if(gameBoard.state.gameGridState.IsOnGrid(end))
+                            {
+                                List<Vector2Int> coords = new(){ start };
+                                for(int k = 0; k < length; ++k)
+                                    coords.Add(coords[^1] + dir);
+                                actionTable.Add((ActionType.Select, coords));
+                            }
+                        }
+            actionTable.Add((ActionType.Push, null));
         }
     }
 }
