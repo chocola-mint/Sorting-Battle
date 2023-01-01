@@ -48,16 +48,15 @@ public class TestGamePressureState
     public void TestAttack()
     {
         GamePressureState p1 = new(100), p2 = new(100);
-        p1.AddPressure(50);
-        p2.AddPressure(50);
-        // Because P1 has 50 pressure, the 25 attack power will be used to reduce its own pressure.
-        p1.Attack(p2, 25);
-        Assert.AreEqual(25, p1.pressure);
-        Assert.AreEqual(50, p2.pressure); // No additional pressure on P2.
-        // Here, after removing the remaining 25 pressure from P1, the remaining 5 attack power will be used on P2.
+        p1.AddPressure(25);
+        p2.AddPressure(25);
+        // Because P1 has 25 pressure, the 15 attack power will be used to reduce its own pressure.
+        p1.Attack(p2, 15);
+        Assert.AreEqual(10, p1.pressure);
+        Assert.AreEqual(55, p2.pressure); // 15 from reduce pressure, 15 from attack power -> +30
         p1.Attack(p2, 30);
         Assert.AreEqual(0, p1.pressure);
-        Assert.AreEqual(55, p2.pressure);
+        Assert.AreEqual(95, p2.pressure); // 10 from reduce pressure, 30 from attack power -> +40
         // And finally, this maximizes P2's pressure.
         p1.Attack(p2, 70);
         Assert.AreEqual(0, p1.pressure);
