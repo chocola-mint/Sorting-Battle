@@ -12,9 +12,7 @@ namespace SortGame
     public abstract class NNController : AIController
     {
         [SerializeField] NNModel modelAsset;
-        #if UNITY_EDITOR
         [SerializeField] bool verbose = true;
-        #endif
         [SerializeField] WorkerFactory.Type inferenceBackend;
         protected Model runtimeModel { get; private set; }
         private IWorker worker;
