@@ -53,6 +53,6 @@ MonoBehaviour:
   useNoise: 0
   maxNoise: 1
   useRandomPercentile: 0
-  argRandomPercentile: 0.865
-  minRandomDelay: 25
-  maxRandomDelay: 45
+  argRandomPercentile: 0.85
+  minRandomDelay: 0
+  maxRandomDelay: 0

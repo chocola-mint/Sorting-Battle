@@ -59,7 +59,8 @@ namespace SortGame.Core
                     other: target.gameBoardState.gamePressureState, 
                     attackPower: ComputeAttackPower(scoreIncreaseInfo));
                 // Reset target's pressure tick.
-                target.ResetPressureTick();
+                if(target.gameBoardState.gamePressureState.pressure <= MaxPressurePerAttack)
+                    target.ResetPressureTick();
             }
             private int ComputeAttackPower(GameScoreState.ScoreIncreaseInfo scoreIncreaseInfo)
             {

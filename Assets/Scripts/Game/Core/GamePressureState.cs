@@ -28,8 +28,8 @@ namespace SortGame.Core
         }
         public void Attack(GamePressureState other, int attackPower)
         {
-            attackPower -= ConsumePressure(attackPower);
-            other.AddPressure(attackPower);
+            int consumedPressure = ConsumePressure(attackPower);
+            other.AddPressure(attackPower + consumedPressure);
         }
     }
 }
