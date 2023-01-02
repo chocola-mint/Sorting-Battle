@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBoardComponent: {fileID: 0}
-  modelAsset: {fileID: 5022602860645237092, guid: 460d2467cca5ee54699bbb083daafb33, type: 3}
+  modelAsset: {fileID: 5022602860645237092, guid: 7d2a1d821fe276f40b14e66e18c0ab2f, type: 3}
   verbose: 1
   inferenceBackend: 513
   tickPerClick: 10
   tickPerPush: 30
   useNoise: 0
-  maxNoise: 1
+  maxNoise: 0.2
   useRandomPercentile: 0
   argRandomPercentile: 0.85
-  minRandomDelay: 0
-  maxRandomDelay: 0
+  minRandomDelay: 20
+  maxRandomDelay: 30

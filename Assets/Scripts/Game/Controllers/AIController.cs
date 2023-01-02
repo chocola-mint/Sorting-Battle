@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SortGame.Core;
 using SortGame.Core.GameFunctions;
+using System.Linq;
 
 namespace SortGame
 {
@@ -16,6 +17,8 @@ namespace SortGame
         // The "virtual" cursor used by the AI. Used to simplify decision processes, 
         // removing intricacies surrounding the player's mouse.
         private Vector2Int cursor;
+        private System.Lazy<GameBoard> opponentGameBoardCache;
+        protected GameBoard opponentGameBoard => opponentGameBoardCache.Value;
         /// <summary>
         /// Utility method.
         /// </summary>
@@ -27,6 +30,8 @@ namespace SortGame
         protected override sealed void Init()
         {
             base.Init();
+            // Initialize opponentGameBoardCache, which should be a GameBoard that's not this gameBoard.
+            opponentGameBoardCache = new(() => FindObjectsOfType<GameBoard>().First(x => x != gameBoard), false);
             // Disable the pusher UI.
             pusher.enabled = false;
             // Call the AI's actual init method.
