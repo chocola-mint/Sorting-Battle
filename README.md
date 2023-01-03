@@ -39,11 +39,7 @@ In general, please try to mimick the coding style in the existing codebase, and 
 
 ## License
 
-* **Unless specified otherwise in its own directory**, all source code under the **[Assets](/Assets/)** folder is licensed under the **MIT license**. "Source code" includes:
-    * Text files written in programming languages: **.cs**, **.js**, etc.
-    * Shader graphs.
-    * ONNX assets.
-    * Other Unity-specific assets: Scene data, prefab data, ScriptableObject data.
+* **Unless specified otherwise in its own directory**, everything under the **[Assets](/Assets/)** folder is licensed under the **MIT license**.
 * Notable exceptions:
     * The [TextMesh Pro](/Assets/TextMesh%20Pro/) directory uses the [Unity Companion License](https://unity.com/legal/licenses/unity-companion-license) instead. Unfortunately by design we are forced to include the directory.
     * [ChocoUtil](/Assets/Scripts/ChocoUtil/) is a hard-fork of CHM's personal Unity utilities available [here](https://github.com/chocola-mint/ChocoUtil), and inherits the original MIT license.
