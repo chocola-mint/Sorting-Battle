@@ -8,6 +8,7 @@ The RL models are trained using the [Sorting Battle Gym](https://github.com/jerr
 Here are the most important directories in the assets folder:
 * [Scripts](/Assets/Scripts/): Contains the C# source code for the entire game.
     * [Game](/Assets/Scripts/Game/): Contains gameplay code. Note that internally the game is referred to as "SortGame".
+         * [Core](/Assets/Scripts/Game/Core/): Contains core game logic. This part of the codebase is intentionally designed to avoid using Unity-specific data structures. It does still use Unity's Random state, but that can be replicated elsewhere easily.
     * [Utils](/Assets/Scripts/Utils/): Contains utility code used by the gameplay code. Uses the SortGame namespace.
     * [ChocoUtils](/Assets/Scripts/ChocoUtil/): Fork of CHM's [personal Unity utility repository](https://github.com/chocola-mint/Sorting-Battle/issues). Its main purpose here is to provide coroutine utilities.
 * [Tests](/Assets/Tests/): Contains unit tests for the entire game. At the moment, only editor tests are implemented because they run very fast compared to play mode tests. (less than 0.5 seconds)
