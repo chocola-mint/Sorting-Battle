@@ -1,5 +1,7 @@
 # Sorting-Battle
 
+![](/Media/logo.png)
+
 Sorting Battle is an open-source competitive puzzle game similar to Tetris Attack. Its original purpose is to design an end-to-end reinforcement learning (RL) environment where the trained models can have practical use in the game.
 
 The RL models are trained using the [Sorting Battle Gym](https://github.com/jerry20091103/Sorting-Battle-Python), which aims to achieve feature parity with the [SortGame Core](/Assets/Scripts/Game/Core/). This is achieved through code tracing and implementing the same unit tests.
