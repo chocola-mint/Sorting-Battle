@@ -5,7 +5,7 @@ Sorting Battle is an open-source competitive puzzle game similar to Tetris Attac
 The RL models are trained using the [Sorting Battle Gym](https://github.com/jerry20091103/Sorting-Battle-Python), which aims to achieve feature parity with the [SortGame Core](/Assets/Scripts/Game/Core/). This is achieved through code tracing and implementing the same unit tests.
 
 ## Repository Walkthrough
-Here are the most important directories in the assets folder:
+Here are the most important directories in the [Assets](/Assets/) directory:
 * [Scripts](/Assets/Scripts/): Contains the C# source code for the entire game.
     * [Game](/Assets/Scripts/Game/): Contains gameplay code. Note that internally the game is referred to as "SortGame".
          * [Core](/Assets/Scripts/Game/Core/): Contains core game logic. This part of the codebase is intentionally designed to avoid using Unity-specific data structures. It does still use Unity's Random state, but that can be replicated elsewhere easily.
