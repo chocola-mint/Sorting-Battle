@@ -4,6 +4,29 @@ Sorting Battle is an open-source competitive puzzle game similar to Tetris Attac
 
 The RL models are trained using the [Sorting Battle Gym](https://github.com/jerry20091103/Sorting-Battle-Python), which aims to achieve feature parity with the [SortGame Core](/Assets/Scripts/Game/Core/). This is achieved through code tracing and implementing the same unit tests.
 
+## Repository Walkthrough
+Here are the most important directories in the assets folder:
+* [Scripts](/Assets/Scripts/): Contains the C# source code for the entire game.
+    * [Game](/Assets/Scripts/Game/): Contains gameplay code.
+    * [Utils](/Assets/Scripts/Utils/): Contains utility code used by the gameplay code. Uses the SortGame namespace.
+    * [ChocoUtils](/Assets/Scripts/ChocoUtil/): Fork of CHM's [personal Unity utility repository](https://github.com/chocola-mint/Sorting-Battle/issues). Its main purpose here is to provide coroutine utilities.
+* [Tests](/Assets/Tests/): Contains unit tests for the entire game. At the moment, only editor tests are implemented because they run very fast compared to play mode tests. (less than 0.5 seconds)
+    * [GameTests](/Assets/Tests/GameTests/): Contains tests for [SortGame Core](/Assets/Scripts/Game/Core/). Similar tests are implemented in the [Sorting Battle Gym](https://github.com/jerry20091103/Sorting-Battle-Python) as well.
+    * [UtilsTests](/Assets/Tests/UtilsTests/): Contains tests for [SortGame Utils](/Assets/Scripts/Utils/).
+* [Prefabs](/Assets/Prefabs/): Contains reusable GameObjects and some ScriptableObject wrappers of said GameObjects. (For example, each [PlayerType](/Assets/Scripts/Game/Controllers/PlayerType.cs) wraps a GameController prefab, so they're put together)
+* [Settings](/Assets/Settings/): Contains game setting assets, such as input settings and other ScriptableObjects.
+* [Scenes](/Assets/Scenes/): Contains game scenes and scene-related ScriptableObjects.
+* [ONNX](/Assets/ONNX/): Contains ONNX neural network assets.
+* [Materials](/Assets/Materials/): Contains all assets related to materials (including shaders and textures).
+* [Sprites](/Assets/Sprites/): Contains game sprites. Might be removed in the future (refactored into the Prefab folders).
+* [External](/Assets/External/): Contains external assets. Their licenses/credits are attributed in their respective directories.
+
+## Contributing
+
+It is recommended that you try out the [open issues](https://github.com/chocola-mint/Sorting-Battle/issues) first.
+
+In general, please try to mimick the coding style in the existing codebase, and remember to use the Test Runner window to detect regressions before submitting pull requests.
+
 ## License
 
 * **Unless specified otherwise in its own directory**, all source code under the **[Assets](/Assets/)** folder is licensed under the **MIT license**. "Source code" includes:
