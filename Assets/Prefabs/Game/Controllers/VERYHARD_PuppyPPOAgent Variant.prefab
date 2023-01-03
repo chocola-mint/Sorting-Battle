@@ -56,6 +56,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8531988252737255684, guid: 1a150e35fb7adfc4faa4e839701c00b3, type: 3}
+      propertyPath: modelAsset
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 929f202524bf0754bae82ac437238f32, type: 3}
+    - target: {fileID: 8531988252737255684, guid: 1a150e35fb7adfc4faa4e839701c00b3, type: 3}
       propertyPath: tickPerPush
       value: 15
       objectReference: {fileID: 0}
