@@ -15,7 +15,9 @@ You need the following:
 Here are the most important directories in the [Assets](/Assets/) directory:
 * [Scripts](/Assets/Scripts/): Contains the C# source code for the entire game.
     * [Game](/Assets/Scripts/Game/): Contains gameplay code. Note that internally the game is referred to as "SortGame".
-         * [Core](/Assets/Scripts/Game/Core/): Contains core game logic. This part of the codebase is intentionally designed to avoid using Unity-specific data structures. It does still use Unity's Random state, but that can be replicated elsewhere easily.
+        * [Core](/Assets/Scripts/Game/Core/): Contains core game logic. This part of the codebase is intentionally designed to avoid using Unity-specific data structures. It does still use Unity's Random state, but that can be replicated elsewhere easily.
+        * [UI](/Assets/Scripts/Game/UI/): Contains components used by the UI system, which powers various menus in the game.
+        * [Sound](/Assets/Scripts/Game/Sound/): Contains audio components and ScriptableObjects that make it easier to manage and play audio assets.
     * [Utils](/Assets/Scripts/Utils/): Contains utility code used by the gameplay code. Uses the SortGame namespace.
     * [ChocoUtils](/Assets/Scripts/ChocoUtil/): Fork of CHM's [personal Unity utility repository](https://github.com/chocola-mint/ChocoUtil). Its main purpose here is to provide coroutine utilities.
 * [Tests](/Assets/Tests/): Contains unit tests for the entire game. At the moment, only editor tests are implemented because they run very fast compared to play mode tests. (less than 0.5 seconds)
@@ -33,7 +35,7 @@ Here are the most important directories in the [Assets](/Assets/) directory:
 
 It is recommended that you try out the [open issues](https://github.com/chocola-mint/Sorting-Battle/issues) first.
 
-In general, please try to mimick the coding style in the existing codebase, and remember to use the Test Runner window to detect regressions before submitting pull requests.
+In general, please try to mimick the coding style in the existing codebase, and remember to use the [Test Runner window](https://docs.unity3d.com/Manual/testing-editortestsrunner.html) to detect regressions before submitting pull requests.
 
 ## License
 
