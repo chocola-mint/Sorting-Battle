@@ -9,9 +9,10 @@ The RL models are trained using the [Sorting Battle Gym](https://github.com/jerr
 Refer to our [presentation slides](https://docs.google.com/presentation/d/1EthJHoBGDKr_O8OhGpC6bvZwa7gPInu2nyNB6ULWm18/edit?usp=sharing) for an overview.
 
 ## Installation
-You need the following:
+You'll need the following:
 * Unity 2021.3.x (If contributing, you'll need [the same Unity version](/ProjectSettings/ProjectVersion.txt) this repository is using.)
     * You can install Unity [here](https://unity.com/download).
+Just clone this repository and open it with Unity.
 
 ## Repository Walkthrough
 Here are the most important directories in the [Assets](/Assets/) directory:
@@ -42,7 +43,7 @@ Our decision to use RL is mostly due to three reasons:
    * If we were to "rate" each board's state with a heuristic function instead: One might punish taller boards, but taller boards also allow longer vertical lines, so it's hard to say that taller boards are definitely not preferred.
 2. Search algorithms have a hard time dealing with *real-time* games in general, compared to turn-based games like Chess or Go.
    * You usually find search algorithms in *planning* an optimal solution from the current state. However, in our game, informative game states are scattered sparsely across the time domain. This means search algorithms must compute a lot of simulation steps to get a good solution.
-   * For stochastic algorithms like [Monte Carlo Tree Search (MCTS)](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search), it may also take a lot of steps for each simulated game to end. The legal action space for each step can also be very large, especially if there are a lot of number blocks on the board, increasing the width of the search tree. And so, MTCS would have a hard time converging to a good solution too, not to mention the performance concerns that come with maintaining such a big search tree.
+   * For stochastic algorithms like [Monte Carlo Tree Search (MCTS)](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search), it may also take a lot of steps for each simulated game to end. The legal action space for each step can also be very large, especially if there are a lot of number blocks on the board, increasing the width of the search tree. And so, MCTS would have a hard time converging to a good solution too, not to mention the performance concerns that come with maintaining such a big search tree.
 3. RL algorithms are easier to implement and maintain compared to sophisticated search algorithms that rely on specifically-tuned heuristics.
 
 Our RL model can make decisions almost instantly without the memory overhead of a search tree. We believe that it's ultimately the best choice for our application.
@@ -65,7 +66,7 @@ But of course, now that this project has graduated into an open source project, 
 
 It is recommended that you try out the [open issues](https://github.com/chocola-mint/Sorting-Battle/issues) first.
 
-In general, please try to mimic the coding style in the existing codebase, and remember to use the [Test Runner window](https://docs.unity3d.com/Manual/testing-editortestsrunner.html) to detect regressions before submitting pull requests.
+In general, please try to mimic the coding style in the existing codebase, and remember to use the [Test Runner window](https://docs.unity3d.com/Manual/testing-editortestsrunner.html) to detect regressions before submitting pull requests. Also, avoid moving/renaming files to reduce conflict.
 
 ## License
 
