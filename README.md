@@ -6,6 +6,8 @@ Sorting Battle is an open-source competitive puzzle game similar to Tetris Attac
 
 The RL models are trained using the [Sorting Battle Gym](https://github.com/jerry20091103/Sorting-Battle-Python), which aims to achieve feature parity with the [SortGame Core](/Assets/Scripts/Game/Core/). This is achieved through code tracing and implementing the same unit tests.
 
+Refer to our [presentation slides](https://docs.google.com/presentation/d/1EthJHoBGDKr_O8OhGpC6bvZwa7gPInu2nyNB6ULWm18/edit?usp=sharing) for an overview.
+
 ## Installation
 You need the following:
 * Unity 2021.3.x (If contributing, you'll need [the same Unity version](/ProjectSettings/ProjectVersion.txt) this repository is using.)
@@ -31,11 +33,27 @@ Here are the most important directories in the [Assets](/Assets/) directory:
 * [Sprites](/Assets/Sprites/): Contains game sprites. Might be removed in the future (refactored into the Prefab folders).
 * [External](/Assets/External/): Contains external assets. Their licenses/credits are attributed in their respective directories.
 
+## FAQ
+### Why use RL? Wouldn't more traditional [search algorithms](https://en.wikipedia.org/wiki/Search_algorithm) perform better?
+Our decision to use RL is mostly due to three reasons:
+1. It is hard to define a good heuristic for *Sorting Battle*.
+   * One class of search algorithms aims to optimize a heuristic function greedily using algorithms like [A*](https://en.wikipedia.org/wiki/A*_search_algorithm). However, we've found it difficult to define such a heuristic function here. 
+   * For example, one might greedily try to clear all lines whenever possible, but clearing each line can change the rest of the board, removing other lines.
+   * If we were to "rate" each board's state with a heuristic function instead: One might punish taller boards, but taller boards also allow longer vertical lines, so it's hard to say that taller boards are definitely not preferred.
+2. Search algorithms have a hard time dealing with *real-time* games in general, compared to turn-based games like Chess or Go.
+   * You usually find search algorithms in *planning* an optimal solution from the current state. However, in our game, informative game states are scattered sparsely across the time domain. This means search algorithms must compute a lot of simulation steps to get a good solution.
+   * For stochastic algorithms like [Monte Carlo Tree Search (MCTS)](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search), it may also take a lot of steps for each simulated game to end. The legal action space for each step can also be very large, especially if there are a lot of number blocks on the board, increasing the width of the search tree. And so, MTCS would have a hard time converging to a good solution too, not to mention the performance concerns that come with maintaining such a big search tree.
+3. RL algorithms are easier to implement and maintain compared to sophisticated search algorithms that rely on specifically-tuned heuristics.
+
+Our RL model can make decisions almost instantly without the memory overhead of a search tree. We believe that it's ultimately the best choice for our application.
+
+However! Our C# framework can still support search algorithm-based implementations, theoretically. Such an implementation would have to inherit from [AIController](/Assets/Scripts/Game/Controllers/AIController.cs). Feel free to submit a pull request if you managed to design a good search algorithm to play our game!
+
 ## Contributing
 
 It is recommended that you try out the [open issues](https://github.com/chocola-mint/Sorting-Battle/issues) first.
 
-In general, please try to mimick the coding style in the existing codebase, and remember to use the [Test Runner window](https://docs.unity3d.com/Manual/testing-editortestsrunner.html) to detect regressions before submitting pull requests.
+In general, please try to mimic the coding style in the existing codebase, and remember to use the [Test Runner window](https://docs.unity3d.com/Manual/testing-editortestsrunner.html) to detect regressions before submitting pull requests.
 
 ## License
 
