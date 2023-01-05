@@ -49,6 +49,18 @@ Our RL model can make decisions almost instantly without the memory overhead of 
 
 However! Our C# framework can still support search algorithm-based implementations, theoretically. Such an implementation would have to inherit from [AIController](/Assets/Scripts/Game/Controllers/AIController.cs). Feel free to submit a pull request if you managed to design a good search algorithm to play our game!
 
+### Why did you not use ML-Agents Toolkit? Wouldn't it be more convenient?
+
+1. ML-Agents Toolkit requires RL developers to install Unity, which can be annoying if you don't usually use Unity.
+2. ML-Agents Toolkit's training process is much more inefficient compared to a pure Python implementation.
+   * The training process for ML-Agents Toolkit involves either using the Unity Editor *or* a separate build of the game (which can be headless in our case), and using a communication bridge to marshall data (input/output) from and to the Python runtime (which would contain the RL model).
+   * Whatever the case, the entire Unity runtime must be included in the training process, which involves animating objects that the RL model would not care about.
+   * And of course, interprocess communication across C# and Python can also hurt performance.
+3. ML-Agents Toolkit leaves less space for customization.
+   * This project started as a term project for a Machine Learning course, and we wanted finer control on the model's architecture. ML-Agents Toolkit's built-in models cannot be modified (although it does happen to have a PPO implementation), so we had to use Python one way or another.
+
+But of course, now that this project has graduated into an open source project, this is no longer a hard requirement. See [Issue #2](https://github.com/chocola-mint/Sorting-Battle/issues/2).
+
 ## Contributing
 
 It is recommended that you try out the [open issues](https://github.com/chocola-mint/Sorting-Battle/issues) first.
